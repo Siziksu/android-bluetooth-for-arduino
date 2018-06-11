@@ -1,0 +1,164 @@
+{
+    "macros": [
+        {
+            "id": 0,
+            "name": "M1",
+            "command": ""
+        },
+        {
+            "id": 1,
+            "name": "M2",
+            "command": ""
+        },
+        {
+            "id": 2,
+            "name": "M3",
+            "command": ""
+        },
+        {
+            "id": 3,
+            "name": "M4",
+            "command": ""
+        },
+        {
+            "id": 4,
+            "name": "M5",
+            "command": ""
+        },
+        {
+            "id": 5,
+            "name": "M6",
+            "command": ""
+        },
+        {
+            "id": 6,
+            "name": "M7",
+            "command": ""
+        },
+        {
+            "id": 7,
+            "name": "M8",
+            "command": ""
+        },
+        {
+            "id": 8,
+            "name": "M9",
+            "command": ""
+        },
+        {
+            "id": 9,
+            "name": "M10",
+            "command": ""
+        },
+        {
+            "id": 10,
+            "name": "M11",
+            "command": ""
+        },
+        {
+            "id": 11,
+            "name": "M12",
+            "command": ""
+        },
+        {
+            "id": 12,
+            "name": "M13",
+            "command": ""
+        },
+        {
+            "id": 13,
+            "name": "M14",
+            "command": ""
+        },
+        {
+            "id": 14,
+            "name": "M15",
+            "command": ""
+        },
+        {
+            "id": 15,
+            "name": "M16",
+            "command": ""
+        },
+        {
+            "id": 16,
+            "name": "M17",
+            "command": ""
+        },
+        {
+            "id": 17,
+            "name": "M18",
+            "command": ""
+        },
+        {
+            "id": 18,
+            "name": "M19",
+            "command": ""
+        },
+        {
+            "id": 19,
+            "name": "M20",
+            "command": ""
+        },
+        {
+            "id": 20,
+            "name": "M21",
+            "command": ""
+        },
+        {
+            "id": 21,
+            "name": "M22",
+            "command": ""
+        },
+        {
+            "id": 22,
+            "name": "M23",
+            "command": ""
+        },
+        {
+            "id": 23,
+            "name": "M24",
+            "command": ""
+        },
+        {
+            "id": 24,
+            "name": "M25",
+            "command": ""
+        },
+        {
+            "id": 25,
+            "name": "M26",
+            "command": ""
+        },
+        {
+            "id": 26,
+            "name": "M28",
+            "command": ""
+        },
+        {
+            "id": 27,
+            "name": "M28",
+            "command": ""
+        },
+        {
+            "id": 28,
+            "name": "M29",
+            "command": ""
+        },
+        {
+            "id": 29,
+            "name": "M30",
+            "command": ""
+        },
+        {
+            "id": 30,
+            "name": "M31",
+            "command": ""
+        },
+        {
+            "id": 31,
+            "name": "M32",
+            "command": ""
+        }
+    ]
+}
