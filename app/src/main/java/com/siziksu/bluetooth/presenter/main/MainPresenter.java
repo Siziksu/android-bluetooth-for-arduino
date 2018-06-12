@@ -63,7 +63,7 @@ public final class MainPresenter implements MainPresenterContract<MainViewContra
 
     @Override
     public void updateButtonsText() {
-        setButtonsText();
+        updateMacros();
     }
 
     @Override
@@ -103,19 +103,16 @@ public final class MainPresenter implements MainPresenterContract<MainViewContra
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == Constants.MACRO_REQUEST_CODE) {
-            if (resultCode == Activity.RESULT_OK) {
-                Bundle extras = data.getExtras();
-                if (extras != null) {
-                    if (extras.containsKey(Constants.MACRO_ID_EXTRA)
-                        && extras.containsKey(Constants.MACRO_NAME_EXTRA)
-                        && extras.containsKey(Constants.MACRO_COMMAND_EXTRA)) {
-                        int index = extras.getInt(Constants.MACRO_ID_EXTRA);
-                        buttons.get(index).setText(extras.getString(Constants.MACRO_NAME_EXTRA));
-                        macros.get(index).name = extras.getString(Constants.MACRO_NAME_EXTRA);
-                        macros.get(index).command = extras.getString(Constants.MACRO_COMMAND_EXTRA);
-                        preferencesDomain.setMacros(new MacroMapper().unMap(macros));
-                    }
+        if (requestCode == Constants.MACRO_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+            Bundle extras = data.getExtras();
+            if (extras != null) {
+                if (extras.containsKey(Constants.MACRO_ID_EXTRA)
+                    && extras.containsKey(Constants.MACRO_NAME_EXTRA)
+                    && extras.containsKey(Constants.MACRO_COMMAND_EXTRA)) {
+                    int index = extras.getInt(Constants.MACRO_ID_EXTRA);
+                    String name = extras.getString(Constants.MACRO_NAME_EXTRA); ;
+                    String command = extras.getString(Constants.MACRO_COMMAND_EXTRA); ;
+                    updateMacro(index, name, command);
                 }
             }
         }
@@ -166,15 +163,24 @@ public final class MainPresenter implements MainPresenterContract<MainViewContra
     public void onMacros(List<MacroDomainModel> list) {
         this.macros.clear();
         this.macros.addAll(new MacroMapper().map(list));
-        setButtonsText();
+        updateMacros();
     }
 
-    private void setButtonsText() {
+    private void updateMacros() {
         if (!macros.isEmpty()) {
             for (int i = 0; i < buttons.size(); i++) {
                 buttons.get(i).setText(macros.get(i).name);
+                buttons.get(i).setSelected(!macros.get(i).command.isEmpty());
             }
         }
+    }
+
+    private void updateMacro(int index, String name, String command) {
+        macros.get(index).name = name;
+        macros.get(index).command = command;
+        buttons.get(index).setText(macros.get(index).name);
+        buttons.get(index).setSelected(!macros.get(index).command.isEmpty());
+        preferencesDomain.setMacros(new MacroMapper().unMap(macros));
     }
 
     private void editMacro(int resId) {
