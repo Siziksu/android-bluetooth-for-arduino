@@ -10,7 +10,7 @@
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
     <color name="darkGrey">#333333</color>
-    <color name="grey">#FF757575</color>
+    <color name="grey">#757575</color>
     <color name="transparent">#00000000</color>
     <color name="background">@color/white</color>
     <color name="progressBar">#ffffff</color>
@@ -20,4 +20,7 @@
     <color name="buttonPressed">#535353</color>
     <color name="buttonSelected">#4e599f</color>
     <color name="buttonSelectedAndPressed">#3e4678</color>
+    <color name="bottomNavigationViewBackground">#3F51B5</color>
+    <color name="navigationTintChecked">#ffffff</color>
+    <color name="navigationTintUnchecked">#1e2440</color>
 </resources>

@@ -50,8 +50,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@color/white"
-        app:itemBackground="@color/white"
+        android:background="@color/bottomNavigationViewBackground"
+        app:itemBackground="@color/bottomNavigationViewBackground"
         app:itemIconTint="@drawable/bottom_navigation_tint"
         app:itemTextColor="@drawable/bottom_navigation_tint"
         app:menu="@menu/menu_bottom_navigation" />
