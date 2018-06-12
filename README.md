@@ -16,9 +16,15 @@ This application is originally designed for the Arduino project [MiminuConntroll
 - `Retrofit` as an http client.  
 - `Calligraphy` for the font faces.
 
-## Art
+## Screenshots
 
-In the folder `art`, can be found some screenshots.
+![Screenshot](art/device-2018-06-11-073005.png)
+![Screenshot](art/device-2018-06-11-073059.png)
+![Screenshot](art/device-2018-06-11-073118.png)
+![Screenshot](art/device-2018-06-11-073129.png)
+![Screenshot](art/device-2018-06-12-163156.png)
+![Screenshot](art/device-2018-06-12-163250.png)
+![Screenshot](art/device-2018-06-12-163304.png)
 
 ## License
     Copyright 2018 Esteban Latre
