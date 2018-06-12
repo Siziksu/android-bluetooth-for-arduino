@@ -40,6 +40,11 @@ public final class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     }
 
     @Override
+    public void refresh() {
+        selected = -1;
+    }
+
+    @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.row_device, parent, false);
         return new ItemViewHolder(view, listener);
@@ -71,18 +76,8 @@ public final class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     }
 
     @Override
-    public String getItem(int position) {
-        return itemsManager.getItem(position);
-    }
-
-    @Override
     public LinearLayoutManager getLayoutManager() {
         return layoutManager;
-    }
-
-    @Override
-    public void showItems(List<String> list) {
-        itemsManager.showItems(this, list);
     }
 
     @Override
@@ -91,7 +86,12 @@ public final class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     }
 
     @Override
-    public List<String> getItems() {
-        return itemsManager.getItems();
+    public String getItem(int position) {
+        return itemsManager.getItem(position);
+    }
+
+    @Override
+    public void showItems(List<String> list) {
+        itemsManager.showItems(this, list);
     }
 }

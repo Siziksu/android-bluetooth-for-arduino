@@ -6,6 +6,8 @@ public interface BluetoothDomainContract<D> extends BaseDomainContract<D> {
 
     void start();
 
+    void refresh();
+
     void onDeviceClick(int position, String device);
 
     void onConnectButtonClick();

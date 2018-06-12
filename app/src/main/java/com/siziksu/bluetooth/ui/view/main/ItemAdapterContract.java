@@ -10,15 +10,15 @@ public interface ItemAdapterContract {
 
     void init(ClickListener listener);
 
-    String getItem(int position);
-
-    RecyclerView.LayoutManager getLayoutManager();
-
-    void showItems(List<String> list);
-
-    RecyclerView.Adapter getAdapter();
+    void refresh();
 
     void notifyDataSetChanged();
 
-    List<String> getItems();
+    RecyclerView.LayoutManager getLayoutManager();
+
+    RecyclerView.Adapter getAdapter();
+
+    String getItem(int position);
+
+    void showItems(List<String> list);
 }

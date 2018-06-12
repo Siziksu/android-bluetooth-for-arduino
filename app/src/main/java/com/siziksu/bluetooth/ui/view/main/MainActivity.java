@@ -122,6 +122,9 @@ public class MainActivity extends AppCompatActivity implements MainViewContract 
             case R.id.action_clear_terminal:
                 terminal.setText("");
                 return true;
+            case R.id.action_refresh:
+                presenter.refresh();
+                return true;
             default:
                 break;
         }

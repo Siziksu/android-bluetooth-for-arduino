@@ -14,6 +14,8 @@ public interface MainPresenterContract<V extends BaseViewContract> extends BaseP
 
     void start();
 
+    void refresh();
+
     void onConnectButtonClick();
 
     void onDeviceClick(int position, String device);

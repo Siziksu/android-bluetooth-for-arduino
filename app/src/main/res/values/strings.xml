@@ -45,4 +45,5 @@
     <string name="m30">M30</string>
     <string name="m31">M31</string>
     <string name="m32">M32</string>
+    <string name="action_refresh">Refresh</string>
 </resources>

@@ -2,6 +2,8 @@ package com.siziksu.bluetooth.domain.bluetooth;
 
 import com.siziksu.bluetooth.data.RepositoryContract;
 
+import java.util.ArrayList;
+
 import javax.inject.Inject;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -46,13 +48,16 @@ public final class BluetoothDomain implements BluetoothDomainContract<MainBlueto
     }
 
     @Override
+    public void refresh() {
+        getPairedDevices();
+    }
+
+    @Override
     public void onDeviceClick(int position, String device) {
         if (lastPosition != position && !deviceSelected) {
             selectDevice(position, device);
         } else if (lastPosition != position) {
-            if (connected) {
-                disconnectFromDevice();
-            }
+            disconnectFromDevice();
             selectDevice(position, device);
         } else if (!deviceSelected) {
             selectDevice(position, device);
@@ -102,6 +107,7 @@ public final class BluetoothDomain implements BluetoothDomainContract<MainBlueto
                             domain.hideLoadingDialog();
                         },
                         throwable -> {
+                            domain.showDeviceList(new ArrayList<>());
                             domain.write("Error getting paired devices", true);
                             domain.hideLoadingDialog();
                         }
@@ -130,9 +136,7 @@ public final class BluetoothDomain implements BluetoothDomainContract<MainBlueto
     private void deselectDevice(String device) {
         domain.write(device + " device deselected", false);
         deviceSelected = false;
-        if (connected) {
-            disconnectFromDevice();
-        }
+        disconnectFromDevice();
     }
 
     private void connectWithTheDevice() {
@@ -156,11 +160,13 @@ public final class BluetoothDomain implements BluetoothDomainContract<MainBlueto
     }
 
     private void disconnectFromDevice() {
-        domain.write("Disconnecting...", false);
-        repository.disconnectFromTheDevice();
-        connected = false;
-        domain.write("Disconnected", false);
-        domain.onConnectionUpdate(false);
+        if (connected) {
+            domain.write("Disconnecting...", false);
+            repository.disconnectFromTheDevice();
+            connected = false;
+            domain.write("Disconnected", false);
+            domain.onConnectionUpdate(false);
+        }
     }
 
     private void clearDisposable() {

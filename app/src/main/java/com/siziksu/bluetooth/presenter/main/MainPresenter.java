@@ -73,6 +73,11 @@ public final class MainPresenter implements MainPresenterContract<MainViewContra
     }
 
     @Override
+    public void refresh() {
+        bluetoothDomain.refresh();
+    }
+
+    @Override
     public void onConnectButtonClick() {
         bluetoothDomain.onConnectButtonClick();
     }
