@@ -10,13 +10,13 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
-public final class BluetoothDomain implements BluetoothDomainContract<MainBluetoothDomainContract> {
+public final class BluetoothDomain implements BluetoothDomainContract<BluetoothDomainPresenterContract> {
 
     @Inject
     RepositoryContract repository;
 
     private Disposable disposable;
-    private MainBluetoothDomainContract domain;
+    private BluetoothDomainPresenterContract presenter;
 
     private int lastPosition = -1;
     private boolean deviceSelected;
@@ -27,23 +27,24 @@ public final class BluetoothDomain implements BluetoothDomainContract<MainBlueto
     }
 
     @Override
-    public void register(MainBluetoothDomainContract domain) {
-        this.domain = domain;
+    public void register(BluetoothDomainPresenterContract presenter) {
+        this.presenter = presenter;
     }
 
     @Override
     public void unregister() {
         clearDisposable();
         repository.disconnectFromTheDevice();
+        presenter = null;
     }
 
     @Override
     public void start() {
-        domain.showLoadingDialog();
-        domain.write("Initializing bluetooth adapter...", false);
+        presenter.showLoadingDialog();
+        presenter.write("Initializing bluetooth adapter...", false);
         repository.initializeBluetoothAdapter();
-        domain.write("Initialized", false);
-        domain.write("Getting list of paired devices...", false);
+        presenter.write("Initialized", false);
+        presenter.write("Getting list of paired devices...", false);
         getPairedDevices();
     }
 
@@ -70,14 +71,14 @@ public final class BluetoothDomain implements BluetoothDomainContract<MainBlueto
     public void onConnectButtonClick() {
         if (deviceSelected) {
             if (!connected) {
-                domain.showLoadingDialog();
-                domain.write("Connecting...", false);
+                presenter.showLoadingDialog();
+                presenter.write("Connecting...", false);
                 connectWithTheDevice();
             } else {
                 disconnectFromDevice();
             }
         } else {
-            domain.write("No device selected", true);
+            presenter.write("No device selected", true);
         }
     }
 
@@ -86,12 +87,12 @@ public final class BluetoothDomain implements BluetoothDomainContract<MainBlueto
         if (deviceSelected && connected) {
             if (!command.isEmpty()) {
                 repository.sendMessageToTheDevice(command);
-                domain.write("Sent: " + command + "", false);
+                presenter.write("Sent: " + command + "", false);
             } else {
-                domain.write("Command not defined", true);
+                presenter.write("Command not defined", true);
             }
         } else {
-            domain.write("Not connected", true);
+            presenter.write("Not connected", true);
         }
     }
 
@@ -102,14 +103,14 @@ public final class BluetoothDomain implements BluetoothDomainContract<MainBlueto
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         list -> {
-                            domain.showDeviceList(list);
-                            domain.write("List of paired devices ready", false);
-                            domain.hideLoadingDialog();
+                            presenter.showDeviceList(list);
+                            presenter.write("List of paired devices ready", false);
+                            presenter.hideLoadingDialog();
                         },
                         throwable -> {
-                            domain.showDeviceList(new ArrayList<>());
-                            domain.write("Error getting paired devices", true);
-                            domain.hideLoadingDialog();
+                            presenter.showDeviceList(new ArrayList<>());
+                            presenter.write("Error getting paired devices", true);
+                            presenter.hideLoadingDialog();
                         }
                 );
     }
@@ -123,18 +124,18 @@ public final class BluetoothDomain implements BluetoothDomainContract<MainBlueto
                         value -> {
                             deviceSelected = value;
                             lastPosition = position;
-                            domain.write(device + " device selected", false);
-                            domain.hideLoadingDialog();
+                            presenter.write(device + " device selected", false);
+                            presenter.hideLoadingDialog();
                         },
                         throwable -> {
-                            domain.write("Error selecting the pared device" + device + "", true);
-                            domain.hideLoadingDialog();
+                            presenter.write("Error selecting the pared device" + device + "", true);
+                            presenter.hideLoadingDialog();
                         }
                 );
     }
 
     private void deselectDevice(String device) {
-        domain.write(device + " device deselected", false);
+        presenter.write(device + " device deselected", false);
         deviceSelected = false;
         disconnectFromDevice();
     }
@@ -147,25 +148,25 @@ public final class BluetoothDomain implements BluetoothDomainContract<MainBlueto
                 .subscribe(
                         value -> {
                             connected = value;
-                            domain.write("Connected", false);
-                            domain.hideLoadingDialog();
-                            domain.onConnectionUpdate(true);
+                            presenter.write("Connected", false);
+                            presenter.hideLoadingDialog();
+                            presenter.onConnectionUpdate(true);
                         },
                         throwable -> {
-                            domain.write("Error connecting", true);
-                            domain.hideLoadingDialog();
-                            domain.onConnectionUpdate(false);
+                            presenter.write("Error connecting", true);
+                            presenter.hideLoadingDialog();
+                            presenter.onConnectionUpdate(false);
                         }
                 );
     }
 
     private void disconnectFromDevice() {
         if (connected) {
-            domain.write("Disconnecting...", false);
+            presenter.write("Disconnecting...", false);
             repository.disconnectFromTheDevice();
             connected = false;
-            domain.write("Disconnected", false);
-            domain.onConnectionUpdate(false);
+            presenter.write("Disconnected", false);
+            presenter.onConnectionUpdate(false);
         }
     }
 

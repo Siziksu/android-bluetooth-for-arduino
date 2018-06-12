@@ -15,20 +15,20 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
-public final class PreferencesDomain implements PreferencesDomainContract<MainPreferencesDomainContract> {
+public final class PreferencesDomain implements PreferencesDomainContract<PreferencesDomainPresenterContract> {
 
     @Inject
     RepositoryContract repository;
 
     private Disposable disposable;
-    private MainPreferencesDomainContract domain;
+    private PreferencesDomainPresenterContract domain;
 
     public PreferencesDomain(RepositoryContract repository) {
         this.repository = repository;
     }
 
     @Override
-    public void register(MainPreferencesDomainContract domain) {
+    public void register(PreferencesDomainPresenterContract domain) {
         this.domain = domain;
     }
 

@@ -2,7 +2,7 @@ package com.siziksu.bluetooth.domain.bluetooth;
 
 import java.util.List;
 
-public interface MainBluetoothDomainContract {
+public interface BluetoothDomainPresenterContract {
 
     void write(String message, boolean error);
 

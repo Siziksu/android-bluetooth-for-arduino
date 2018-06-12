@@ -10,9 +10,9 @@ import com.siziksu.bluetooth.common.Constants;
 import com.siziksu.bluetooth.common.function.Functions;
 import com.siziksu.bluetooth.common.utils.DatesUtils;
 import com.siziksu.bluetooth.domain.bluetooth.BluetoothDomainContract;
-import com.siziksu.bluetooth.domain.bluetooth.MainBluetoothDomainContract;
+import com.siziksu.bluetooth.domain.bluetooth.BluetoothDomainPresenterContract;
 import com.siziksu.bluetooth.domain.model.MacroDomainModel;
-import com.siziksu.bluetooth.domain.preferences.MainPreferencesDomainContract;
+import com.siziksu.bluetooth.domain.preferences.PreferencesDomainPresenterContract;
 import com.siziksu.bluetooth.domain.preferences.PreferencesDomainContract;
 import com.siziksu.bluetooth.presenter.mapper.MacroMapper;
 import com.siziksu.bluetooth.presenter.model.Macro;
@@ -24,19 +24,19 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-public final class MainPresenter implements MainPresenterContract<MainViewContract>, MainBluetoothDomainContract, MainPreferencesDomainContract {
+public final class MainPresenter implements MainPresenterContract<MainViewContract>, BluetoothDomainPresenterContract, PreferencesDomainPresenterContract {
 
     @Inject
-    BluetoothDomainContract<MainBluetoothDomainContract> bluetoothDomain;
+    BluetoothDomainContract<BluetoothDomainPresenterContract> bluetoothDomain;
     @Inject
-    PreferencesDomainContract<MainPreferencesDomainContract> preferencesDomain;
+    PreferencesDomainContract<PreferencesDomainPresenterContract> preferencesDomain;
 
     private MainViewContract view;
     private List<Macro> macros = new ArrayList<>();
     private List<Button> buttons = new ArrayList<>();
 
-    public MainPresenter(BluetoothDomainContract<MainBluetoothDomainContract> bluetoothDomain,
-                         PreferencesDomainContract<MainPreferencesDomainContract> preferencesDomain) {
+    public MainPresenter(BluetoothDomainContract<BluetoothDomainPresenterContract> bluetoothDomain,
+                         PreferencesDomainContract<PreferencesDomainPresenterContract> preferencesDomain) {
         this.bluetoothDomain = bluetoothDomain;
         this.preferencesDomain = preferencesDomain;
     }

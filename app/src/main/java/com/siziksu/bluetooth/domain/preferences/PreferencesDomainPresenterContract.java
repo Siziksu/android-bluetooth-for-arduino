@@ -4,7 +4,7 @@ import com.siziksu.bluetooth.domain.model.MacroDomainModel;
 
 import java.util.List;
 
-public interface MainPreferencesDomainContract {
+public interface PreferencesDomainPresenterContract {
 
     void onMacros(List<MacroDomainModel> list);
 }

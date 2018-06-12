@@ -2,11 +2,18 @@
 
 ## Short description
 
-This application is a bluetooth client used to control an Arduino project.
+- This application is a bluetooth client used to control an Arduino project.
+- It provides 32 programmable macro buttons.
+- This application is originally designed for the Arduino project [MiminuConntroller](https://github.com/Siziksu/MiminuController), a USB MIDI controller for Arduino MEGA 2560.
 
-It provides 32 programmable macro buttons.
+## Architecture
 
-This application is originally designed for the Arduino project [MiminuConntroller](https://github.com/Siziksu/MiminuController), a USB MIDI controller for Arduino MEGA 2560.
+- The application uses a layered architecture (`ui`, `presenter`, `domain` and `data`). 
+- Each layer has its own models with its mappers.
+- The `ui` layer gets all what it needs from the `presenter` layer.
+- The `presenter` layer is the _man in the middle_ that connects the visual part (`ui` layer) with the data through the `domain` layer.
+- The `domain` layer manages the background calls to the `data` layer.
+- The `data` layer is a `repository`. This layer gets the data from a `client`. The `client`, through a `service`, accesses this data. 
 
 ## What moves this application:
 
