@@ -3,6 +3,7 @@
     <string name="action_ok">OK</string>
     <string name="action_connect">Connect</string>
     <string name="action_disconnect">Disconnect</string>
+    <string name="action_refresh">Refresh</string>
     <string name="action_clear_terminal">Clear terminal</string>
     <string name="action_apply">Apply</string>
     <string name="connection">Connection</string>
@@ -45,5 +46,4 @@
     <string name="m30">M30</string>
     <string name="m31">M31</string>
     <string name="m32">M32</string>
-    <string name="action_refresh">Refresh</string>
 </resources>
