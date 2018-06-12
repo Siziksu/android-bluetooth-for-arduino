@@ -7,7 +7,7 @@ import android.widget.Button;
 
 import com.siziksu.bluetooth.R;
 import com.siziksu.bluetooth.common.Constants;
-import com.siziksu.bluetooth.common.function.Predicate;
+import com.siziksu.bluetooth.common.function.Functions;
 import com.siziksu.bluetooth.common.utils.DatesUtils;
 import com.siziksu.bluetooth.domain.bluetooth.BluetoothDomainContract;
 import com.siziksu.bluetooth.domain.bluetooth.MainBluetoothDomainContract;
@@ -23,8 +23,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import javax.inject.Inject;
-
-import butterknife.ButterKnife;
 
 public final class MainPresenter implements MainPresenterContract<MainViewContract>, MainBluetoothDomainContract, MainPreferencesDomainContract {
 
@@ -86,7 +84,11 @@ public final class MainPresenter implements MainPresenterContract<MainViewContra
 
     @Override
     public void onMacroButtonClick(int resId) {
-        getMacro(resId, macro -> bluetoothDomain.sendCommand(macro != null ? macro.command : ""));
+        Functions.apply(buttons, button -> button.getId() == resId,
+                        button -> {
+                            Macro macro = macros.get(buttons.indexOf(button));
+                            bluetoothDomain.sendCommand(macro != null ? macro.command : "");
+                        });
     }
 
     @Override
@@ -171,20 +173,14 @@ public final class MainPresenter implements MainPresenterContract<MainViewContra
     }
 
     private void editMacro(int resId) {
-        getMacro(resId, macro -> {
-            if (view != null) {
-                Intent intent = new Intent(view.getAppCompatActivity(), MacroActivity.class);
-                intent.putExtra(Constants.MACRO_EXTRA, macro);
-                view.getAppCompatActivity().startActivityForResult(intent, Constants.MACRO_REQUEST_CODE);
-            }
-        });
-    }
-
-    private void getMacro(int resId, Predicate<Macro> macroPredicate) {
-        ButterKnife.apply(buttons, (view, index) -> {
-            if (view.getId() == resId) {
-                macroPredicate.supply(macros.get(buttons.indexOf(view)));
-            }
-        });
+        Functions.apply(buttons, button -> button.getId() == resId,
+                        button -> {
+                            Macro macro = macros.get(buttons.indexOf(button));
+                            if (view != null) {
+                                Intent intent = new Intent(view.getAppCompatActivity(), MacroActivity.class);
+                                intent.putExtra(Constants.MACRO_EXTRA, macro);
+                                view.getAppCompatActivity().startActivityForResult(intent, Constants.MACRO_REQUEST_CODE);
+                            }
+                        });
     }
 }
