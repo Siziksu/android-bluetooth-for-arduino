@@ -18,5 +18,6 @@
     <color name="macroBackground">#232323</color>
     <color name="buttonNormal">#434343</color>
     <color name="buttonPressed">#535353</color>
-    <color name="buttonSelected">#3e4678</color>
+    <color name="buttonSelected">#4e599f</color>
+    <color name="buttonSelectedAndPressed">#3e4678</color>
 </resources>
