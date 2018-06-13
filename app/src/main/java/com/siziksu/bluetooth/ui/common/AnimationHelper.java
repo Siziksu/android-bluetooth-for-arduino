@@ -18,7 +18,7 @@ public final class AnimationHelper {
     private boolean movingRight;
     private boolean normal = true;
     
-    private Disposable disposable;
+    private Disposable[] disposables = new Disposable[2];
 
     private final MetricsUtils metricsUtils;
 
@@ -37,7 +37,8 @@ public final class AnimationHelper {
             List<Completable> completableList = new ArrayList<>();
             completableList.add(Completable.create(emitter -> leftView.animate().translationX(-metricsUtils.getWidth()).withEndAction(emitter::onComplete)));
             completableList.add(Completable.create(emitter -> rightView.animate().translationX(0).withEndAction(emitter::onComplete)));
-            disposable = Completable.merge(completableList).subscribe(() -> movingLeft = false);
+            clearDisposable(0);
+            disposables[0] = Completable.merge(completableList).subscribe(() -> movingLeft = false);
         }
     }
 
@@ -49,7 +50,8 @@ public final class AnimationHelper {
             List<Completable> completableList = new ArrayList<>();
             completableList.add(Completable.create(emitter -> leftView.animate().translationX(0).withEndAction(emitter::onComplete)));
             completableList.add(Completable.create(emitter -> rightView.animate().translationX(metricsUtils.getWidth()).withEndAction(emitter::onComplete)));
-            disposable = Completable.merge(completableList).subscribe(() -> movingRight = false);
+            clearDisposable(1);
+            disposables[1] = Completable.merge(completableList).subscribe(() -> movingRight = false);
         }
     }
 
@@ -59,5 +61,18 @@ public final class AnimationHelper {
         } else {
             animateToLeft();
         }
+    }
+
+    private void clearDisposable(int index) {
+        if (disposables[index] != null) {
+            disposables[index].dispose();
+            disposables[index] = null;
+        }
+    }
+
+    public void onDestroy() {
+        clearDisposable(0);
+        clearDisposable(1);
+        disposables = null;
     }
 }

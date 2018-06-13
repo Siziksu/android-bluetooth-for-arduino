@@ -103,6 +103,7 @@ public class MainActivity extends AppCompatActivity implements MainViewContract 
     protected void onDestroy() {
         super.onDestroy();
         presenter.unregister();
+        animationHelper.onDestroy();
     }
 
     @Override

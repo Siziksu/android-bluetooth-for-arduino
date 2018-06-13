@@ -15,19 +15,17 @@ public final class MetricsUtils {
 
     private final DisplayMetrics metrics;
     private final Display display;
-    private final float width;
-    private final float height;
 
     public MetricsUtils(AppCompatActivity activity) {
         this.metrics = new DisplayMetrics();
         display = activity.getWindowManager().getDefaultDisplay();
-        display.getMetrics(metrics);
-        width = metrics.widthPixels;
-        height = metrics.heightPixels;
     }
 
     public float getWidth() {
-        return getRotation() == VERTICAL ? (width < height ? metrics.widthPixels : metrics.heightPixels) : (width < height ? metrics.heightPixels : metrics.widthPixels);
+        display.getMetrics(metrics);
+        return getRotation() == VERTICAL ?
+                (metrics.widthPixels < metrics.heightPixels ? metrics.widthPixels : metrics.heightPixels) :
+                (metrics.widthPixels < metrics.heightPixels ? metrics.heightPixels : metrics.widthPixels);
     }
 
     public int getRotation() {
