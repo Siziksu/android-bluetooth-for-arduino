@@ -10,7 +10,7 @@ public interface MainPresenterContract<V extends BaseViewContract> extends BaseP
 
     void setButtons(Button[] buttons);
 
-    void updateButtonsText();
+    void updateButtonsText(boolean macrosByName);
 
     void start();
 

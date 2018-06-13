@@ -1,434 +1,449 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    android:id="@+id/relativeLayout"
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/mainBackground"
-    android:padding="@dimen/padding3"
-    tools:ignore="ContentDescription,MissingPrefix">
+    android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/m1"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:text="@string/m1"
-        style="@style/AppTheme.MacroButton"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/horizontal1"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/vertical1" />
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbarMacros"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:minHeight="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
-    <Button
-        android:id="@+id/m2"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:text="@string/m2"
-        style="@style/AppTheme.MacroButton"
-        app:layout_constraintTop_toBottomOf="@id/horizontal1"
-        app:layout_constraintBottom_toTopOf="@+id/horizontal2"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/vertical1" />
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/relativeLayout"
+        android:layout_below="@+id/toolbarMacros"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/mainBackground"
+        android:padding="@dimen/padding3"
+        tools:ignore="ContentDescription,MissingPrefix">
 
-    <Button
-        android:id="@+id/m3"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:text="@string/m3"
-        style="@style/AppTheme.MacroButton"
-        app:layout_constraintTop_toBottomOf="@id/horizontal2"
-        app:layout_constraintBottom_toTopOf="@+id/horizontal3"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/vertical1" />
+        <Button
+            android:id="@+id/m1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="@string/m1"
+            style="@style/AppTheme.MacroButton"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/horizontal1"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/vertical1" />
 
-    <Button
-        android:id="@+id/m4"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:text="@string/m4"
-        style="@style/AppTheme.MacroButton"
-        app:layout_constraintTop_toBottomOf="@id/horizontal3"
-        app:layout_constraintBottom_toTopOf="@+id/horizontal4"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/vertical1" />
+        <Button
+            android:id="@+id/m2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="@string/m2"
+            style="@style/AppTheme.MacroButton"
+            app:layout_constraintTop_toBottomOf="@id/horizontal1"
+            app:layout_constraintBottom_toTopOf="@+id/horizontal2"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/vertical1" />
 
-    <Button
-        android:id="@+id/m5"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:text="@string/m5"
-        style="@style/AppTheme.MacroButton"
-        app:layout_constraintTop_toBottomOf="@id/horizontal4"
-        app:layout_constraintBottom_toTopOf="@+id/horizontal5"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/vertical1" />
+        <Button
+            android:id="@+id/m3"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="@string/m3"
+            style="@style/AppTheme.MacroButton"
+            app:layout_constraintTop_toBottomOf="@id/horizontal2"
+            app:layout_constraintBottom_toTopOf="@+id/horizontal3"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/vertical1" />
 
-    <Button
-        android:id="@+id/m6"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:text="@string/m6"
-        style="@style/AppTheme.MacroButton"
-        app:layout_constraintTop_toBottomOf="@id/horizontal5"
-        app:layout_constraintBottom_toTopOf="@+id/horizontal6"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/vertical1" />
+        <Button
+            android:id="@+id/m4"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="@string/m4"
+            style="@style/AppTheme.MacroButton"
+            app:layout_constraintTop_toBottomOf="@id/horizontal3"
+            app:layout_constraintBottom_toTopOf="@+id/horizontal4"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/vertical1" />
 
-    <Button
-        android:id="@+id/m7"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:text="@string/m7"
-        style="@style/AppTheme.MacroButton"
-        app:layout_constraintTop_toBottomOf="@id/horizontal6"
-        app:layout_constraintBottom_toTopOf="@+id/horizontal7"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/vertical1" />
+        <Button
+            android:id="@+id/m5"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="@string/m5"
+            style="@style/AppTheme.MacroButton"
+            app:layout_constraintTop_toBottomOf="@id/horizontal4"
+            app:layout_constraintBottom_toTopOf="@+id/horizontal5"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/vertical1" />
 
-    <Button
-        android:id="@+id/m8"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:text="@string/m8"
-        style="@style/AppTheme.MacroButton"
-        app:layout_constraintTop_toBottomOf="@id/horizontal7"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/vertical1" />
+        <Button
+            android:id="@+id/m6"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="@string/m6"
+            style="@style/AppTheme.MacroButton"
+            app:layout_constraintTop_toBottomOf="@id/horizontal5"
+            app:layout_constraintBottom_toTopOf="@+id/horizontal6"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/vertical1" />
 
-    <android.support.constraint.Guideline
-        android:id="@+id/vertical1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.25" />
+        <Button
+            android:id="@+id/m7"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="@string/m7"
+            style="@style/AppTheme.MacroButton"
+            app:layout_constraintTop_toBottomOf="@id/horizontal6"
+            app:layout_constraintBottom_toTopOf="@+id/horizontal7"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/vertical1" />
 
-    <Button
-        android:id="@+id/m9"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:text="@string/m9"
-        style="@style/AppTheme.MacroButton"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/horizontal1"
-        app:layout_constraintLeft_toRightOf="@+id/vertical1"
-        app:layout_constraintRight_toLeftOf="@+id/vertical2" />
+        <Button
+            android:id="@+id/m8"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="@string/m8"
+            style="@style/AppTheme.MacroButton"
+            app:layout_constraintTop_toBottomOf="@id/horizontal7"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/vertical1" />
 
-    <Button
-        android:id="@+id/m10"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:text="@string/m10"
-        style="@style/AppTheme.MacroButton"
-        app:layout_constraintTop_toBottomOf="@+id/horizontal1"
-        app:layout_constraintBottom_toTopOf="@+id/horizontal2"
-        app:layout_constraintLeft_toRightOf="@+id/vertical1"
-        app:layout_constraintRight_toLeftOf="@+id/vertical2" />
+        <android.support.constraint.Guideline
+            android:id="@+id/vertical1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.25" />
 
-    <Button
-        android:id="@+id/m11"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:text="@string/m11"
-        style="@style/AppTheme.MacroButton"
-        app:layout_constraintTop_toBottomOf="@+id/horizontal2"
-        app:layout_constraintBottom_toTopOf="@+id/horizontal3"
-        app:layout_constraintLeft_toRightOf="@+id/vertical1"
-        app:layout_constraintRight_toLeftOf="@+id/vertical2" />
+        <Button
+            android:id="@+id/m9"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="@string/m9"
+            style="@style/AppTheme.MacroButton"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/horizontal1"
+            app:layout_constraintLeft_toRightOf="@+id/vertical1"
+            app:layout_constraintRight_toLeftOf="@+id/vertical2" />
 
-    <Button
-        android:id="@+id/m12"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:text="@string/m12"
-        style="@style/AppTheme.MacroButton"
-        app:layout_constraintTop_toBottomOf="@+id/horizontal3"
-        app:layout_constraintBottom_toTopOf="@+id/horizontal4"
-        app:layout_constraintLeft_toRightOf="@+id/vertical1"
-        app:layout_constraintRight_toLeftOf="@+id/vertical2" />
+        <Button
+            android:id="@+id/m10"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="@string/m10"
+            style="@style/AppTheme.MacroButton"
+            app:layout_constraintTop_toBottomOf="@+id/horizontal1"
+            app:layout_constraintBottom_toTopOf="@+id/horizontal2"
+            app:layout_constraintLeft_toRightOf="@+id/vertical1"
+            app:layout_constraintRight_toLeftOf="@+id/vertical2" />
 
-    <Button
-        android:id="@+id/m13"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:text="@string/m13"
-        style="@style/AppTheme.MacroButton"
-        app:layout_constraintTop_toBottomOf="@+id/horizontal4"
-        app:layout_constraintBottom_toTopOf="@+id/horizontal5"
-        app:layout_constraintLeft_toRightOf="@+id/vertical1"
-        app:layout_constraintRight_toLeftOf="@+id/vertical2" />
+        <Button
+            android:id="@+id/m11"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="@string/m11"
+            style="@style/AppTheme.MacroButton"
+            app:layout_constraintTop_toBottomOf="@+id/horizontal2"
+            app:layout_constraintBottom_toTopOf="@+id/horizontal3"
+            app:layout_constraintLeft_toRightOf="@+id/vertical1"
+            app:layout_constraintRight_toLeftOf="@+id/vertical2" />
 
-    <Button
-        android:id="@+id/m14"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:text="@string/m14"
-        style="@style/AppTheme.MacroButton"
-        app:layout_constraintTop_toBottomOf="@+id/horizontal5"
-        app:layout_constraintBottom_toTopOf="@+id/horizontal6"
-        app:layout_constraintLeft_toRightOf="@+id/vertical1"
-        app:layout_constraintRight_toLeftOf="@+id/vertical2" />
+        <Button
+            android:id="@+id/m12"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="@string/m12"
+            style="@style/AppTheme.MacroButton"
+            app:layout_constraintTop_toBottomOf="@+id/horizontal3"
+            app:layout_constraintBottom_toTopOf="@+id/horizontal4"
+            app:layout_constraintLeft_toRightOf="@+id/vertical1"
+            app:layout_constraintRight_toLeftOf="@+id/vertical2" />
 
-    <Button
-        android:id="@+id/m15"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:text="@string/m15"
-        style="@style/AppTheme.MacroButton"
-        app:layout_constraintTop_toBottomOf="@+id/horizontal6"
-        app:layout_constraintBottom_toTopOf="@+id/horizontal7"
-        app:layout_constraintLeft_toRightOf="@+id/vertical1"
-        app:layout_constraintRight_toLeftOf="@+id/vertical2" />
+        <Button
+            android:id="@+id/m13"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="@string/m13"
+            style="@style/AppTheme.MacroButton"
+            app:layout_constraintTop_toBottomOf="@+id/horizontal4"
+            app:layout_constraintBottom_toTopOf="@+id/horizontal5"
+            app:layout_constraintLeft_toRightOf="@+id/vertical1"
+            app:layout_constraintRight_toLeftOf="@+id/vertical2" />
 
-    <Button
-        android:id="@+id/m16"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:text="@string/m16"
-        style="@style/AppTheme.MacroButton"
-        app:layout_constraintTop_toBottomOf="@+id/horizontal7"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toRightOf="@+id/vertical1"
-        app:layout_constraintRight_toLeftOf="@+id/vertical2" />
+        <Button
+            android:id="@+id/m14"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="@string/m14"
+            style="@style/AppTheme.MacroButton"
+            app:layout_constraintTop_toBottomOf="@+id/horizontal5"
+            app:layout_constraintBottom_toTopOf="@+id/horizontal6"
+            app:layout_constraintLeft_toRightOf="@+id/vertical1"
+            app:layout_constraintRight_toLeftOf="@+id/vertical2" />
 
-    <android.support.constraint.Guideline
-        android:id="@+id/vertical2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.50" />
+        <Button
+            android:id="@+id/m15"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="@string/m15"
+            style="@style/AppTheme.MacroButton"
+            app:layout_constraintTop_toBottomOf="@+id/horizontal6"
+            app:layout_constraintBottom_toTopOf="@+id/horizontal7"
+            app:layout_constraintLeft_toRightOf="@+id/vertical1"
+            app:layout_constraintRight_toLeftOf="@+id/vertical2" />
 
-    <Button
-        android:id="@+id/m17"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:text="@string/m17"
-        style="@style/AppTheme.MacroButton"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/horizontal1"
-        app:layout_constraintLeft_toRightOf="@+id/vertical2"
-        app:layout_constraintRight_toLeftOf="@+id/vertical3" />
+        <Button
+            android:id="@+id/m16"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="@string/m16"
+            style="@style/AppTheme.MacroButton"
+            app:layout_constraintTop_toBottomOf="@+id/horizontal7"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/vertical1"
+            app:layout_constraintRight_toLeftOf="@+id/vertical2" />
 
-    <Button
-        android:id="@+id/m18"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:text="@string/m18"
-        style="@style/AppTheme.MacroButton"
-        app:layout_constraintTop_toBottomOf="@+id/horizontal1"
-        app:layout_constraintBottom_toTopOf="@+id/horizontal2"
-        app:layout_constraintLeft_toRightOf="@+id/vertical2"
-        app:layout_constraintRight_toLeftOf="@+id/vertical3" />
+        <android.support.constraint.Guideline
+            android:id="@+id/vertical2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.50" />
 
-    <Button
-        android:id="@+id/m19"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:text="@string/m19"
-        style="@style/AppTheme.MacroButton"
-        app:layout_constraintTop_toBottomOf="@+id/horizontal2"
-        app:layout_constraintBottom_toTopOf="@+id/horizontal3"
-        app:layout_constraintLeft_toRightOf="@+id/vertical2"
-        app:layout_constraintRight_toLeftOf="@+id/vertical3" />
+        <Button
+            android:id="@+id/m17"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="@string/m17"
+            style="@style/AppTheme.MacroButton"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/horizontal1"
+            app:layout_constraintLeft_toRightOf="@+id/vertical2"
+            app:layout_constraintRight_toLeftOf="@+id/vertical3" />
 
-    <Button
-        android:id="@+id/m20"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:text="@string/m20"
-        style="@style/AppTheme.MacroButton"
-        app:layout_constraintTop_toBottomOf="@+id/horizontal3"
-        app:layout_constraintBottom_toTopOf="@+id/horizontal4"
-        app:layout_constraintLeft_toRightOf="@+id/vertical2"
-        app:layout_constraintRight_toLeftOf="@+id/vertical3" />
+        <Button
+            android:id="@+id/m18"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="@string/m18"
+            style="@style/AppTheme.MacroButton"
+            app:layout_constraintTop_toBottomOf="@+id/horizontal1"
+            app:layout_constraintBottom_toTopOf="@+id/horizontal2"
+            app:layout_constraintLeft_toRightOf="@+id/vertical2"
+            app:layout_constraintRight_toLeftOf="@+id/vertical3" />
 
-    <Button
-        android:id="@+id/m21"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:text="@string/m21"
-        style="@style/AppTheme.MacroButton"
-        app:layout_constraintTop_toBottomOf="@+id/horizontal4"
-        app:layout_constraintBottom_toTopOf="@+id/horizontal5"
-        app:layout_constraintLeft_toRightOf="@+id/vertical2"
-        app:layout_constraintRight_toLeftOf="@+id/vertical3" />
+        <Button
+            android:id="@+id/m19"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="@string/m19"
+            style="@style/AppTheme.MacroButton"
+            app:layout_constraintTop_toBottomOf="@+id/horizontal2"
+            app:layout_constraintBottom_toTopOf="@+id/horizontal3"
+            app:layout_constraintLeft_toRightOf="@+id/vertical2"
+            app:layout_constraintRight_toLeftOf="@+id/vertical3" />
 
-    <Button
-        android:id="@+id/m22"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:text="@string/m22"
-        style="@style/AppTheme.MacroButton"
-        app:layout_constraintTop_toBottomOf="@+id/horizontal5"
-        app:layout_constraintBottom_toTopOf="@+id/horizontal6"
-        app:layout_constraintLeft_toRightOf="@+id/vertical2"
-        app:layout_constraintRight_toLeftOf="@+id/vertical3" />
+        <Button
+            android:id="@+id/m20"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="@string/m20"
+            style="@style/AppTheme.MacroButton"
+            app:layout_constraintTop_toBottomOf="@+id/horizontal3"
+            app:layout_constraintBottom_toTopOf="@+id/horizontal4"
+            app:layout_constraintLeft_toRightOf="@+id/vertical2"
+            app:layout_constraintRight_toLeftOf="@+id/vertical3" />
 
-    <Button
-        android:id="@+id/m23"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:text="@string/m23"
-        style="@style/AppTheme.MacroButton"
-        app:layout_constraintTop_toBottomOf="@+id/horizontal6"
-        app:layout_constraintBottom_toTopOf="@+id/horizontal7"
-        app:layout_constraintLeft_toRightOf="@+id/vertical2"
-        app:layout_constraintRight_toLeftOf="@+id/vertical3" />
+        <Button
+            android:id="@+id/m21"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="@string/m21"
+            style="@style/AppTheme.MacroButton"
+            app:layout_constraintTop_toBottomOf="@+id/horizontal4"
+            app:layout_constraintBottom_toTopOf="@+id/horizontal5"
+            app:layout_constraintLeft_toRightOf="@+id/vertical2"
+            app:layout_constraintRight_toLeftOf="@+id/vertical3" />
 
-    <Button
-        android:id="@+id/m24"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:text="@string/m24"
-        style="@style/AppTheme.MacroButton"
-        app:layout_constraintTop_toBottomOf="@+id/horizontal7"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toRightOf="@+id/vertical2"
-        app:layout_constraintRight_toLeftOf="@+id/vertical3" />
+        <Button
+            android:id="@+id/m22"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="@string/m22"
+            style="@style/AppTheme.MacroButton"
+            app:layout_constraintTop_toBottomOf="@+id/horizontal5"
+            app:layout_constraintBottom_toTopOf="@+id/horizontal6"
+            app:layout_constraintLeft_toRightOf="@+id/vertical2"
+            app:layout_constraintRight_toLeftOf="@+id/vertical3" />
 
-    <android.support.constraint.Guideline
-        android:id="@+id/vertical3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.75" />
+        <Button
+            android:id="@+id/m23"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="@string/m23"
+            style="@style/AppTheme.MacroButton"
+            app:layout_constraintTop_toBottomOf="@+id/horizontal6"
+            app:layout_constraintBottom_toTopOf="@+id/horizontal7"
+            app:layout_constraintLeft_toRightOf="@+id/vertical2"
+            app:layout_constraintRight_toLeftOf="@+id/vertical3" />
 
-    <Button
-        android:id="@+id/m25"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:text="@string/m25"
-        style="@style/AppTheme.MacroButton"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/horizontal1"
-        app:layout_constraintLeft_toRightOf="@+id/vertical3"
-        app:layout_constraintRight_toRightOf="parent" />
+        <Button
+            android:id="@+id/m24"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="@string/m24"
+            style="@style/AppTheme.MacroButton"
+            app:layout_constraintTop_toBottomOf="@+id/horizontal7"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/vertical2"
+            app:layout_constraintRight_toLeftOf="@+id/vertical3" />
 
-    <Button
-        android:id="@+id/m26"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:text="@string/m26"
-        style="@style/AppTheme.MacroButton"
-        app:layout_constraintTop_toBottomOf="@+id/horizontal1"
-        app:layout_constraintBottom_toTopOf="@+id/horizontal2"
-        app:layout_constraintLeft_toRightOf="@+id/vertical3"
-        app:layout_constraintRight_toRightOf="parent" />
+        <android.support.constraint.Guideline
+            android:id="@+id/vertical3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.75" />
 
-    <Button
-        android:id="@+id/m27"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:text="@string/m27"
-        style="@style/AppTheme.MacroButton"
-        app:layout_constraintTop_toBottomOf="@+id/horizontal2"
-        app:layout_constraintBottom_toTopOf="@+id/horizontal3"
-        app:layout_constraintLeft_toRightOf="@+id/vertical3"
-        app:layout_constraintRight_toRightOf="parent" />
+        <Button
+            android:id="@+id/m25"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="@string/m25"
+            style="@style/AppTheme.MacroButton"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/horizontal1"
+            app:layout_constraintLeft_toRightOf="@+id/vertical3"
+            app:layout_constraintRight_toRightOf="parent" />
 
-    <Button
-        android:id="@+id/m28"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:text="@string/m28"
-        style="@style/AppTheme.MacroButton"
-        app:layout_constraintTop_toBottomOf="@+id/horizontal3"
-        app:layout_constraintBottom_toTopOf="@+id/horizontal4"
-        app:layout_constraintLeft_toRightOf="@+id/vertical3"
-        app:layout_constraintRight_toRightOf="parent" />
+        <Button
+            android:id="@+id/m26"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="@string/m26"
+            style="@style/AppTheme.MacroButton"
+            app:layout_constraintTop_toBottomOf="@+id/horizontal1"
+            app:layout_constraintBottom_toTopOf="@+id/horizontal2"
+            app:layout_constraintLeft_toRightOf="@+id/vertical3"
+            app:layout_constraintRight_toRightOf="parent" />
 
-    <Button
-        android:id="@+id/m29"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:text="@string/m29"
-        style="@style/AppTheme.MacroButton"
-        app:layout_constraintTop_toBottomOf="@+id/horizontal4"
-        app:layout_constraintBottom_toTopOf="@+id/horizontal5"
-        app:layout_constraintLeft_toRightOf="@+id/vertical3"
-        app:layout_constraintRight_toRightOf="parent" />
+        <Button
+            android:id="@+id/m27"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="@string/m27"
+            style="@style/AppTheme.MacroButton"
+            app:layout_constraintTop_toBottomOf="@+id/horizontal2"
+            app:layout_constraintBottom_toTopOf="@+id/horizontal3"
+            app:layout_constraintLeft_toRightOf="@+id/vertical3"
+            app:layout_constraintRight_toRightOf="parent" />
 
-    <Button
-        android:id="@+id/m30"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:text="@string/m30"
-        style="@style/AppTheme.MacroButton"
-        app:layout_constraintTop_toBottomOf="@+id/horizontal5"
-        app:layout_constraintBottom_toTopOf="@+id/horizontal6"
-        app:layout_constraintLeft_toRightOf="@+id/vertical3"
-        app:layout_constraintRight_toRightOf="parent" />
+        <Button
+            android:id="@+id/m28"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="@string/m28"
+            style="@style/AppTheme.MacroButton"
+            app:layout_constraintTop_toBottomOf="@+id/horizontal3"
+            app:layout_constraintBottom_toTopOf="@+id/horizontal4"
+            app:layout_constraintLeft_toRightOf="@+id/vertical3"
+            app:layout_constraintRight_toRightOf="parent" />
 
-    <Button
-        android:id="@+id/m31"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:text="@string/m31"
-        style="@style/AppTheme.MacroButton"
-        app:layout_constraintTop_toBottomOf="@+id/horizontal6"
-        app:layout_constraintBottom_toTopOf="@+id/horizontal7"
-        app:layout_constraintLeft_toRightOf="@+id/vertical3"
-        app:layout_constraintRight_toRightOf="parent" />
+        <Button
+            android:id="@+id/m29"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="@string/m29"
+            style="@style/AppTheme.MacroButton"
+            app:layout_constraintTop_toBottomOf="@+id/horizontal4"
+            app:layout_constraintBottom_toTopOf="@+id/horizontal5"
+            app:layout_constraintLeft_toRightOf="@+id/vertical3"
+            app:layout_constraintRight_toRightOf="parent" />
 
-    <Button
-        android:id="@+id/m32"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:text="@string/m32"
-        style="@style/AppTheme.MacroButton"
-        app:layout_constraintTop_toBottomOf="@+id/horizontal7"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toRightOf="@+id/vertical3"
-        app:layout_constraintRight_toRightOf="parent" />
+        <Button
+            android:id="@+id/m30"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="@string/m30"
+            style="@style/AppTheme.MacroButton"
+            app:layout_constraintTop_toBottomOf="@+id/horizontal5"
+            app:layout_constraintBottom_toTopOf="@+id/horizontal6"
+            app:layout_constraintLeft_toRightOf="@+id/vertical3"
+            app:layout_constraintRight_toRightOf="parent" />
 
-    <android.support.constraint.Guideline
-        android:id="@+id/horizontal1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.125" />
+        <Button
+            android:id="@+id/m31"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="@string/m31"
+            style="@style/AppTheme.MacroButton"
+            app:layout_constraintTop_toBottomOf="@+id/horizontal6"
+            app:layout_constraintBottom_toTopOf="@+id/horizontal7"
+            app:layout_constraintLeft_toRightOf="@+id/vertical3"
+            app:layout_constraintRight_toRightOf="parent" />
 
-    <android.support.constraint.Guideline
-        android:id="@+id/horizontal2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.250" />
+        <Button
+            android:id="@+id/m32"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="@string/m32"
+            style="@style/AppTheme.MacroButton"
+            app:layout_constraintTop_toBottomOf="@+id/horizontal7"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/vertical3"
+            app:layout_constraintRight_toRightOf="parent" />
 
-    <android.support.constraint.Guideline
-        android:id="@+id/horizontal3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.375" />
+        <android.support.constraint.Guideline
+            android:id="@+id/horizontal1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.125" />
 
-    <android.support.constraint.Guideline
-        android:id="@+id/horizontal4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.500" />
+        <android.support.constraint.Guideline
+            android:id="@+id/horizontal2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.250" />
 
-    <android.support.constraint.Guideline
-        android:id="@+id/horizontal5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.625" />
+        <android.support.constraint.Guideline
+            android:id="@+id/horizontal3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.375" />
 
-    <android.support.constraint.Guideline
-        android:id="@+id/horizontal6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.750" />
+        <android.support.constraint.Guideline
+            android:id="@+id/horizontal4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.500" />
 
-    <android.support.constraint.Guideline
-        android:id="@+id/horizontal7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.875" />
-</android.support.constraint.ConstraintLayout>
+        <android.support.constraint.Guideline
+            android:id="@+id/horizontal5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.625" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/horizontal6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.750" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/horizontal7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.875" />
+    </android.support.constraint.ConstraintLayout>
+</RelativeLayout>

@@ -12,8 +12,8 @@ import com.siziksu.bluetooth.common.utils.DatesUtils;
 import com.siziksu.bluetooth.domain.bluetooth.BluetoothDomainContract;
 import com.siziksu.bluetooth.domain.bluetooth.BluetoothDomainPresenterContract;
 import com.siziksu.bluetooth.domain.model.MacroDomainModel;
-import com.siziksu.bluetooth.domain.preferences.PreferencesDomainPresenterContract;
 import com.siziksu.bluetooth.domain.preferences.PreferencesDomainContract;
+import com.siziksu.bluetooth.domain.preferences.PreferencesDomainPresenterContract;
 import com.siziksu.bluetooth.presenter.mapper.MacroMapper;
 import com.siziksu.bluetooth.presenter.model.Macro;
 import com.siziksu.bluetooth.ui.view.macro.MacroActivity;
@@ -34,6 +34,7 @@ public final class MainPresenter implements MainPresenterContract<MainViewContra
     private MainViewContract view;
     private List<Macro> macros = new ArrayList<>();
     private List<Button> buttons = new ArrayList<>();
+    private boolean macrosByName;
 
     public MainPresenter(BluetoothDomainContract<BluetoothDomainPresenterContract> bluetoothDomain,
                          PreferencesDomainContract<PreferencesDomainPresenterContract> preferencesDomain) {
@@ -62,7 +63,8 @@ public final class MainPresenter implements MainPresenterContract<MainViewContra
     }
 
     @Override
-    public void updateButtonsText() {
+    public void updateButtonsText(boolean macrosByName) {
+        this.macrosByName = macrosByName;
         updateMacros();
     }
 
@@ -169,8 +171,7 @@ public final class MainPresenter implements MainPresenterContract<MainViewContra
     private void updateMacros() {
         if (!macros.isEmpty()) {
             for (int i = 0; i < buttons.size(); i++) {
-                buttons.get(i).setText(macros.get(i).name);
-                buttons.get(i).setSelected(!macros.get(i).command.isEmpty());
+                updateButtonData(i);
             }
         }
     }
@@ -178,9 +179,13 @@ public final class MainPresenter implements MainPresenterContract<MainViewContra
     private void updateMacro(int index, String name, String command) {
         macros.get(index).name = name;
         macros.get(index).command = command;
-        buttons.get(index).setText(macros.get(index).name);
-        buttons.get(index).setSelected(!macros.get(index).command.isEmpty());
+        updateButtonData(index);
         preferencesDomain.setMacros(new MacroMapper().unMap(macros));
+    }
+
+    private void updateButtonData(int index) {
+        buttons.get(index).setText(macrosByName ? macros.get(index).name : macros.get(index).command);
+        buttons.get(index).setSelected(!macros.get(index).command.isEmpty());
     }
 
     private void editMacro(int resId) {

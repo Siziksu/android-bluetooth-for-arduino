@@ -41,6 +41,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnLongClick;
 import butterknife.Optional;
+import io.reactivex.annotations.Nullable;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class MainActivity extends AppCompatActivity implements MainViewContract {
@@ -50,8 +51,11 @@ public class MainActivity extends AppCompatActivity implements MainViewContract 
     @Inject
     ItemAdapterContract adapter;
 
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
+    @BindView(R.id.toolbarConnection)
+    Toolbar toolbarConnection;
+    @Nullable
+    @BindView(R.id.toolbarMacros)
+    Toolbar toolbarMacros;
     @BindView(R.id.bottomNavigation)
     BottomNavigationView bottomNavigation;
     @BindView(R.id.connectionView)
@@ -75,6 +79,7 @@ public class MainActivity extends AppCompatActivity implements MainViewContract 
     private AnimationHelper animationHelper;
     private boolean alreadyStarted;
     private MenuItem item;
+    private boolean macrosByName = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,7 +113,7 @@ public class MainActivity extends AppCompatActivity implements MainViewContract 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_main_connection, menu);
         item = menu.findItem(R.id.action_connect);
         return true;
     }
@@ -197,7 +202,8 @@ public class MainActivity extends AppCompatActivity implements MainViewContract 
 
     private void initializeViews() {
         ButterKnife.bind(this);
-        setSupportActionBar(toolbar);
+        setSupportActionBar(toolbarConnection);
+        initializeToolbarMacros();
         presenter.setButtons(buttons);
         animationHelper = new AnimationHelper(connectionView, macrosView, new MetricsUtils(this));
         terminal.setText("");
@@ -246,8 +252,31 @@ public class MainActivity extends AppCompatActivity implements MainViewContract 
         ((ViewGroup) macrosView).removeAllViews();
         ((ViewGroup) macrosView).addView(getLayoutInflater().inflate(R.layout.view_macros, ((ViewGroup) macrosViewContainer), false));
         ButterKnife.bind(this);
+        initializeToolbarMacros();
         animationHelper.onConfigurationChanged();
         presenter.setButtons(buttons);
-        presenter.updateButtonsText();
+        presenter.updateButtonsText(macrosByName);
+    }
+
+    private void initializeToolbarMacros() {
+        if (toolbarMacros != null) {
+            toolbarMacros.inflateMenu(R.menu.menu_main_macro);
+            updateMenuItem(toolbarMacros.getMenu().findItem(R.id.action_macros_by));
+            toolbarMacros.setOnMenuItemClickListener(item -> {
+                switch (item.getItemId()) {
+                    case R.id.action_macros_by:
+                        macrosByName = !macrosByName;
+                        updateMenuItem(item);
+                        return true;
+                }
+                return false;
+            });
+        }
+    }
+
+    private void updateMenuItem(MenuItem item) {
+        item.setIcon(ContextCompat.getDrawable(this, macrosByName ? R.drawable.commands : R.drawable.macros));
+        item.setTitle(getString(macrosByName ? R.string.action_macros_by_command : R.string.action_macros_by_name));
+        presenter.updateButtonsText(macrosByName);
     }
 }
