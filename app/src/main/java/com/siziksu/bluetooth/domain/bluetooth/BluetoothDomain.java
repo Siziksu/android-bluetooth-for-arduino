@@ -44,10 +44,10 @@ public final class BluetoothDomain implements BluetoothDomainContract<BluetoothD
     @Override
     public void start() {
         presenter.showLoadingDialog();
-        presenter.write("Initializing bluetooth adapter...", false);
+        presenter.write("Initializing bluetooth adapter...", false, true);
         repository.initializeBluetoothAdapter();
-        presenter.write("Initialized", false);
-        presenter.write("Getting list of paired devices...", false);
+        presenter.write("Initialized", false, true);
+        presenter.write("Getting list of paired devices...", false, true);
         getPairedDevices();
     }
 
@@ -75,13 +75,13 @@ public final class BluetoothDomain implements BluetoothDomainContract<BluetoothD
         if (deviceSelected) {
             if (!connected) {
                 presenter.showLoadingDialog();
-                presenter.write("Connecting...", false);
+                presenter.write("Connecting...", false, true);
                 connectWithTheDevice();
             } else {
                 disconnectFromDevice();
             }
         } else {
-            presenter.write("No device selected", true);
+            presenter.write("No device selected", true, true);
         }
     }
 
@@ -90,12 +90,12 @@ public final class BluetoothDomain implements BluetoothDomainContract<BluetoothD
         if (deviceSelected && connected) {
             if (!command.isEmpty()) {
                 repository.sendMessageToTheDevice(START_MARKER + command + END_MARKER);
-                presenter.write("Sent: " + command + "", false);
+                presenter.write(command + "", false, false);
             } else {
-                presenter.write("Command not defined", true);
+                presenter.write("Command not defined", true, false);
             }
         } else {
-            presenter.write("Not connected", true);
+            presenter.write("Not connected", true, true);
         }
     }
 
@@ -107,12 +107,12 @@ public final class BluetoothDomain implements BluetoothDomainContract<BluetoothD
                 .subscribe(
                         list -> {
                             presenter.showDeviceList(list);
-                            presenter.write("List of paired devices ready", false);
+                            presenter.write("List of paired devices ready", false, true);
                             presenter.hideLoadingDialog();
                         },
                         throwable -> {
                             presenter.showDeviceList(new ArrayList<>());
-                            presenter.write("Error getting paired devices", true);
+                            presenter.write("Error getting paired devices", true, true);
                             presenter.hideLoadingDialog();
                         }
                 );
@@ -127,18 +127,18 @@ public final class BluetoothDomain implements BluetoothDomainContract<BluetoothD
                         value -> {
                             deviceSelected = value;
                             lastPosition = position;
-                            presenter.write(device + " device selected", false);
+                            presenter.write(device + " device selected", false, true);
                             presenter.hideLoadingDialog();
                         },
                         throwable -> {
-                            presenter.write("Error selecting the pared device" + device + "", true);
+                            presenter.write("Error selecting the pared device" + device + "", true, true);
                             presenter.hideLoadingDialog();
                         }
                 );
     }
 
     private void deselectDevice(String device) {
-        presenter.write(device + " device deselected", false);
+        presenter.write(device + " device deselected", false, true);
         deviceSelected = false;
         disconnectFromDevice();
     }
@@ -151,12 +151,12 @@ public final class BluetoothDomain implements BluetoothDomainContract<BluetoothD
                 .subscribe(
                         value -> {
                             connected = value;
-                            presenter.write("Connected", false);
+                            presenter.write("Connected", false, true);
                             presenter.hideLoadingDialog();
                             presenter.onConnectionUpdate(true);
                         },
                         throwable -> {
-                            presenter.write("Error connecting", true);
+                            presenter.write("Error connecting", true, true);
                             presenter.hideLoadingDialog();
                             presenter.onConnectionUpdate(false);
                         }
@@ -165,10 +165,10 @@ public final class BluetoothDomain implements BluetoothDomainContract<BluetoothD
 
     private void disconnectFromDevice() {
         if (connected) {
-            presenter.write("Disconnecting...", false);
+            presenter.write("Disconnecting...", false, true);
             repository.disconnectFromTheDevice();
             connected = false;
-            presenter.write("Disconnected", false);
+            presenter.write("Disconnected", false, true);
             presenter.onConnectionUpdate(false);
         }
     }

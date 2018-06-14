@@ -10,7 +10,7 @@
 
     <include
         android:id="@+id/connectionView"
-        android:layout_above="@+id/lastCommand"
+        android:layout_above="@+id/bottomNavigation"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentTop="true"
@@ -18,7 +18,7 @@
 
     <RelativeLayout
         android:id="@+id/macrosViewContainer"
-        android:layout_above="@+id/lastCommand"
+        android:layout_above="@+id/bottomNavigation"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentTop="true">
@@ -29,21 +29,6 @@
             android:layout_height="match_parent"
             layout="@layout/view_macros" />
     </RelativeLayout>
-
-    <TextView
-        fontPath="fonts/OpenSans-Regular.ttf"
-        android:id="@+id/lastCommand"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/bottomNavigation"
-        android:paddingTop="@dimen/padding10"
-        android:paddingBottom="@dimen/padding10"
-        android:paddingStart="@dimen/padding15"
-        android:paddingEnd="@dimen/padding15"
-        android:background="@color/darkGrey"
-        android:text="@string/app_name"
-        android:textColor="@color/white"
-        android:textSize="@dimen/textSize12" />
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/bottomNavigation"

@@ -4,22 +4,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbarMacros"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:minHeight="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+    android:layout_height="match_parent"
+    tools:ignore="ContentDescription,MissingPrefix">
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/relativeLayout"
-        android:layout_below="@+id/toolbarMacros"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_above="@+id/bottomBar"
         android:background="@color/mainBackground"
         android:padding="@dimen/padding3"
         tools:ignore="ContentDescription,MissingPrefix">
@@ -446,4 +438,34 @@
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.875" />
     </android.support.constraint.ConstraintLayout>
+
+    <RelativeLayout
+        android:id="@+id/bottomBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/padding5"
+        android:paddingBottom="@dimen/padding5"
+        android:paddingStart="@dimen/padding15"
+        android:paddingEnd="@dimen/padding15"
+        android:background="@color/darkGrey"
+        android:layout_alignParentBottom="true">
+
+        <TextView
+            fontPath="fonts/OpenSans-Regular.ttf"
+            android:id="@+id/lastCommand"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="@string/app_name"
+            android:textColor="@color/white"
+            android:textSize="@dimen/textSize12" />
+
+        <ImageButton
+            android:id="@+id/editMacrosButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:background="@drawable/commands" />
+    </RelativeLayout>
 </RelativeLayout>

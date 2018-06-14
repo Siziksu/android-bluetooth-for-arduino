@@ -14,12 +14,15 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
+import android.text.Spanned;
 import android.text.method.ScrollingMovementMethod;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.siziksu.bluetooth.App;
@@ -40,8 +43,8 @@ import butterknife.BindViews;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnLongClick;
+import butterknife.OnTouch;
 import butterknife.Optional;
-import io.reactivex.annotations.Nullable;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class MainActivity extends AppCompatActivity implements MainViewContract {
@@ -53,9 +56,6 @@ public class MainActivity extends AppCompatActivity implements MainViewContract 
 
     @BindView(R.id.toolbarConnection)
     Toolbar toolbarConnection;
-    @Nullable
-    @BindView(R.id.toolbarMacros)
-    Toolbar toolbarMacros;
     @BindView(R.id.bottomNavigation)
     BottomNavigationView bottomNavigation;
     @BindView(R.id.connectionView)
@@ -64,6 +64,8 @@ public class MainActivity extends AppCompatActivity implements MainViewContract 
     View macrosViewContainer;
     @BindView(R.id.macrosView)
     View macrosView;
+    @BindView(R.id.editMacrosButton)
+    ImageButton editMacrosButton;
     @BindView(R.id.terminal)
     TextView terminal;
     @BindView(R.id.lastCommand)
@@ -74,12 +76,13 @@ public class MainActivity extends AppCompatActivity implements MainViewContract 
                 R.id.m9, R.id.m10, R.id.m11, R.id.m12, R.id.m13, R.id.m14, R.id.m15, R.id.m16,
                 R.id.m17, R.id.m18, R.id.m19, R.id.m20, R.id.m21, R.id.m22, R.id.m23, R.id.m24,
                 R.id.m25, R.id.m26, R.id.m27, R.id.m28, R.id.m29, R.id.m30, R.id.m31, R.id.m32})
-    Button[] buttons;
+    List<Button> buttons;
 
     private AnimationHelper animationHelper;
     private boolean alreadyStarted;
     private MenuItem item;
     private boolean macrosByName = true;
+    private Spanned last;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -169,10 +172,13 @@ public class MainActivity extends AppCompatActivity implements MainViewContract 
     }
 
     @Override
-    public void writeInTerminal(String message) {
-        terminal.append(Html.fromHtml((terminal.length() == 0 ? "" : Constants.CRLF) + message));
-        terminal.requestFocus();
-        lastCommand.setText(Html.fromHtml(message));
+    public void writeInTerminal(String message, boolean main) {
+        if (main) {
+            terminal.append(Html.fromHtml((terminal.length() == 0 ? "" : Constants.CRLF) + message));
+            terminal.requestFocus();
+        }
+        last = Html.fromHtml(message);
+        lastCommand.setText(last);
     }
 
     @Override
@@ -182,12 +188,17 @@ public class MainActivity extends AppCompatActivity implements MainViewContract 
     }
 
     @Optional
-    @OnClick({R.id.m1, R.id.m2, R.id.m3, R.id.m4, R.id.m5, R.id.m6, R.id.m7, R.id.m8,
+    @OnTouch({R.id.m1, R.id.m2, R.id.m3, R.id.m4, R.id.m5, R.id.m6, R.id.m7, R.id.m8,
               R.id.m9, R.id.m10, R.id.m11, R.id.m12, R.id.m13, R.id.m14, R.id.m15, R.id.m16,
               R.id.m17, R.id.m18, R.id.m19, R.id.m20, R.id.m21, R.id.m22, R.id.m23, R.id.m24,
               R.id.m25, R.id.m26, R.id.m27, R.id.m28, R.id.m29, R.id.m30, R.id.m31, R.id.m32})
-    public void onMacroButtonClick(View view) {
-        presenter.onMacroButtonClick(view.getId());
+    public boolean onMacroButtonTouch(View view, MotionEvent event) {
+        if (macrosByName) {
+            presenter.onMacroButtonTouch(view.getId(), event);
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Optional
@@ -196,14 +207,23 @@ public class MainActivity extends AppCompatActivity implements MainViewContract 
                   R.id.m17, R.id.m18, R.id.m19, R.id.m20, R.id.m21, R.id.m22, R.id.m23, R.id.m24,
                   R.id.m25, R.id.m26, R.id.m27, R.id.m28, R.id.m29, R.id.m30, R.id.m31, R.id.m32})
     public boolean onMacroButtonLongClick(View view) {
-        presenter.onMacroButtonLongClick(view.getId());
-        return true;
+        if (!macrosByName) {
+            presenter.onMacroButtonLongClick(view.getId());
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @OnClick(R.id.editMacrosButton)
+    public void onEditMacrosButtonClick() {
+        macrosByName = !macrosByName;
+        updateEditMacrosButtonAndButtonsText();
     }
 
     private void initializeViews() {
         ButterKnife.bind(this);
         setSupportActionBar(toolbarConnection);
-        initializeToolbarMacros();
         presenter.setButtons(buttons);
         animationHelper = new AnimationHelper(connectionView, macrosView, new MetricsUtils(this));
         terminal.setText("");
@@ -233,6 +253,7 @@ public class MainActivity extends AppCompatActivity implements MainViewContract 
         recyclerView.addItemDecoration(decoration);
         bottomNavigation.setOnNavigationItemSelectedListener(this::setViewPagerSelectedItem);
         bottomNavigation.setSelectedItemId(R.id.action_connection);
+        updateEditMacrosButtonAndButtonsText();
     }
 
     private boolean setViewPagerSelectedItem(MenuItem item) {
@@ -252,31 +273,14 @@ public class MainActivity extends AppCompatActivity implements MainViewContract 
         ((ViewGroup) macrosView).removeAllViews();
         ((ViewGroup) macrosView).addView(getLayoutInflater().inflate(R.layout.view_macros, ((ViewGroup) macrosViewContainer), false));
         ButterKnife.bind(this);
-        initializeToolbarMacros();
         animationHelper.onConfigurationChanged();
         presenter.setButtons(buttons);
-        presenter.updateButtonsText(macrosByName);
+        lastCommand.setText(last);
+        updateEditMacrosButtonAndButtonsText();
     }
 
-    private void initializeToolbarMacros() {
-        if (toolbarMacros != null) {
-            toolbarMacros.inflateMenu(R.menu.menu_main_macro);
-            updateMenuItem(toolbarMacros.getMenu().findItem(R.id.action_macros_by));
-            toolbarMacros.setOnMenuItemClickListener(item -> {
-                switch (item.getItemId()) {
-                    case R.id.action_macros_by:
-                        macrosByName = !macrosByName;
-                        updateMenuItem(item);
-                        return true;
-                }
-                return false;
-            });
-        }
-    }
-
-    private void updateMenuItem(MenuItem item) {
-        item.setIcon(ContextCompat.getDrawable(this, macrosByName ? R.drawable.commands : R.drawable.macros));
-        item.setTitle(getString(macrosByName ? R.string.action_macros_by_command : R.string.action_macros_by_name));
+    private void updateEditMacrosButtonAndButtonsText() {
+        editMacrosButton.setBackground(ContextCompat.getDrawable(this, macrosByName ? R.drawable.commands : R.drawable.macros));
         presenter.updateButtonsText(macrosByName);
     }
 }

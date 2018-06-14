@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface BluetoothDomainPresenterContract {
 
-    void write(String message, boolean error);
+    void write(String message, boolean error, boolean main);
 
     void showLoadingDialog();
 

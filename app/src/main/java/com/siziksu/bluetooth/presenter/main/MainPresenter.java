@@ -3,6 +3,7 @@ package com.siziksu.bluetooth.presenter.main;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.widget.Button;
 
 import com.siziksu.bluetooth.R;
@@ -20,7 +21,6 @@ import com.siziksu.bluetooth.ui.common.DialogFragmentHelper;
 import com.siziksu.bluetooth.ui.view.macro.MacroActivity;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -58,9 +58,9 @@ public final class MainPresenter implements MainPresenterContract<MainViewContra
     }
 
     @Override
-    public void setButtons(Button[] buttons) {
+    public void setButtons(List<Button> buttons) {
         this.buttons.clear();
-        this.buttons.addAll(Arrays.asList(buttons));
+        this.buttons.addAll(buttons);
     }
 
     @Override
@@ -91,27 +91,46 @@ public final class MainPresenter implements MainPresenterContract<MainViewContra
     }
 
     @Override
-    public void onMacroButtonClick(int resId) {
+    public void onMacroButtonTouch(int resId, MotionEvent event) {
         Functions.apply(buttons, button -> button.getId() == resId,
                         button -> {
                             Macro macro = macros.get(buttons.indexOf(button));
-                            if (macro.confirmation) {
-                                DialogFragmentHelper.showConfirmationDialog(
-                                        view.getAppCompatActivity(),
-                                        R.string.main_confirmation_dialog_message,
-                                        R.string.main_confirmation_dialog_accept,
-                                        aVoid -> sendCommand(macro),
-                                        R.string.main_confirmation_dialog_cancel,
-                                        aVoid -> {}
-                                );
-                            } else {
-                                sendCommand(macro);
+                            if (macro != null) {
+                                String command = macro.command;
+                                switch (event.getAction()) {
+                                    case MotionEvent.ACTION_DOWN:
+                                        command += " ON";
+                                        if (!macro.confirmation) {
+                                            sendCommand(command);
+                                        }
+                                        break;
+                                    case MotionEvent.ACTION_UP:
+                                        if (macro.confirmation) {
+                                            command += " ON";
+                                            useDialogToSendCommand(command);
+                                        } else {
+                                            command += " OFF";
+                                            sendCommand(command);
+                                        }
+                                        break;
+                                }
                             }
                         });
     }
 
-    private void sendCommand(Macro macro) {
-        bluetoothDomain.sendCommand(macro != null ? macro.command : "");
+    private void useDialogToSendCommand(String command) {
+        DialogFragmentHelper.showConfirmationDialog(
+                view.getAppCompatActivity(),
+                R.string.main_confirmation_dialog_message,
+                R.string.main_confirmation_dialog_accept,
+                aVoid -> sendCommand(command),
+                R.string.main_confirmation_dialog_cancel,
+                aVoid -> {}
+        );
+    }
+
+    private void sendCommand(String command) {
+        bluetoothDomain.sendCommand(command);
     }
 
     @Override
@@ -135,7 +154,7 @@ public final class MainPresenter implements MainPresenterContract<MainViewContra
     }
 
     @Override
-    public void write(String message, boolean error) {
+    public void write(String message, boolean error, boolean main) {
         if (view != null) {
             String currentDate = DatesUtils.getTimeString();
             String terminalDateColor = view.getAppCompatActivity().getString(R.string.terminal_date);
@@ -143,7 +162,7 @@ public final class MainPresenter implements MainPresenterContract<MainViewContra
             String terminalWarningColor = view.getAppCompatActivity().getString(R.string.terminal_warning);
             String date = String.format(Constants.TERMINAL_DATE, terminalDateColor, currentDate);
             String entry = String.format(Constants.TERMINAL_ENTRY, (!error ? terminalEntryColor : terminalWarningColor), message);
-            view.writeInTerminal(date + entry);
+            view.writeInTerminal(date + entry, main);
         }
     }
 

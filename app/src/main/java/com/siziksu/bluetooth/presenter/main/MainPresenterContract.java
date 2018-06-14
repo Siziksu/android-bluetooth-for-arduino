@@ -1,14 +1,17 @@
 package com.siziksu.bluetooth.presenter.main;
 
 import android.content.Intent;
+import android.view.MotionEvent;
 import android.widget.Button;
 
 import com.siziksu.bluetooth.presenter.BasePresenterContract;
 import com.siziksu.bluetooth.presenter.BaseViewContract;
 
+import java.util.List;
+
 public interface MainPresenterContract<V extends BaseViewContract> extends BasePresenterContract<V> {
 
-    void setButtons(Button[] buttons);
+    void setButtons(List<Button> buttons);
 
     void updateButtonsText(boolean macrosByName);
 
@@ -20,7 +23,7 @@ public interface MainPresenterContract<V extends BaseViewContract> extends BaseP
 
     void onDeviceClick(int position, String device);
 
-    void onMacroButtonClick(int resId);
+    void onMacroButtonTouch(int resId, MotionEvent event);
 
     void onMacroButtonLongClick(int resId);
 
