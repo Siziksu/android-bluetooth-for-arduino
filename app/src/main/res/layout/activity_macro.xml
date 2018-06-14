@@ -17,76 +17,107 @@
         app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
-    <RelativeLayout
+    <ScrollView
         android:layout_below="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="@dimen/padding15">
+        android:layout_height="match_parent">
 
-        <TextView
-            fontPath="fonts/Montserrat-Bold.ttf"
-            android:id="@+id/title"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="@dimen/padding10"
-            android:paddingBottom="@dimen/padding10"
-            android:layout_marginBottom="@dimen/padding10"
-            android:background="@color/darkGrey"
-            android:gravity="center"
-            android:text="@string/edit_macro"
-            android:textColor="@color/white"
-            android:textSize="@dimen/textSize30" />
+            android:padding="@dimen/padding15">
 
-        <TextView
-            fontPath="fonts/Montserrat-Light.ttf"
-            android:id="@+id/macroNameLabel"
-            android:layout_below="@+id/title"
-            android:labelFor="@+id/macroName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="@dimen/padding10"
-            android:paddingBottom="@dimen/padding10"
-            android:text="@string/macro_name"
-            android:textColor="@color/white"
-            android:textSize="@dimen/textSize14" />
+            <TextView
+                fontPath="fonts/Montserrat-Bold.ttf"
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/padding5"
+                android:paddingBottom="@dimen/padding5"
+                android:layout_marginBottom="@dimen/padding10"
+                android:background="@color/darkGrey"
+                android:gravity="center"
+                android:text="@string/edit_macro"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textSize30" />
 
-        <EditText
-            fontPath="fonts/Montserrat-Light.ttf"
-            android:id="@+id/macroName"
-            android:layout_below="@+id/macroNameLabel"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="@dimen/padding10"
-            android:paddingBottom="@dimen/padding10"
-            android:selectAllOnFocus="true"
-            android:textColor="@color/white"
-            android:textSize="@dimen/textSize15"
-            android:inputType="text|textNoSuggestions" />
+            <TextView
+                fontPath="fonts/Montserrat-Light.ttf"
+                android:id="@+id/macroNameLabel"
+                android:layout_below="@+id/title"
+                android:labelFor="@+id/macroName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/padding10"
+                android:paddingBottom="@dimen/padding10"
+                android:text="@string/macro_name"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textSize14" />
 
-        <TextView
-            fontPath="fonts/Montserrat-Light.ttf"
-            android:id="@+id/macroCommandLabel"
-            android:layout_below="@+id/macroName"
-            android:labelFor="@+id/macroCommand"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="@dimen/padding10"
-            android:paddingBottom="@dimen/padding10"
-            android:text="@string/macro_command"
-            android:textColor="@color/white"
-            android:textSize="@dimen/textSize14" />
+            <EditText
+                fontPath="fonts/Montserrat-Light.ttf"
+                android:id="@+id/macroName"
+                android:layout_below="@+id/macroNameLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/padding10"
+                android:paddingBottom="@dimen/padding10"
+                android:selectAllOnFocus="true"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textSize15"
+                android:inputType="text|textNoSuggestions" />
 
-        <EditText
-            fontPath="fonts/Montserrat-Light.ttf"
-            android:id="@+id/macroCommand"
-            android:layout_below="@+id/macroCommandLabel"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="@dimen/padding10"
-            android:paddingBottom="@dimen/padding10"
-            android:selectAllOnFocus="true"
-            android:textColor="@color/white"
-            android:textSize="@dimen/textSize15"
-            android:inputType="text|textNoSuggestions" />
-    </RelativeLayout>
+            <TextView
+                fontPath="fonts/Montserrat-Light.ttf"
+                android:id="@+id/macroCommandLabel"
+                android:layout_below="@+id/macroName"
+                android:labelFor="@+id/macroCommand"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/padding10"
+                android:paddingBottom="@dimen/padding10"
+                android:text="@string/macro_command"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textSize14" />
+
+            <EditText
+                fontPath="fonts/Montserrat-Light.ttf"
+                android:id="@+id/macroCommand"
+                android:layout_below="@+id/macroCommandLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/padding10"
+                android:paddingBottom="@dimen/padding10"
+                android:selectAllOnFocus="true"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textSize15"
+                android:inputType="text|textNoSuggestions" />
+
+            <RelativeLayout
+                android:layout_below="@+id/macroCommand"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <CheckBox
+                    android:id="@+id/macroConfirmationCheckBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true" />
+
+                <TextView
+                    fontPath="fonts/Montserrat-Light.ttf"
+                    android:id="@+id/macroConfirmationCheckBoxLabel"
+                    android:labelFor="@+id/macroCommand"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@+id/macroConfirmationCheckBox"
+                    android:layout_centerVertical="true"
+                    android:paddingTop="@dimen/padding10"
+                    android:paddingBottom="@dimen/padding10"
+                    android:text="@string/confirmation_dialog"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/textSize14" />
+            </RelativeLayout>
+        </RelativeLayout>
+    </ScrollView>
 </RelativeLayout>

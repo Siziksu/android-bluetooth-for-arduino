@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.CheckBox;
 import android.widget.EditText;
 
 import com.siziksu.bluetooth.R;
@@ -27,6 +28,8 @@ public class MacroActivity extends AppCompatActivity {
     EditText macroName;
     @BindView(R.id.macroCommand)
     EditText macroCommand;
+    @BindView(R.id.macroConfirmationCheckBox)
+    CheckBox macroConfirmationCheckBox;
 
     private Macro macro;
 
@@ -58,9 +61,10 @@ public class MacroActivity extends AppCompatActivity {
                 return true;
             case R.id.action_apply:
                 Intent intent = new Intent();
-                intent.putExtra(Constants.MACRO_ID_EXTRA, macro.id);
-                intent.putExtra(Constants.MACRO_NAME_EXTRA, macroName.getText().toString());
-                intent.putExtra(Constants.MACRO_COMMAND_EXTRA, macroCommand.getText().toString());
+                macro.name = macroName.getText().toString();
+                macro.command = macroCommand.getText().toString();
+                macro.confirmation = macroConfirmationCheckBox.isChecked();
+                intent.putExtra(Constants.MACRO_EXTRA, macro);
                 setResult(Activity.RESULT_OK, intent);
                 finish();
                 return true;
@@ -88,6 +92,7 @@ public class MacroActivity extends AppCompatActivity {
         if (macro != null) {
             macroName.setText(macro.name);
             macroCommand.setText(macro.command);
+            macroConfirmationCheckBox.setChecked(macro.confirmation);
         }
     }
 }

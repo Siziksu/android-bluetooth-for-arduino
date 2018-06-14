@@ -16,6 +16,7 @@ import com.siziksu.bluetooth.domain.preferences.PreferencesDomainContract;
 import com.siziksu.bluetooth.domain.preferences.PreferencesDomainPresenterContract;
 import com.siziksu.bluetooth.presenter.mapper.MacroMapper;
 import com.siziksu.bluetooth.presenter.model.Macro;
+import com.siziksu.bluetooth.ui.common.DialogFragmentHelper;
 import com.siziksu.bluetooth.ui.view.macro.MacroActivity;
 
 import java.util.ArrayList;
@@ -94,8 +95,23 @@ public final class MainPresenter implements MainPresenterContract<MainViewContra
         Functions.apply(buttons, button -> button.getId() == resId,
                         button -> {
                             Macro macro = macros.get(buttons.indexOf(button));
-                            bluetoothDomain.sendCommand(macro != null ? macro.command : "");
+                            if (macro.confirmation) {
+                                DialogFragmentHelper.showConfirmationDialog(
+                                        view.getAppCompatActivity(),
+                                        R.string.main_confirmation_dialog_message,
+                                        R.string.main_confirmation_dialog_accept,
+                                        aVoid -> sendCommand(macro),
+                                        R.string.main_confirmation_dialog_cancel,
+                                        aVoid -> {}
+                                );
+                            } else {
+                                sendCommand(macro);
+                            }
                         });
+    }
+
+    private void sendCommand(Macro macro) {
+        bluetoothDomain.sendCommand(macro != null ? macro.command : "");
     }
 
     @Override
@@ -108,13 +124,11 @@ public final class MainPresenter implements MainPresenterContract<MainViewContra
         if (requestCode == Constants.MACRO_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
             Bundle extras = data.getExtras();
             if (extras != null) {
-                if (extras.containsKey(Constants.MACRO_ID_EXTRA)
-                    && extras.containsKey(Constants.MACRO_NAME_EXTRA)
-                    && extras.containsKey(Constants.MACRO_COMMAND_EXTRA)) {
-                    int index = extras.getInt(Constants.MACRO_ID_EXTRA);
-                    String name = extras.getString(Constants.MACRO_NAME_EXTRA); ;
-                    String command = extras.getString(Constants.MACRO_COMMAND_EXTRA); ;
-                    updateMacro(index, name, command);
+                if (extras.containsKey(Constants.MACRO_EXTRA)) {
+                    Macro macro = extras.getParcelable(Constants.MACRO_EXTRA);
+                    if (macro != null) {
+                        updateMacro(macro);
+                    }
                 }
             }
         }
@@ -176,10 +190,11 @@ public final class MainPresenter implements MainPresenterContract<MainViewContra
         }
     }
 
-    private void updateMacro(int index, String name, String command) {
-        macros.get(index).name = name;
-        macros.get(index).command = command;
-        updateButtonData(index);
+    private void updateMacro(Macro macro) {
+        macros.get(macro.id).name = macro.name;
+        macros.get(macro.id).command = macro.command;
+        macros.get(macro.id).confirmation = macro.confirmation;
+        updateButtonData(macro.id);
         preferencesDomain.setMacros(new MacroMapper().unMap(macros));
     }
 

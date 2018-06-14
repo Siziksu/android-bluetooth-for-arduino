@@ -23,4 +23,6 @@
     <color name="bottomNavigationViewBackground">#3F51B5</color>
     <color name="navigationTintChecked">#ffffff</color>
     <color name="navigationTintUnchecked">#1e2440</color>
+    <color name="dialogButtonCancel">@color/colorPrimary</color>
+    <color name="dialogButtonAccept">@color/colorAccent</color>
 </resources>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/padding25">
+
+    <TextView
+        android:id="@+id/dialogConfirmationMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/padding15"
+        android:text="@string/app_name"
+        android:textSize="@dimen/textSize16"
+        android:textStyle="normal"
+        android:textColor="@color/black" />
+
+    <Button
+        android:id="@+id/dialogConfirmationPositive"
+        android:layout_below="@+id/dialogConfirmationMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/padding15"
+        android:layout_toStartOf="@+id/dialogConfirmationNegative"
+        android:background="@null"
+        android:minWidth="@dimen/padding35"
+        android:textSize="@dimen/textSize16"
+        android:textColor="@color/dialogButtonAccept"
+        android:text="@string/app_name" />
+
+    <Button
+        android:id="@+id/dialogConfirmationNegative"
+        android:layout_below="@+id/dialogConfirmationMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minWidth="@dimen/padding35"
+        android:layout_alignParentEnd="true"
+        android:background="@null"
+        android:textSize="@dimen/textSize16"
+        android:textColor="@color/dialogButtonCancel"
+        android:text="@string/app_name" />
+</RelativeLayout>

@@ -16,6 +16,10 @@
     <string name="macro_name">Name</string>
     <string name="macro_command">Command</string>
     <string name="edit_macro">Edit Macro</string>
+    <string name="confirmation_dialog">Confirmation dialog</string>
+    <string name="main_confirmation_dialog_message">Are you sure you want to send this command?</string>
+    <string name="main_confirmation_dialog_accept">Yes</string>
+    <string name="main_confirmation_dialog_cancel">No</string>
     <string name="m1">M1</string>
     <string name="m2">M2</string>
     <string name="m3">M3</string>

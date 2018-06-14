@@ -12,6 +12,7 @@ public final class MacroMapper extends Mapper<MacroClientModel, MacroDataModel> 
         macroDataModel.id = object.id;
         macroDataModel.name = object.name;
         macroDataModel.command = object.command;
+        macroDataModel.confirmation = object.confirmation;
         return macroDataModel;
     }
 
@@ -21,6 +22,7 @@ public final class MacroMapper extends Mapper<MacroClientModel, MacroDataModel> 
         macroClientModel.id = mapped.id;
         macroClientModel.name = mapped.name;
         macroClientModel.command = mapped.command;
+        macroClientModel.confirmation = mapped.confirmation;
         return macroClientModel;
     }
 }

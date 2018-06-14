@@ -8,6 +8,9 @@ public class Macro implements Parcelable {
     public int id;
     public String name;
     public String command;
+    public boolean confirmation;
+
+    public Macro() {}
 
     @Override
     public int describeContents() { return 0; }
@@ -17,17 +20,17 @@ public class Macro implements Parcelable {
         dest.writeInt(this.id);
         dest.writeString(this.name);
         dest.writeString(this.command);
+        dest.writeByte(this.confirmation ? (byte) 1 : (byte) 0);
     }
-
-    public Macro() {}
 
     protected Macro(Parcel in) {
         this.id = in.readInt();
         this.name = in.readString();
         this.command = in.readString();
+        this.confirmation = in.readByte() != 0;
     }
 
-    public static final Parcelable.Creator<Macro> CREATOR = new Parcelable.Creator<Macro>() {
+    public static final Creator<Macro> CREATOR = new Creator<Macro>() {
         @Override
         public Macro createFromParcel(Parcel source) {return new Macro(source);}
 

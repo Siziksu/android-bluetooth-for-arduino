@@ -12,6 +12,9 @@ import io.reactivex.schedulers.Schedulers;
 
 public final class BluetoothDomain implements BluetoothDomainContract<BluetoothDomainPresenterContract> {
 
+    private static final String START_MARKER = "¡";
+    private static final String END_MARKER = "!";
+
     @Inject
     RepositoryContract repository;
 
@@ -86,7 +89,7 @@ public final class BluetoothDomain implements BluetoothDomainContract<BluetoothD
     public void sendCommand(String command) {
         if (deviceSelected && connected) {
             if (!command.isEmpty()) {
-                repository.sendMessageToTheDevice(command);
+                repository.sendMessageToTheDevice(START_MARKER + command + END_MARKER);
                 presenter.write("Sent: " + command + "", false);
             } else {
                 presenter.write("Command not defined", true);

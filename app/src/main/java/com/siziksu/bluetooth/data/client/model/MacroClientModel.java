@@ -14,4 +14,7 @@ public class MacroClientModel {
     @SerializedName("command")
     @Expose
     public String command;
+    @SerializedName("confirmation")
+    @Expose
+    public boolean confirmation;
 }

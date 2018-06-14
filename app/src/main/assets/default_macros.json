@@ -3,162 +3,194 @@
         {
             "id": 0,
             "name": "M1",
-            "command": ""
+            "command": "",
+            "confirmation": false
         },
         {
             "id": 1,
             "name": "M2",
-            "command": ""
+            "command": "",
+            "confirmation": false
         },
         {
             "id": 2,
             "name": "M3",
-            "command": ""
+            "command": "",
+            "confirmation": false
         },
         {
             "id": 3,
             "name": "M4",
-            "command": ""
+            "command": "",
+            "confirmation": false
         },
         {
             "id": 4,
             "name": "M5",
-            "command": ""
+            "command": "",
+            "confirmation": false
         },
         {
             "id": 5,
             "name": "M6",
-            "command": ""
+            "command": "",
+            "confirmation": false
         },
         {
             "id": 6,
             "name": "M7",
-            "command": ""
+            "command": "",
+            "confirmation": false
         },
         {
             "id": 7,
             "name": "M8",
-            "command": ""
+            "command": "",
+            "confirmation": false
         },
         {
             "id": 8,
             "name": "M9",
-            "command": ""
+            "command": "",
+            "confirmation": false
         },
         {
             "id": 9,
             "name": "M10",
-            "command": ""
+            "command": "",
+            "confirmation": false
         },
         {
             "id": 10,
             "name": "M11",
-            "command": ""
+            "command": "",
+            "confirmation": false
         },
         {
             "id": 11,
             "name": "M12",
-            "command": ""
+            "command": "",
+            "confirmation": false
         },
         {
             "id": 12,
             "name": "M13",
-            "command": ""
+            "command": "",
+            "confirmation": false
         },
         {
             "id": 13,
             "name": "M14",
-            "command": ""
+            "command": "",
+            "confirmation": false
         },
         {
             "id": 14,
             "name": "M15",
-            "command": ""
+            "command": "",
+            "confirmation": false
         },
         {
             "id": 15,
             "name": "M16",
-            "command": ""
+            "command": "",
+            "confirmation": false
         },
         {
             "id": 16,
             "name": "M17",
-            "command": ""
+            "command": "",
+            "confirmation": false
         },
         {
             "id": 17,
             "name": "M18",
-            "command": ""
+            "command": "",
+            "confirmation": false
         },
         {
             "id": 18,
             "name": "M19",
-            "command": ""
+            "command": "",
+            "confirmation": false
         },
         {
             "id": 19,
             "name": "M20",
-            "command": ""
+            "command": "",
+            "confirmation": false
         },
         {
             "id": 20,
             "name": "M21",
-            "command": ""
+            "command": "",
+            "confirmation": false
         },
         {
             "id": 21,
             "name": "M22",
-            "command": ""
+            "command": "",
+            "confirmation": false
         },
         {
             "id": 22,
             "name": "M23",
-            "command": ""
+            "command": "",
+            "confirmation": false
         },
         {
             "id": 23,
             "name": "M24",
-            "command": ""
+            "command": "",
+            "confirmation": false
         },
         {
             "id": 24,
             "name": "M25",
-            "command": ""
+            "command": "",
+            "confirmation": false
         },
         {
             "id": 25,
             "name": "M26",
-            "command": ""
+            "command": "",
+            "confirmation": false
         },
         {
             "id": 26,
             "name": "M28",
-            "command": ""
+            "command": "",
+            "confirmation": false
         },
         {
             "id": 27,
             "name": "M28",
-            "command": ""
+            "command": "",
+            "confirmation": false
         },
         {
             "id": 28,
             "name": "M29",
-            "command": ""
+            "command": "",
+            "confirmation": false
         },
         {
             "id": 29,
             "name": "M30",
-            "command": ""
+            "command": "",
+            "confirmation": false
         },
         {
             "id": 30,
             "name": "M31",
-            "command": ""
+            "command": "",
+            "confirmation": false
         },
         {
             "id": 31,
             "name": "M32",
-            "command": ""
+            "command": "",
+            "confirmation": false
         }
     ]
 }
