@@ -31,8 +31,9 @@ import com.siziksu.bluetooth.common.Constants;
 import com.siziksu.bluetooth.common.utils.MetricsUtils;
 import com.siziksu.bluetooth.presenter.main.MainPresenterContract;
 import com.siziksu.bluetooth.presenter.main.MainViewContract;
-import com.siziksu.bluetooth.ui.common.AnimationHelper;
 import com.siziksu.bluetooth.ui.common.DialogFragmentHelper;
+import com.siziksu.bluetooth.ui.common.ViewSlider;
+import com.siziksu.bluetooth.ui.common.ViewSliderContract;
 
 import java.util.List;
 
@@ -79,7 +80,7 @@ public class MainActivity extends AppCompatActivity implements MainViewContract 
                 R.id.m25, R.id.m26, R.id.m27, R.id.m28, R.id.m29, R.id.m30, R.id.m31, R.id.m32})
     List<Button> buttons;
 
-    private AnimationHelper animationHelper;
+    private ViewSliderContract viewSlider;
     private boolean alreadyStarted;
     private MenuItem item;
     private boolean macrosByName = true;
@@ -113,7 +114,16 @@ public class MainActivity extends AppCompatActivity implements MainViewContract 
     protected void onDestroy() {
         super.onDestroy();
         presenter.unregister();
-        animationHelper.onDestroy();
+        viewSlider.onDestroy();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (viewSlider.onBackAvailable()) {
+            bottomNavigation.setSelectedItemId(R.id.action_connection);
+        } else {
+            super.onBackPressed();
+        }
     }
 
     @Override
@@ -234,7 +244,7 @@ public class MainActivity extends AppCompatActivity implements MainViewContract 
         ButterKnife.bind(this);
         setSupportActionBar(toolbarConnection);
         presenter.setButtons(buttons);
-        animationHelper = new AnimationHelper(connectionView, macrosView, new MetricsUtils(this));
+        viewSlider = new ViewSlider(connectionView, macrosView, new MetricsUtils(this));
         terminal.setText("");
         terminal.setMovementMethod(new ScrollingMovementMethod());
         adapter = new ItemAdapter(this, new ItemManager());
@@ -269,10 +279,10 @@ public class MainActivity extends AppCompatActivity implements MainViewContract 
     private boolean setViewPagerSelectedItem(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_connection:
-                animationHelper.animateToLeft();
+                viewSlider.animateToLeft();
                 return true;
             case R.id.action_macros:
-                animationHelper.animateToRight();
+                viewSlider.animateToRight();
                 return true;
             default:
                 return false;
@@ -283,7 +293,7 @@ public class MainActivity extends AppCompatActivity implements MainViewContract 
         ((ViewGroup) macrosView).removeAllViews();
         ((ViewGroup) macrosView).addView(getLayoutInflater().inflate(R.layout.view_macros, ((ViewGroup) macrosViewContainer), false));
         ButterKnife.bind(this);
-        animationHelper.onConfigurationChanged();
+        viewSlider.onConfigurationChanged();
         presenter.setButtons(buttons);
         lastCommand.setText(last);
         updateKeepScreenOnButton();

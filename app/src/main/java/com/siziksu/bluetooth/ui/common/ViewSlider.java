@@ -10,25 +10,26 @@ import java.util.List;
 import io.reactivex.Completable;
 import io.reactivex.disposables.Disposable;
 
-public final class AnimationHelper {
+public final class ViewSlider implements ViewSliderContract {
 
     private View leftView;
     private View rightView;
     private boolean movingLeft;
     private boolean movingRight;
     private boolean normal = true;
-    
+
     private Disposable[] disposables = new Disposable[2];
 
     private final MetricsUtils metricsUtils;
 
-    public AnimationHelper(View left, View right, MetricsUtils metricsUtils) {
+    public ViewSlider(View left, View right, MetricsUtils metricsUtils) {
         this.rightView = right;
         this.leftView = left;
         this.metricsUtils = metricsUtils;
         rightView.setTranslationX(metricsUtils.getWidth());
     }
 
+    @Override
     public void animateToRight() {
         if (!movingLeft) {
             normal = true;
@@ -42,6 +43,7 @@ public final class AnimationHelper {
         }
     }
 
+    @Override
     public void animateToLeft() {
         if (!movingRight) {
             normal = false;
@@ -55,12 +57,18 @@ public final class AnimationHelper {
         }
     }
 
+    @Override
     public void onConfigurationChanged() {
         if (normal) {
             animateToRight();
         } else {
             animateToLeft();
         }
+    }
+
+    @Override
+    public boolean onBackAvailable() {
+        return normal;
     }
 
     private void clearDisposable(int index) {
@@ -70,6 +78,7 @@ public final class AnimationHelper {
         }
     }
 
+    @Override
     public void onDestroy() {
         clearDisposable(0);
         clearDisposable(1);
