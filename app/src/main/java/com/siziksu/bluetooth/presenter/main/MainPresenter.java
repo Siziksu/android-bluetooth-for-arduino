@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MotionEvent;
+import android.view.WindowManager;
 import android.widget.Button;
 
 import com.siziksu.bluetooth.R;
@@ -74,6 +75,17 @@ public final class MainPresenter implements MainPresenterContract<MainViewContra
     public void updateButtonsText(boolean macrosByName) {
         this.macrosByName = macrosByName;
         updateMacros();
+    }
+
+    @Override
+    public void updateScreenOnState(boolean keepScreenOn) {
+        if (view != null) {
+            if (keepScreenOn) {
+                view.getAppCompatActivity().getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+            } else {
+                view.getAppCompatActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+            }
+        }
     }
 
     @Override

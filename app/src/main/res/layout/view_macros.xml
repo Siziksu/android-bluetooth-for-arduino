@@ -455,10 +455,22 @@
             android:id="@+id/lastCommand"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_toStartOf="@+id/editKeepScreenOnButton"
             android:layout_centerVertical="true"
+            android:maxLines="1"
+            android:ellipsize="end"
             android:text="@string/app_name"
             android:textColor="@color/white"
             android:textSize="@dimen/textSize12" />
+
+        <ImageButton
+            android:id="@+id/editKeepScreenOnButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toStartOf="@+id/editMacrosButton"
+            android:layout_marginEnd="@dimen/padding10"
+            android:layout_centerVertical="true"
+            android:background="@drawable/keep_on" />
 
         <ImageButton
             android:id="@+id/editMacrosButton"
@@ -466,6 +478,6 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_alignParentEnd="true"
-            android:background="@drawable/commands" />
+            android:background="@drawable/edit" />
     </RelativeLayout>
 </RelativeLayout>

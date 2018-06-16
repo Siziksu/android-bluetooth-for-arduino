@@ -42,7 +42,6 @@ import butterknife.BindView;
 import butterknife.BindViews;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.OnLongClick;
 import butterknife.OnTouch;
 import butterknife.Optional;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
@@ -66,6 +65,8 @@ public class MainActivity extends AppCompatActivity implements MainViewContract 
     View macrosView;
     @BindView(R.id.editMacrosButton)
     ImageButton editMacrosButton;
+    @BindView(R.id.editKeepScreenOnButton)
+    ImageButton editKeepScreenOnButton;
     @BindView(R.id.terminal)
     TextView terminal;
     @BindView(R.id.lastCommand)
@@ -82,6 +83,7 @@ public class MainActivity extends AppCompatActivity implements MainViewContract 
     private boolean alreadyStarted;
     private MenuItem item;
     private boolean macrosByName = true;
+    private boolean keepScreenOn = false;
     private Spanned last;
 
     @Override
@@ -202,23 +204,30 @@ public class MainActivity extends AppCompatActivity implements MainViewContract 
     }
 
     @Optional
-    @OnLongClick({R.id.m1, R.id.m2, R.id.m3, R.id.m4, R.id.m5, R.id.m6, R.id.m7, R.id.m8,
-                  R.id.m9, R.id.m10, R.id.m11, R.id.m12, R.id.m13, R.id.m14, R.id.m15, R.id.m16,
-                  R.id.m17, R.id.m18, R.id.m19, R.id.m20, R.id.m21, R.id.m22, R.id.m23, R.id.m24,
-                  R.id.m25, R.id.m26, R.id.m27, R.id.m28, R.id.m29, R.id.m30, R.id.m31, R.id.m32})
-    public boolean onMacroButtonLongClick(View view) {
+    @OnClick({R.id.m1, R.id.m2, R.id.m3, R.id.m4, R.id.m5, R.id.m6, R.id.m7, R.id.m8,
+              R.id.m9, R.id.m10, R.id.m11, R.id.m12, R.id.m13, R.id.m14, R.id.m15, R.id.m16,
+              R.id.m17, R.id.m18, R.id.m19, R.id.m20, R.id.m21, R.id.m22, R.id.m23, R.id.m24,
+              R.id.m25, R.id.m26, R.id.m27, R.id.m28, R.id.m29, R.id.m30, R.id.m31, R.id.m32})
+    public void onMacroButtonClick(View view) {
         if (!macrosByName) {
             presenter.onMacroButtonLongClick(view.getId());
-            return true;
-        } else {
-            return false;
         }
     }
 
-    @OnClick(R.id.editMacrosButton)
-    public void onEditMacrosButtonClick() {
-        macrosByName = !macrosByName;
-        updateEditMacrosButtonAndButtonsText();
+    @OnClick({R.id.editKeepScreenOnButton, R.id.editMacrosButton})
+    public void onButtonClick(View view) {
+        switch (view.getId()) {
+            case R.id.editKeepScreenOnButton:
+                keepScreenOn = !keepScreenOn;
+                updateKeepScreenOnButton();
+                break;
+            case R.id.editMacrosButton:
+                macrosByName = !macrosByName;
+                updateEditMacrosButtonAndButtonsText();
+                break;
+            default:
+                break;
+        }
     }
 
     private void initializeViews() {
@@ -253,6 +262,7 @@ public class MainActivity extends AppCompatActivity implements MainViewContract 
         recyclerView.addItemDecoration(decoration);
         bottomNavigation.setOnNavigationItemSelectedListener(this::setViewPagerSelectedItem);
         bottomNavigation.setSelectedItemId(R.id.action_connection);
+        updateKeepScreenOnButton();
         updateEditMacrosButtonAndButtonsText();
     }
 
@@ -276,11 +286,17 @@ public class MainActivity extends AppCompatActivity implements MainViewContract 
         animationHelper.onConfigurationChanged();
         presenter.setButtons(buttons);
         lastCommand.setText(last);
+        updateKeepScreenOnButton();
         updateEditMacrosButtonAndButtonsText();
     }
 
+    private void updateKeepScreenOnButton() {
+        editKeepScreenOnButton.setBackground(ContextCompat.getDrawable(this, !keepScreenOn ? R.drawable.keep_on : R.drawable.keep_off));
+        presenter.updateScreenOnState(keepScreenOn);
+    }
+
     private void updateEditMacrosButtonAndButtonsText() {
-        editMacrosButton.setBackground(ContextCompat.getDrawable(this, macrosByName ? R.drawable.commands : R.drawable.macros));
+        editMacrosButton.setBackground(ContextCompat.getDrawable(this, macrosByName ? R.drawable.edit : R.drawable.macros));
         presenter.updateButtonsText(macrosByName);
     }
 }

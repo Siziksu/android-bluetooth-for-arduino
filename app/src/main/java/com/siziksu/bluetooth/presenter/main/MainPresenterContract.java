@@ -15,6 +15,8 @@ public interface MainPresenterContract<V extends BaseViewContract> extends BaseP
 
     void updateButtonsText(boolean macrosByName);
 
+    void updateScreenOnState(boolean keepScreenOn);
+
     void start();
 
     void refresh();
