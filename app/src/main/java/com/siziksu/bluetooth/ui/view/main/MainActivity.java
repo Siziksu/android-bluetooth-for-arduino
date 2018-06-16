@@ -296,7 +296,7 @@ public class MainActivity extends AppCompatActivity implements MainViewContract 
     }
 
     private void updateEditMacrosButtonAndButtonsText() {
-        editMacrosButton.setBackground(ContextCompat.getDrawable(this, macrosByName ? R.drawable.edit : R.drawable.macros));
+        editMacrosButton.setBackground(ContextCompat.getDrawable(this, macrosByName ? R.drawable.macros_edit : R.drawable.macros));
         presenter.updateButtonsText(macrosByName);
     }
 }
