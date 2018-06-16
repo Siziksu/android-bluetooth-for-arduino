@@ -18,7 +18,7 @@ public interface RepositoryContract {
 
     void disconnectFromTheDevice();
 
-    void sendMessageToTheDevice(String message);
+    void sendCommandViaBluetooth(byte[] command);
 
     Single<List<MacroDataModel>> getMacros();
 

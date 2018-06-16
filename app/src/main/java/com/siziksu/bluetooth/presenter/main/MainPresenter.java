@@ -27,6 +27,12 @@ import javax.inject.Inject;
 
 public final class MainPresenter implements MainPresenterContract<MainViewContract>, BluetoothDomainPresenterContract, PreferencesDomainPresenterContract {
 
+    private static final int OFF = 0;
+    private static final int ON = 127;
+    private static final int START_PACKET_BYTE = -2;
+    private static final int END_PACKET_BYTE = -1;
+    private static final int NOT_VALID_PACKET_BYTE = -1;
+
     @Inject
     BluetoothDomainContract<BluetoothDomainPresenterContract> bluetoothDomain;
     @Inject
@@ -36,6 +42,7 @@ public final class MainPresenter implements MainPresenterContract<MainViewContra
     private List<Macro> macros = new ArrayList<>();
     private List<Button> buttons = new ArrayList<>();
     private boolean macrosByName;
+    private byte[] message = {START_PACKET_BYTE, NOT_VALID_PACKET_BYTE, NOT_VALID_PACKET_BYTE, END_PACKET_BYTE};
 
     public MainPresenter(BluetoothDomainContract<BluetoothDomainPresenterContract> bluetoothDomain,
                          PreferencesDomainContract<PreferencesDomainPresenterContract> preferencesDomain) {
@@ -96,41 +103,9 @@ public final class MainPresenter implements MainPresenterContract<MainViewContra
                         button -> {
                             Macro macro = macros.get(buttons.indexOf(button));
                             if (macro != null) {
-                                String command = macro.command;
-                                switch (event.getAction()) {
-                                    case MotionEvent.ACTION_DOWN:
-                                        command += " ON";
-                                        if (!macro.confirmation) {
-                                            sendCommand(command);
-                                        }
-                                        break;
-                                    case MotionEvent.ACTION_UP:
-                                        if (macro.confirmation) {
-                                            command += " ON";
-                                            useDialogToSendCommand(command);
-                                        } else {
-                                            command += " OFF";
-                                            sendCommand(command);
-                                        }
-                                        break;
-                                }
+                                buildCommandAndSend(event.getAction(), macro);
                             }
                         });
-    }
-
-    private void useDialogToSendCommand(String command) {
-        DialogFragmentHelper.showConfirmationDialog(
-                view.getAppCompatActivity(),
-                R.string.main_confirmation_dialog_message,
-                R.string.main_confirmation_dialog_accept,
-                aVoid -> sendCommand(command),
-                R.string.main_confirmation_dialog_cancel,
-                aVoid -> {}
-        );
-    }
-
-    private void sendCommand(String command) {
-        bluetoothDomain.sendCommand(command);
     }
 
     @Override
@@ -157,9 +132,9 @@ public final class MainPresenter implements MainPresenterContract<MainViewContra
     public void write(String message, boolean error, boolean main) {
         if (view != null) {
             String currentDate = DatesUtils.getTimeString();
-            String terminalDateColor = view.getAppCompatActivity().getString(R.string.terminal_date);
-            String terminalEntryColor = view.getAppCompatActivity().getString(R.string.terminal_entry);
-            String terminalWarningColor = view.getAppCompatActivity().getString(R.string.terminal_warning);
+            String terminalDateColor = view.getAppCompatActivity().getString(R.string.terminal_date_color);
+            String terminalEntryColor = view.getAppCompatActivity().getString(R.string.terminal_entry_color);
+            String terminalWarningColor = view.getAppCompatActivity().getString(R.string.terminal_warning_color);
             String date = String.format(Constants.TERMINAL_DATE, terminalDateColor, currentDate);
             String entry = String.format(Constants.TERMINAL_ENTRY, (!error ? terminalEntryColor : terminalWarningColor), message);
             view.writeInTerminal(date + entry, main);
@@ -201,6 +176,46 @@ public final class MainPresenter implements MainPresenterContract<MainViewContra
         updateMacros();
     }
 
+    private void buildCommandAndSend(int action, Macro macro) {
+        message[1] = macro.command;
+        switch (action) {
+            case MotionEvent.ACTION_DOWN:
+                message[2] = ON;
+                if (!macro.confirmation) {
+                    sendCommand(message);
+                }
+                break;
+            case MotionEvent.ACTION_UP:
+                if (macro.confirmation) {
+                    message[2] = ON;
+                    useDialogToSendCommand(message);
+                } else {
+                    message[2] = OFF;
+                    sendCommand(message);
+                }
+                break;
+        }
+    }
+
+    private void useDialogToSendCommand(byte[] command) {
+        DialogFragmentHelper.showConfirmationDialog(
+                view.getAppCompatActivity(),
+                R.string.main_confirmation_dialog_message,
+                R.string.main_confirmation_dialog_accept,
+                aVoid -> sendCommand(command),
+                R.string.main_confirmation_dialog_cancel,
+                aVoid -> {}
+        );
+    }
+
+    private void sendCommand(byte[] command) {
+        if (message[1] != NOT_VALID_PACKET_BYTE && message[2] != NOT_VALID_PACKET_BYTE) {
+            bluetoothDomain.sendCommand(command);
+        } else {
+            write("Command not valid or not defined", true, false);
+        }
+    }
+
     private void updateMacros() {
         if (!macros.isEmpty()) {
             for (int i = 0; i < buttons.size(); i++) {
@@ -218,8 +233,8 @@ public final class MainPresenter implements MainPresenterContract<MainViewContra
     }
 
     private void updateButtonData(int index) {
-        buttons.get(index).setText(macrosByName ? macros.get(index).name : macros.get(index).command);
-        buttons.get(index).setSelected(!macros.get(index).command.isEmpty());
+        buttons.get(index).setText(macrosByName ? macros.get(index).name : String.valueOf(macros.get(index).command & 0xff));
+        buttons.get(index).setSelected(macros.get(index).command != -1);
     }
 
     private void editMacro(int resId) {

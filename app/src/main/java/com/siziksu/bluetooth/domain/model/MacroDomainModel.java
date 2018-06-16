@@ -4,6 +4,6 @@ public class MacroDomainModel {
 
     public int id;
     public String name;
-    public String command;
+    public byte command;
     public boolean confirmation;
 }

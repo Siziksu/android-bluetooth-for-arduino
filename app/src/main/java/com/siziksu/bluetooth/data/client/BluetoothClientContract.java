@@ -16,5 +16,5 @@ public interface BluetoothClientContract {
 
     void disconnectFromTheDevice();
 
-    void sendMessageToTheDevice(String message);
+    void sendCommand(byte[] command);
 }

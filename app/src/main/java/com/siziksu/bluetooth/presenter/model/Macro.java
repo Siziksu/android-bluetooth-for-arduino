@@ -7,7 +7,7 @@ public class Macro implements Parcelable {
 
     public int id;
     public String name;
-    public String command;
+    public byte command;
     public boolean confirmation;
 
     public Macro() {}
@@ -19,14 +19,14 @@ public class Macro implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(this.id);
         dest.writeString(this.name);
-        dest.writeString(this.command);
+        dest.writeByte(this.command);
         dest.writeByte(this.confirmation ? (byte) 1 : (byte) 0);
     }
 
     protected Macro(Parcel in) {
         this.id = in.readInt();
         this.name = in.readString();
-        this.command = in.readString();
+        this.command = in.readByte();
         this.confirmation = in.readByte() != 0;
     }
 

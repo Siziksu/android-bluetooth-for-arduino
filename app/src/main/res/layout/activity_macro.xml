@@ -50,7 +50,7 @@
                 android:layout_height="wrap_content"
                 android:paddingTop="@dimen/padding10"
                 android:paddingBottom="@dimen/padding10"
-                android:text="@string/macro_name"
+                android:text="@string/macro_name_label"
                 android:textColor="@color/white"
                 android:textSize="@dimen/textSize14" />
 
@@ -76,7 +76,7 @@
                 android:layout_height="wrap_content"
                 android:paddingTop="@dimen/padding10"
                 android:paddingBottom="@dimen/padding10"
-                android:text="@string/macro_command"
+                android:text="@string/macro_command_label"
                 android:textColor="@color/white"
                 android:textSize="@dimen/textSize14" />
 
@@ -89,9 +89,11 @@
                 android:paddingTop="@dimen/padding10"
                 android:paddingBottom="@dimen/padding10"
                 android:selectAllOnFocus="true"
+                android:maxLength="3"
                 android:textColor="@color/white"
                 android:textSize="@dimen/textSize15"
-                android:inputType="text|textNoSuggestions" />
+                android:digits="0123456789"
+                android:inputType="number|textNoSuggestions" />
 
             <RelativeLayout
                 android:layout_below="@+id/macroCommand"

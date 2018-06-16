@@ -107,11 +107,11 @@ public final class BluetoothClient implements BluetoothClientContract {
     }
 
     @Override
-    public void sendMessageToTheDevice(String message) {
+    public void sendCommand(byte[] command) {
         try {
             if (bluetoothSocket != null && bluetoothSocket.isConnected()) {
                 if (outputStream != null) {
-                    outputStream.write(message.getBytes());
+                    outputStream.write(command);
                 }
             }
         } catch (IOException e) {

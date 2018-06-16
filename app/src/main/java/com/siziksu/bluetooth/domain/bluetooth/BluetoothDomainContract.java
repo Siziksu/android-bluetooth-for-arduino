@@ -12,5 +12,5 @@ public interface BluetoothDomainContract<D> extends BaseDomainContract<D> {
 
     void onConnectButtonClick();
 
-    void sendCommand(String command);
+    void sendCommand(byte[] command);
 }

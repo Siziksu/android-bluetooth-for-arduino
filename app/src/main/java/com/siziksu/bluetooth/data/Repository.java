@@ -54,8 +54,8 @@ public final class Repository implements RepositoryContract {
     }
 
     @Override
-    public void sendMessageToTheDevice(String message) {
-        bluetoothClient.sendMessageToTheDevice(message);
+    public void sendCommandViaBluetooth(byte[] command) {
+        bluetoothClient.sendCommand(command);
     }
 
     @Override

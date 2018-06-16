@@ -13,7 +13,7 @@ public class MacroClientModel {
     public String name;
     @SerializedName("command")
     @Expose
-    public String command;
+    public byte command;
     @SerializedName("confirmation")
     @Expose
     public boolean confirmation;

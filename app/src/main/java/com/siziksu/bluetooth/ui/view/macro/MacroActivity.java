@@ -14,6 +14,7 @@ import android.widget.EditText;
 
 import com.siziksu.bluetooth.R;
 import com.siziksu.bluetooth.common.Constants;
+import com.siziksu.bluetooth.common.utils.MathUtils;
 import com.siziksu.bluetooth.presenter.model.Macro;
 
 import butterknife.BindView;
@@ -62,7 +63,7 @@ public class MacroActivity extends AppCompatActivity {
             case R.id.action_apply:
                 Intent intent = new Intent();
                 macro.name = macroName.getText().toString();
-                macro.command = macroCommand.getText().toString();
+                macro.command = MathUtils.getByteFromUnsignedStringNumber(macroCommand.getText().toString());
                 macro.confirmation = macroConfirmationCheckBox.isChecked();
                 intent.putExtra(Constants.MACRO_EXTRA, macro);
                 setResult(Activity.RESULT_OK, intent);
@@ -91,7 +92,7 @@ public class MacroActivity extends AppCompatActivity {
         }
         if (macro != null) {
             macroName.setText(macro.name);
-            macroCommand.setText(macro.command);
+            macroCommand.setText(String.valueOf(macro.command & 0xff));
             macroConfirmationCheckBox.setChecked(macro.confirmation);
         }
     }
