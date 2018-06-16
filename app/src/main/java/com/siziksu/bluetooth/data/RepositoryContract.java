@@ -4,6 +4,7 @@ import com.siziksu.bluetooth.data.model.MacroDataModel;
 
 import java.util.List;
 
+import io.reactivex.Completable;
 import io.reactivex.Single;
 
 public interface RepositoryContract {
@@ -14,11 +15,11 @@ public interface RepositoryContract {
 
     Single<Boolean> selectPairedDevice(String device);
 
-    Single<Boolean> connectWithTheDevice();
+    Completable connectWithTheDevice();
 
     void disconnectFromTheDevice();
 
-    void sendCommandViaBluetooth(byte[] command);
+    Completable sendCommandViaBluetooth(byte[] command);
 
     Single<List<MacroDataModel>> getMacros();
 

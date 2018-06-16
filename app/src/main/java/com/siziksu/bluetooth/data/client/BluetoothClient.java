@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
+import io.reactivex.Completable;
 import io.reactivex.Single;
 
 public final class BluetoothClient implements BluetoothClientContract {
@@ -70,8 +71,8 @@ public final class BluetoothClient implements BluetoothClientContract {
     }
 
     @Override
-    public Single<Boolean> connectWithTheDevice() {
-        return Single.create(emitter -> {
+    public Completable connectWithTheDevice() {
+        return Completable.create(emitter -> {
             if (deviceFound) {
                 UUID uuid = UUID.fromString(Constants.SERIAL_PORT_SERVICE_CLASS_UUID);
                 try {
@@ -79,9 +80,9 @@ public final class BluetoothClient implements BluetoothClientContract {
                         bluetoothSocket = bluetoothDevice.createRfcommSocketToServiceRecord(uuid);
                         bluetoothSocket.connect();
                         outputStream = bluetoothSocket.getOutputStream();
-                        emitter.onSuccess(true);
+                        emitter.onComplete();
                     } else {
-                        emitter.onSuccess(true);
+                        emitter.onComplete();
                     }
                 } catch (IOException e) {
                     emitter.onError(e);
@@ -107,15 +108,22 @@ public final class BluetoothClient implements BluetoothClientContract {
     }
 
     @Override
-    public void sendCommand(byte[] command) {
-        try {
-            if (bluetoothSocket != null && bluetoothSocket.isConnected()) {
-                if (outputStream != null) {
-                    outputStream.write(command);
+    public Completable sendCommand(byte[] command) {
+        return Completable.create(emitter -> {
+            try {
+                if (bluetoothSocket != null && bluetoothSocket.isConnected()) {
+                    if (outputStream != null) {
+                        outputStream.write(command);
+                        emitter.onComplete();
+                    } else {
+                        emitter.onError(new Throwable());
+                    }
+                } else {
+                    emitter.onError(new Throwable());
                 }
+            } catch (IOException e) {
+                emitter.onError(e);
             }
-        } catch (IOException e) {
-            Log.e("Bluetooth", e.getMessage(), e);
-        }
+        });
     }
 }

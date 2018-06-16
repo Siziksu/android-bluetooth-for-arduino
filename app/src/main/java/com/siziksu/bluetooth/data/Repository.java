@@ -11,6 +11,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import io.reactivex.Completable;
 import io.reactivex.Single;
 
 public final class Repository implements RepositoryContract {
@@ -44,7 +45,7 @@ public final class Repository implements RepositoryContract {
     }
 
     @Override
-    public Single<Boolean> connectWithTheDevice() {
+    public Completable connectWithTheDevice() {
         return bluetoothClient.connectWithTheDevice();
     }
 
@@ -54,8 +55,8 @@ public final class Repository implements RepositoryContract {
     }
 
     @Override
-    public void sendCommandViaBluetooth(byte[] command) {
-        bluetoothClient.sendCommand(command);
+    public Completable sendCommandViaBluetooth(byte[] command) {
+        return bluetoothClient.sendCommand(command);
     }
 
     @Override

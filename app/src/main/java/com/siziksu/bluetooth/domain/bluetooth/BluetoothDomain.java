@@ -85,8 +85,16 @@ public final class BluetoothDomain implements BluetoothDomainContract<BluetoothD
     @Override
     public void sendCommand(byte[] command) {
         if (deviceSelected && connected) {
-            repository.sendCommandViaBluetooth(command);
-            presenter.write("[" + (command[1] & 0xff) + ", " + (command[2] & 0xff) + "]", false, false);
+            disposable = repository.sendCommandViaBluetooth(command)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(
+                            () -> presenter.write("[" + (command[1] & 0xff) + ", " + (command[2] & 0xff) + "]", false, false),
+                            throwable -> {
+                                connected = false;
+                                presenter.write("Device not connected", true, true);
+                            }
+                    );
         } else {
             presenter.write("Not connected", true, true);
         }
@@ -142,13 +150,14 @@ public final class BluetoothDomain implements BluetoothDomainContract<BluetoothD
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
-                        value -> {
-                            connected = value;
+                        () -> {
+                            connected = true;
                             presenter.write("Connected", false, true);
                             presenter.hideLoadingDialog();
                             presenter.onConnectionUpdate(true);
                         },
                         throwable -> {
+                            connected = false;
                             presenter.write("Error connecting", true, true);
                             presenter.hideLoadingDialog();
                             presenter.onConnectionUpdate(false);

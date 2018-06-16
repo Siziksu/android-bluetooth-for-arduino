@@ -2,6 +2,7 @@ package com.siziksu.bluetooth.data.client;
 
 import java.util.List;
 
+import io.reactivex.Completable;
 import io.reactivex.Single;
 
 public interface BluetoothClientContract {
@@ -12,9 +13,9 @@ public interface BluetoothClientContract {
 
     Single<Boolean> selectPairedDevice(String device);
 
-    Single<Boolean> connectWithTheDevice();
+    Completable connectWithTheDevice();
 
     void disconnectFromTheDevice();
 
-    void sendCommand(byte[] command);
+    Completable sendCommand(byte[] command);
 }
