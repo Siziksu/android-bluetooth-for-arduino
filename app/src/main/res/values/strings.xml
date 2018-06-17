@@ -14,7 +14,7 @@
     <string name="terminal_entry_color">#f1c345</string>
     <string name="terminal_warning_color">#ff7b00</string>
     <string name="macro_name_label">Name</string>
-    <string name="macro_command_label">Command (value from 0 to 255)</string>
+    <string name="macro_command_label">Command (value from 0 to 253)</string>
     <string name="edit_macro">Edit Macro</string>
     <string name="confirmation_dialog">Confirmation dialog</string>
     <string name="main_confirmation_dialog_message">Are you sure you want to send this command?</string>

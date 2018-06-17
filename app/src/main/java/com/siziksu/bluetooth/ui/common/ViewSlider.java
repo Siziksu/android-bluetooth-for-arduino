@@ -16,7 +16,7 @@ public final class ViewSlider implements ViewSliderContract {
     private View rightView;
     private boolean movingLeft;
     private boolean movingRight;
-    private boolean normal = true;
+    private boolean left = true;
 
     private Disposable[] disposables = new Disposable[2];
 
@@ -32,7 +32,7 @@ public final class ViewSlider implements ViewSliderContract {
     @Override
     public void animateToRight() {
         if (!movingLeft) {
-            normal = true;
+            left = true;
             movingRight = false;
             movingLeft = true;
             List<Completable> completableList = new ArrayList<>();
@@ -46,7 +46,7 @@ public final class ViewSlider implements ViewSliderContract {
     @Override
     public void animateToLeft() {
         if (!movingRight) {
-            normal = false;
+            left = false;
             movingLeft = false;
             movingRight = true;
             List<Completable> completableList = new ArrayList<>();
@@ -59,7 +59,7 @@ public final class ViewSlider implements ViewSliderContract {
 
     @Override
     public void onConfigurationChanged() {
-        if (normal) {
+        if (left) {
             animateToRight();
         } else {
             animateToLeft();
@@ -68,7 +68,7 @@ public final class ViewSlider implements ViewSliderContract {
 
     @Override
     public boolean onBackAvailable() {
-        return normal;
+        return left;
     }
 
     private void clearDisposable(int index) {

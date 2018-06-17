@@ -1,7 +1,6 @@
 package com.siziksu.bluetooth.presenter.main;
 
 import android.content.Intent;
-import android.view.MotionEvent;
 import android.widget.Button;
 
 import com.siziksu.bluetooth.presenter.BasePresenterContract;
@@ -25,9 +24,9 @@ public interface MainPresenterContract<V extends BaseViewContract> extends BaseP
 
     void onDeviceClick(int position, String device);
 
-    void onMacroButtonTouch(int resId, MotionEvent event);
+    void onMacroButtonTouch(int resId, int action);
 
-    void onMacroButtonLongClick(int resId);
+    void onMacroEditButtonClick(int resId);
 
     void onActivityResult(int requestCode, int resultCode, Intent data);
 }

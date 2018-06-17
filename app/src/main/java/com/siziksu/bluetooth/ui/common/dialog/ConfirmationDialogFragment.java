@@ -12,7 +12,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.siziksu.bluetooth.R;
-import com.siziksu.bluetooth.common.function.Functions;
+import com.siziksu.bluetooth.common.function.Func;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -31,8 +31,8 @@ public class ConfirmationDialogFragment extends DialogFragment {
     @BindView(R.id.dialogConfirmationNegative)
     Button buttonCancel;
 
-    private Functions.Consumer<Void> positive;
-    private Functions.Consumer<Void> negative;
+    private Func.Consumer<Void> positive;
+    private Func.Consumer<Void> negative;
     private String messageString;
     private String positiveString;
     private String negativeString;
@@ -105,7 +105,7 @@ public class ConfirmationDialogFragment extends DialogFragment {
         dismiss();
     }
 
-    public void setCallback(Functions.Consumer<Void> positive, Functions.Consumer<Void> negative) {
+    public void setCallback(Func.Consumer<Void> positive, Func.Consumer<Void> negative) {
         this.positive = positive;
         this.negative = negative;
     }

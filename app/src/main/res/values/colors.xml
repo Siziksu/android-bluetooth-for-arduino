@@ -18,8 +18,8 @@
     <color name="macroBackground">#232323</color>
     <color name="buttonNormal">#434343</color>
     <color name="buttonPressed">#535353</color>
-    <color name="buttonSelected">#4e599f</color>
-    <color name="buttonSelectedAndPressed">#3e4678</color>
+    <color name="buttonBlueNormal">#4e599f</color>
+    <color name="buttonBluePressed">#3e4678</color>
     <color name="bottomNavigationViewBackground">#3F51B5</color>
     <color name="navigationTintChecked">#ffffff</color>
     <color name="navigationTintUnchecked">#1e2440</color>

@@ -209,8 +209,7 @@ public class MainActivity extends AppCompatActivity implements MainViewContract 
             switch (event.getAction()) {
                 case MotionEvent.ACTION_DOWN:
                 case MotionEvent.ACTION_UP:
-                    presenter.onMacroButtonTouch(view.getId(), event);
-                    return true;
+                    presenter.onMacroButtonTouch(view.getId(), event.getAction());
                 default:
                     return false;
             }
@@ -226,7 +225,7 @@ public class MainActivity extends AppCompatActivity implements MainViewContract 
               R.id.m25, R.id.m26, R.id.m27, R.id.m28, R.id.m29, R.id.m30, R.id.m31, R.id.m32})
     public void onMacroButtonClick(View view) {
         if (!macrosByName) {
-            presenter.onMacroButtonLongClick(view.getId());
+            presenter.onMacroEditButtonClick(view.getId());
         }
     }
 

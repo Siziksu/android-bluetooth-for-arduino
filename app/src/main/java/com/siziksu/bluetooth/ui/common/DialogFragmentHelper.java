@@ -6,7 +6,7 @@ import android.support.annotation.StringRes;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 
-import com.siziksu.bluetooth.common.function.Functions;
+import com.siziksu.bluetooth.common.function.Func;
 import com.siziksu.bluetooth.ui.common.dialog.ConfirmationDialogFragment;
 import com.siziksu.bluetooth.ui.common.dialog.IndeterminateProgressFragment;
 
@@ -23,9 +23,9 @@ public class DialogFragmentHelper {
     public static void showConfirmationDialog(AppCompatActivity activity,
                                               @StringRes int message,
                                               @StringRes int positiveText,
-                                              Functions.Consumer<Void> positive,
+                                              Func.Consumer<Void> positive,
                                               @StringRes int negativeText,
-                                              Functions.Consumer<Void> negative) {
+                                              Func.Consumer<Void> negative) {
         ConfirmationDialogFragment fragment = getConfirmationDialogFragment(positive, negative);
         Bundle bundle = new Bundle();
         bundle.putString(ConfirmationDialogFragment.MESSAGE_KEY, activity.getString(message));
@@ -58,7 +58,7 @@ public class DialogFragmentHelper {
     }
 
     @NonNull
-    private static ConfirmationDialogFragment getConfirmationDialogFragment(Functions.Consumer<Void> positive, Functions.Consumer<Void> negative) {
+    private static ConfirmationDialogFragment getConfirmationDialogFragment(Func.Consumer<Void> positive, Func.Consumer<Void> negative) {
         ConfirmationDialogFragment fragment = new ConfirmationDialogFragment();
         fragment.setCallback(positive, negative);
         fragment.setCancelable(true);
