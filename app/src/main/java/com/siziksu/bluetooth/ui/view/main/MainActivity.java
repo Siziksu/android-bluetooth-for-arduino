@@ -206,8 +206,14 @@ public class MainActivity extends AppCompatActivity implements MainViewContract 
               R.id.m25, R.id.m26, R.id.m27, R.id.m28, R.id.m29, R.id.m30, R.id.m31, R.id.m32})
     public boolean onMacroButtonTouch(View view, MotionEvent event) {
         if (macrosByName) {
-            presenter.onMacroButtonTouch(view.getId(), event);
-            return true;
+            switch (event.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                case MotionEvent.ACTION_UP:
+                    presenter.onMacroButtonTouch(view.getId(), event);
+                    return true;
+                default:
+                    return false;
+            }
         } else {
             return false;
         }
