@@ -186,7 +186,7 @@ public class MainActivity extends AppCompatActivity implements MainViewContract 
     @Override
     public void writeInTerminal(String message, boolean main) {
         if (main) {
-            terminal.append(Html.fromHtml((terminal.length() == 0 ? "" : Constants.CRLF) + message));
+            terminal.append(Html.fromHtml((terminal.length() == 0 ? "" : Constants.TERMINAL_CRLF) + message));
             terminal.requestFocus();
         }
         last = Html.fromHtml(message);

@@ -46,4 +46,20 @@
     <style name="AppTheme.MacroButton.Blue" parent="AppTheme.MacroButton">
         <item name="android:background">@drawable/button_macro_blue</item>
     </style>
+
+    <style name="AppTheme.MacroButton.Red" parent="AppTheme.MacroButton">
+        <item name="android:background">@drawable/button_macro_red</item>
+    </style>
+
+    <style name="AppTheme.MacroButton.Green" parent="AppTheme.MacroButton">
+        <item name="android:background">@drawable/button_macro_green</item>
+    </style>
+
+    <style name="AppTheme.MacroButton.Yellow" parent="AppTheme.MacroButton">
+        <item name="android:background">@drawable/button_macro_yellow</item>
+    </style>
+
+    <style name="AppTheme.MacroButton.Orange" parent="AppTheme.MacroButton">
+        <item name="android:background">@drawable/button_macro_orange</item>
+    </style>
 </resources>

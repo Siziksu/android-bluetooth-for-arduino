@@ -13,6 +13,7 @@ public final class MacroMapper extends Mapper<MacroDomainModel, Macro> {
         macro.name = object.name;
         macro.command = object.command;
         macro.confirmation = object.confirmation;
+        macro.color = object.color;
         return macro;
     }
 
@@ -23,6 +24,7 @@ public final class MacroMapper extends Mapper<MacroDomainModel, Macro> {
         macroDomainModel.name = mapped.name;
         macroDomainModel.command = mapped.command;
         macroDomainModel.confirmation = mapped.confirmation;
+        macroDomainModel.color = mapped.color;
         return macroDomainModel;
     }
 }

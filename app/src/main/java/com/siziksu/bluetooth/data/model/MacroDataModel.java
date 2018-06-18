@@ -6,4 +6,5 @@ public class MacroDataModel {
     public String name;
     public byte command;
     public boolean confirmation;
+    public int color;
 }

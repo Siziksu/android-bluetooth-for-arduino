@@ -9,19 +9,24 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.RadioGroup;
 
 import com.siziksu.bluetooth.R;
 import com.siziksu.bluetooth.common.Constants;
+import com.siziksu.bluetooth.common.utils.ColorUtils;
 import com.siziksu.bluetooth.common.utils.MathUtils;
 import com.siziksu.bluetooth.presenter.model.Macro;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.Optional;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
-public class MacroActivity extends AppCompatActivity {
+public class EditMacroActivity extends AppCompatActivity {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -31,6 +36,8 @@ public class MacroActivity extends AppCompatActivity {
     EditText macroCommand;
     @BindView(R.id.macroConfirmationCheckBox)
     CheckBox macroConfirmationCheckBox;
+    @BindView(R.id.macroColorGroup)
+    RadioGroup macroColorGroup;
 
     private Macro macro;
 
@@ -75,6 +82,16 @@ public class MacroActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Optional
+    @OnClick({R.id.macroRadioGrey, R.id.macroRadioBlue, R.id.macroRadioGreen,
+              R.id.macroRadioOrange, R.id.macroRadioYellow, R.id.macroRadioRed,
+              R.id.macroRadioPink, R.id.macroRadioLila})
+    public void onMacroRadioButtonClick(View view) {
+        if (macro != null) {
+            macro.color = ColorUtils.getMacroColorFromRadioButtonChecked(view);
+        }
+    }
+
     private void checkIntentExtras() {
         Bundle bundle = getIntent().getExtras();
         if (bundle != null && bundle.containsKey(Constants.MACRO_EXTRA)) {
@@ -94,6 +111,7 @@ public class MacroActivity extends AppCompatActivity {
             macroName.setText(macro.name);
             macroCommand.setText(String.valueOf(macro.command & 0xff));
             macroConfirmationCheckBox.setChecked(macro.confirmation);
+            macroColorGroup.check(ColorUtils.getRadioButtonFromColor(macro.color));
         }
     }
 }

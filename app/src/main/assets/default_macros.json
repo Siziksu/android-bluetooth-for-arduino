@@ -4,193 +4,225 @@
             "id": 0,
             "name": "DOWN",
             "command": -6,
-            "confirmation": false
+            "confirmation": false,
+            "color": 0
         },
         {
             "id": 1,
             "name": "ARM",
             "command": 0,
-            "confirmation": false
+            "confirmation": false,
+            "color": 0
         },
         {
             "id": 2,
             "name": "|<",
             "command": 1,
-            "confirmation": false
+            "confirmation": false,
+            "color": 0
         },
         {
             "id": 3,
             "name": ">|",
             "command": 2,
-            "confirmation": false
+            "confirmation": false,
+            "color": 0
         },
         {
             "id": 4,
             "name": "CYCLE",
             "command": 3,
-            "confirmation": false
+            "confirmation": false,
+            "color": 0
         },
         {
             "id": 5,
             "name": "STOP",
             "command": 4,
-            "confirmation": false
+            "confirmation": false,
+            "color": 0
         },
         {
             "id": 6,
             "name": "PLAY/PAUSE",
             "command": 5,
-            "confirmation": false
+            "confirmation": false,
+            "color": 0
         },
         {
             "id": 7,
             "name": "RECORD",
             "command": 6,
-            "confirmation": false
+            "confirmation": false,
+            "color": 0
         },
         {
             "id": 8,
             "name": "UP",
             "command": -5,
-            "confirmation": false
+            "confirmation": false,
+            "color": 0
         },
         {
             "id": 9,
             "name": "SOLO",
             "command": 7,
-            "confirmation": false
+            "confirmation": false,
+            "color": 0
         },
         {
             "id": 10,
             "name": "GO L",
             "command": 8,
-            "confirmation": false
+            "confirmation": false,
+            "color": 0
         },
         {
             "id": 11,
             "name": "GO R",
             "command": 9,
-            "confirmation": false
+            "confirmation": false,
+            "color": 0
         },
         {
             "id": 12,
             "name": "UNDO",
             "command": 10,
-            "confirmation": false
+            "confirmation": false,
+            "color": 0
         },
         {
             "id": 13,
             "name": "REDO",
             "command": 11,
-            "confirmation": false
+            "confirmation": false,
+            "color": 0
         },
         {
             "id": 14,
             "name": "TIME",
             "command": 12,
-            "confirmation": false
+            "confirmation": false,
+            "color": 0
         },
         {
             "id": 15,
             "name": "CLICK",
             "command": 13,
-            "confirmation": false
+            "confirmation": false,
+            "color": 0
         },
         {
             "id": 16,
             "name": "EDIT",
             "command": -4,
-            "confirmation": false
+            "confirmation": false,
+            "color": 0
         },
         {
             "id": 17,
             "name": "MUTE",
             "command": 14,
-            "confirmation": false
+            "confirmation": false,
+            "color": 0
         },
         {
             "id": 18,
             "name": "SET L",
             "command": 15,
-            "confirmation": false
+            "confirmation": false,
+            "color": 0
         },
         {
             "id": 19,
             "name": "SET R",
             "command": 16,
-            "confirmation": false
+            "confirmation": false,
+            "color": 0
         },
         {
             "id": 20,
             "name": "NORMAL",
             "command": 17,
-            "confirmation": false
+            "confirmation": false,
+            "color": 0
         },
         {
             "id": 21,
             "name": "PUNCH",
             "command": 18,
-            "confirmation": false
+            "confirmation": false,
+            "color": 0
         },
         {
             "id": 22,
             "name": "TRACK UP",
             "command": 19,
-            "confirmation": false
+            "confirmation": false,
+            "color": 0
         },
         {
             "id": 23,
             "name": "TRACK DOWN",
             "command": 20,
-            "confirmation": false
+            "confirmation": false,
+            "color": 0
         },
         {
             "id": 24,
             "name": "SAVE",
             "command": -3,
-            "confirmation": true
+            "confirmation": true,
+            "color": 0
         },
         {
             "id": 25,
             "name": "FX BYPASS",
             "command": 21,
-            "confirmation": false
+            "confirmation": false,
+            "color": 0
         },
         {
             "id": 26,
             "name": "SET MARKER 1",
             "command": 22,
-            "confirmation": false
+            "confirmation": false,
+            "color": 0
         },
         {
             "id": 27,
             "name": "GO MARKER 1",
             "command": 23,
-            "confirmation": false
+            "confirmation": false,
+            "color": 0
         },
         {
             "id": 28,
             "name": "MIXER",
             "command": 24,
-            "confirmation": false
+            "confirmation": false,
+            "color": 0
         },
         {
             "id": 29,
             "name": "SNAP",
             "command": 25,
-            "confirmation": false
+            "confirmation": false,
+            "color": 0
         },
         {
             "id": 30,
             "name": "UNMUTE ALL",
             "command": 26,
-            "confirmation": false
+            "confirmation": false,
+            "color": 0
         },
         {
             "id": 31,
             "name": "UNSOLO ALL",
             "command": 27,
-            "confirmation": false
+            "confirmation": false,
+            "color": 0
         }
     ]
 }

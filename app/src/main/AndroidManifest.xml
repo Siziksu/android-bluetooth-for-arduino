@@ -20,7 +20,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.view.macro.MacroActivity"
+            android:name=".ui.view.macro.EditMacroActivity"
             android:windowSoftInputMode="stateHidden"
             android:configChanges="orientation|screenSize" />
     </application>

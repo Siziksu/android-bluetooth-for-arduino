@@ -17,4 +17,7 @@ public class MacroClientModel {
     @SerializedName("confirmation")
     @Expose
     public boolean confirmation;
+    @SerializedName("color")
+    @Expose
+    public int color;
 }

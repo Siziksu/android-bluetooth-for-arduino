@@ -5,11 +5,14 @@ package com.siziksu.bluetooth.common.utils;
  */
 public class MathUtils {
 
+    private static final int COMMAND_MIN_VALUE = 0;
+    private static final int COMMAND_MAX_VALUE = 253;
+
     private MathUtils() {}
 
     /**
      * Transforms an unsigned int value into signed byte.
-     * If the value is greater than 255 will return -1
+     * If the value is greater than COMMAND_MAX_VALUE will return -1
      *
      * @param string string integer value
      *
@@ -17,6 +20,6 @@ public class MathUtils {
      */
     public static byte getByteFromUnsignedStringNumber(String string) {
         int value = Integer.parseInt(string);
-        return (value >= 0 && value <= 255) ? (byte) value : -1;
+        return (value >= COMMAND_MIN_VALUE && value <= COMMAND_MAX_VALUE) ? (byte) value : -1;
     }
 }

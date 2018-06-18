@@ -9,6 +9,7 @@ public class Macro implements Parcelable {
     public String name;
     public byte command;
     public boolean confirmation;
+    public int color;
 
     public Macro() {}
 
@@ -21,6 +22,7 @@ public class Macro implements Parcelable {
         dest.writeString(this.name);
         dest.writeByte(this.command);
         dest.writeByte(this.confirmation ? (byte) 1 : (byte) 0);
+        dest.writeInt(this.color);
     }
 
     protected Macro(Parcel in) {
@@ -28,6 +30,7 @@ public class Macro implements Parcelable {
         this.name = in.readString();
         this.command = in.readByte();
         this.confirmation = in.readByte() != 0;
+        this.color = in.readInt();
     }
 
     public static final Creator<Macro> CREATOR = new Creator<Macro>() {

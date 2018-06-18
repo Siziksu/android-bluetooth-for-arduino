@@ -10,6 +10,7 @@ import android.widget.Button;
 import com.siziksu.bluetooth.R;
 import com.siziksu.bluetooth.common.Constants;
 import com.siziksu.bluetooth.common.function.Func;
+import com.siziksu.bluetooth.common.utils.ColorUtils;
 import com.siziksu.bluetooth.common.utils.DatesUtils;
 import com.siziksu.bluetooth.domain.bluetooth.BluetoothDomainContract;
 import com.siziksu.bluetooth.domain.bluetooth.BluetoothDomainPresenterContract;
@@ -19,7 +20,7 @@ import com.siziksu.bluetooth.domain.preferences.PreferencesDomainPresenterContra
 import com.siziksu.bluetooth.presenter.mapper.MacroMapper;
 import com.siziksu.bluetooth.presenter.model.Macro;
 import com.siziksu.bluetooth.ui.common.DialogFragmentHelper;
-import com.siziksu.bluetooth.ui.view.macro.MacroActivity;
+import com.siziksu.bluetooth.ui.view.macro.EditMacroActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -127,7 +128,7 @@ public final class MainPresenter implements MainPresenterContract<MainViewContra
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == Constants.MACRO_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+        if (requestCode == Constants.EDIT_MACRO_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
             Bundle extras = data.getExtras();
             if (extras != null) {
                 if (extras.containsKey(Constants.MACRO_EXTRA)) {
@@ -210,14 +211,16 @@ public final class MainPresenter implements MainPresenterContract<MainViewContra
     }
 
     private void useDialogToSendCommand(byte[] command) {
-        DialogFragmentHelper.showConfirmationDialog(
-                view.getAppCompatActivity(),
-                R.string.main_confirmation_dialog_message,
-                R.string.main_confirmation_dialog_accept,
-                aVoid -> sendCommand(command),
-                R.string.main_confirmation_dialog_cancel,
-                aVoid -> {}
-        );
+        if (view != null) {
+            DialogFragmentHelper.showConfirmationDialog(
+                    view.getAppCompatActivity(),
+                    R.string.main_confirmation_dialog_message,
+                    R.string.main_confirmation_dialog_accept,
+                    aVoid -> sendCommand(command),
+                    R.string.main_confirmation_dialog_cancel,
+                    aVoid -> {}
+            );
+        }
     }
 
     private void sendCommand(byte[] command) {
@@ -240,12 +243,16 @@ public final class MainPresenter implements MainPresenterContract<MainViewContra
         macros.get(macro.id).name = macro.name;
         macros.get(macro.id).command = macro.command;
         macros.get(macro.id).confirmation = macro.confirmation;
+        macros.get(macro.id).color = macro.color;
         updateButtonData(macro.id);
         preferencesDomain.setMacros(new MacroMapper().unMap(macros));
     }
 
     private void updateButtonData(int index) {
         buttons.get(index).setText(macrosByName ? macros.get(index).name : String.valueOf(macros.get(index).command & 0xff));
+        if (view != null) {
+            buttons.get(index).setBackground(ColorUtils.getBackgroundDrawableFromColor(view.getAppCompatActivity(), macros.get(index).color));
+        }
     }
 
     private void editMacro(int resId) {
@@ -253,9 +260,9 @@ public final class MainPresenter implements MainPresenterContract<MainViewContra
                    button -> {
                        Macro macro = macros.get(buttons.indexOf(button));
                        if (view != null) {
-                           Intent intent = new Intent(view.getAppCompatActivity(), MacroActivity.class);
+                           Intent intent = new Intent(view.getAppCompatActivity(), EditMacroActivity.class);
                            intent.putExtra(Constants.MACRO_EXTRA, macro);
-                           view.getAppCompatActivity().startActivityForResult(intent, Constants.MACRO_REQUEST_CODE);
+                           view.getAppCompatActivity().startActivityForResult(intent, Constants.EDIT_MACRO_REQUEST_CODE);
                        }
                    });
     }

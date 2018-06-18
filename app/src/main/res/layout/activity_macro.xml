@@ -96,6 +96,7 @@
                 android:inputType="number|textNoSuggestions" />
 
             <RelativeLayout
+                android:id="@+id/confirmationDialog"
                 android:layout_below="@+id/macroCommand"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -120,6 +121,85 @@
                     android:textColor="@color/white"
                     android:textSize="@dimen/textSize14" />
             </RelativeLayout>
+
+            <RadioGroup
+                android:id="@+id/macroColorGroup"
+                android:layout_below="@+id/confirmationDialog"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RadioButton
+                    fontPath="fonts/Montserrat-Light.ttf"
+                    android:id="@+id/macroRadioGrey"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/grey"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/textSize14" />
+
+                <RadioButton
+                    fontPath="fonts/Montserrat-Light.ttf"
+                    android:id="@+id/macroRadioBlue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/blue"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/textSize14" />
+
+                <RadioButton
+                    fontPath="fonts/Montserrat-Light.ttf"
+                    android:id="@+id/macroRadioGreen"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/green"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/textSize14" />
+
+                <RadioButton
+                    fontPath="fonts/Montserrat-Light.ttf"
+                    android:id="@+id/macroRadioOrange"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/orange"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/textSize14" />
+
+                <RadioButton
+                    fontPath="fonts/Montserrat-Light.ttf"
+                    android:id="@+id/macroRadioRed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/red"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/textSize14" />
+
+                <RadioButton
+                    fontPath="fonts/Montserrat-Light.ttf"
+                    android:id="@+id/macroRadioYellow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/yellow"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/textSize14" />
+
+                <RadioButton
+                    fontPath="fonts/Montserrat-Light.ttf"
+                    android:id="@+id/macroRadioPink"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/pink"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/textSize14" />
+
+                <RadioButton
+                    fontPath="fonts/Montserrat-Light.ttf"
+                    android:id="@+id/macroRadioLila"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/lila"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/textSize14" />
+            </RadioGroup>
         </RelativeLayout>
     </ScrollView>
 </RelativeLayout>
