@@ -46,7 +46,9 @@ public class RoundedView extends View {
     private float degree = 0;
     private float dx;
     private float dy;
-    private int midiValue;
+    private int validDegree;
+    private int validMidiValue;
+    private int lastValidMidiValueSent;
 
     private Func.Consumer<Integer> listener;
 
@@ -120,8 +122,8 @@ public class RoundedView extends View {
             canvas.drawArc(rimBounds, 120, 300, false, rimPaint);
         }
         // Draw the bar
-        if (barWidth > 0 && degree >= 0 && degree <= 325) {
-            canvas.drawArc(barBounds, 120, degree > 300 ? 300 : degree, false, barPaint);
+        if (barWidth > 0) {
+            canvas.drawArc(barBounds, 120, validDegree, false, barPaint);
         }
         // Draw the text
         textX = (getMeasuredWidth() / 2);
@@ -197,14 +199,19 @@ public class RoundedView extends View {
         degree -= 90;
         degree = (degree < 0) ? 360 + degree : degree;
         degree -= 30;
+        validDegree = degree >= 0 && degree <= 318 ? (int) degree : validDegree;
+        validDegree = validDegree > 300 ? 300 : validDegree;
         setText();
     }
 
     private void setText() {
-        midiValue = (int) degree;
-        midiValue *= 0.4233333333333333;
-        text = midiValue >= 0 && midiValue <= 127 ? String.valueOf(midiValue) : text;
-        sendValue();
+        validMidiValue = validDegree;
+        validMidiValue *= 0.4234;
+        text = validMidiValue >= 0 && validMidiValue <= 127 ? String.valueOf(validMidiValue) : text;
+        if (lastValidMidiValueSent != validMidiValue) {
+            sendValue();
+            lastValidMidiValueSent = validMidiValue;
+        }
     }
 
     private void sendValue() {
