@@ -30,6 +30,21 @@
             layout="@layout/view_macros" />
     </RelativeLayout>
 
+    <RelativeLayout
+        android:id="@+id/potentiometersViewContainer"
+        android:layout_above="@+id/bottomNavigation"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true">
+
+        <include
+            android:id="@+id/potentiometersView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            layout="@layout/view_potentiometers" />
+    </RelativeLayout>
+
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/bottomNavigation"
         android:layout_width="match_parent"

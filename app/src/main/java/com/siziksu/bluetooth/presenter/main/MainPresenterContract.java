@@ -24,6 +24,8 @@ public interface MainPresenterContract<V extends BaseViewContract> extends BaseP
 
     void onDeviceClick(int position, String device);
 
+    void onPotChange(int id, int value);
+
     void onMacroButtonTouch(int resId, int action);
 
     void onMacroEditButtonClick(int resId);

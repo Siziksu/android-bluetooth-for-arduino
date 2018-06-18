@@ -111,6 +111,13 @@ public final class MainPresenter implements MainPresenterContract<MainViewContra
     }
 
     @Override
+    public void onPotChange(int id, int value) {
+        message[1] = getMidiCcFromPotId(id);
+        message[2] = (byte) value;
+        bluetoothDomain.sendCommand(message);
+    }
+
+    @Override
     public void onMacroButtonTouch(int resId, int action) {
         Func.apply(buttons, button -> button.getId() == resId,
                    button -> {
@@ -265,5 +272,28 @@ public final class MainPresenter implements MainPresenterContract<MainViewContra
                            view.getAppCompatActivity().startActivityForResult(intent, Constants.EDIT_MACRO_REQUEST_CODE);
                        }
                    });
+    }
+
+    private byte getMidiCcFromPotId(int id) {
+        switch (id) {
+            case R.id.potentiometer1:
+                return 100;
+            case R.id.potentiometer2:
+                return 101;
+            case R.id.potentiometer3:
+                return 102;
+            case R.id.potentiometer4:
+                return 103;
+            case R.id.potentiometer5:
+                return 104;
+            case R.id.potentiometer6:
+                return 105;
+            case R.id.potentiometer7:
+                return 106;
+            case R.id.potentiometer8:
+                return 107;
+            default:
+                return 100;
+        }
     }
 }

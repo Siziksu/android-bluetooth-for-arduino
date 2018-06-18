@@ -28,12 +28,14 @@ import android.widget.TextView;
 import com.siziksu.bluetooth.App;
 import com.siziksu.bluetooth.R;
 import com.siziksu.bluetooth.common.Constants;
+import com.siziksu.bluetooth.common.function.Func;
 import com.siziksu.bluetooth.common.utils.MetricsUtils;
 import com.siziksu.bluetooth.presenter.main.MainPresenterContract;
 import com.siziksu.bluetooth.presenter.main.MainViewContract;
 import com.siziksu.bluetooth.ui.common.DialogFragmentHelper;
 import com.siziksu.bluetooth.ui.common.ViewSlider;
 import com.siziksu.bluetooth.ui.common.ViewSliderContract;
+import com.siziksu.bluetooth.ui.view.custom.RoundedView;
 
 import java.util.List;
 
@@ -64,6 +66,10 @@ public class MainActivity extends AppCompatActivity implements MainViewContract 
     View macrosViewContainer;
     @BindView(R.id.macrosView)
     View macrosView;
+    @BindView(R.id.potentiometersViewContainer)
+    View potentiometersViewContainer;
+    @BindView(R.id.potentiometersView)
+    View potentiometersView;
     @BindView(R.id.editMacrosButton)
     ImageButton editMacrosButton;
     @BindView(R.id.editKeepScreenOnButton)
@@ -79,6 +85,9 @@ public class MainActivity extends AppCompatActivity implements MainViewContract 
                 R.id.m17, R.id.m18, R.id.m19, R.id.m20, R.id.m21, R.id.m22, R.id.m23, R.id.m24,
                 R.id.m25, R.id.m26, R.id.m27, R.id.m28, R.id.m29, R.id.m30, R.id.m31, R.id.m32})
     List<Button> buttons;
+    @BindViews({R.id.potentiometer1, R.id.potentiometer2, R.id.potentiometer3, R.id.potentiometer4,
+                R.id.potentiometer5, R.id.potentiometer6, R.id.potentiometer7, R.id.potentiometer8})
+    List<RoundedView> pots;
 
     private ViewSliderContract viewSlider;
     private boolean alreadyStarted;
@@ -86,6 +95,7 @@ public class MainActivity extends AppCompatActivity implements MainViewContract 
     private boolean macrosByName = true;
     private boolean keepScreenOn = false;
     private Spanned last;
+    int[] potsValues = {0, 0, 0, 0, 0, 0, 0, 0};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -248,7 +258,7 @@ public class MainActivity extends AppCompatActivity implements MainViewContract 
         ButterKnife.bind(this);
         setSupportActionBar(toolbarConnection);
         presenter.setButtons(buttons);
-        viewSlider = new ViewSlider(connectionView, macrosView, new MetricsUtils(this));
+        viewSlider = new ViewSlider(connectionView, macrosView, potentiometersView, new MetricsUtils(this));
         terminal.setText("");
         terminal.setMovementMethod(new ScrollingMovementMethod());
         adapter = new ItemAdapter(this, new ItemManager());
@@ -278,30 +288,37 @@ public class MainActivity extends AppCompatActivity implements MainViewContract 
         bottomNavigation.setSelectedItemId(R.id.action_connection);
         updateKeepScreenOnButton();
         updateEditMacrosButtonAndButtonsText();
-    }
-
-    private boolean setViewPagerSelectedItem(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_connection:
-                viewSlider.animateToLeft();
-                return true;
-            case R.id.action_macros:
-                viewSlider.animateToRight();
-                return true;
-            default:
-                return false;
-        }
+        updatePots();
     }
 
     private void updateViews() {
         ((ViewGroup) macrosView).removeAllViews();
         ((ViewGroup) macrosView).addView(getLayoutInflater().inflate(R.layout.view_macros, ((ViewGroup) macrosViewContainer), false));
+        ((ViewGroup) potentiometersView).removeAllViews();
+        ((ViewGroup) potentiometersView).addView(getLayoutInflater().inflate(R.layout.view_potentiometers, ((ViewGroup) potentiometersViewContainer), false));
         ButterKnife.bind(this);
         viewSlider.onConfigurationChanged();
         presenter.setButtons(buttons);
         lastCommand.setText(last);
         updateKeepScreenOnButton();
         updateEditMacrosButtonAndButtonsText();
+        updatePots();
+    }
+
+    private boolean setViewPagerSelectedItem(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_connection:
+                viewSlider.showLeftView();
+                return true;
+            case R.id.action_macros:
+                viewSlider.showCenterView();
+                return true;
+            case R.id.action_pots:
+                viewSlider.showRightView();
+                return true;
+            default:
+                return false;
+        }
     }
 
     private void updateKeepScreenOnButton() {
@@ -312,5 +329,15 @@ public class MainActivity extends AppCompatActivity implements MainViewContract 
     private void updateEditMacrosButtonAndButtonsText() {
         editMacrosButton.setBackground(ContextCompat.getDrawable(this, macrosByName ? R.drawable.macros_edit : R.drawable.macros));
         presenter.updateButtonsText(macrosByName);
+    }
+
+    private void updatePots() {
+        Func.apply(pots, pot -> pot.setValue(potsValues[pots.indexOf(pot)]));
+        Func.apply(pots, pot -> pot.setListener(
+                value -> {
+                    presenter.onPotChange(pot.getId(), pot.getValue());
+                    potsValues[pots.indexOf(pot)] = pot.getValue();
+                }
+        ));
     }
 }

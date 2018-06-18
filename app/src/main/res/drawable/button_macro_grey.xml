@@ -3,13 +3,13 @@
     <item android:state_pressed="true">
         <shape xmlns:android="http://schemas.android.com/apk/res/android">
             <corners android:radius="@dimen/padding2" />
-            <solid android:color="@color/buttonPressed" />
+            <solid android:color="@color/greyPressed" />
         </shape>
     </item>
     <item>
         <shape xmlns:android="http://schemas.android.com/apk/res/android">
             <corners android:radius="@dimen/padding2" />
-            <solid android:color="@color/buttonNormal" />
+            <solid android:color="@color/greyDefault" />
         </shape>
     </item>
 </selector>

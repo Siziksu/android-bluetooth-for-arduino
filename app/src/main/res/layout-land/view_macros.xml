@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/bottomBar"
-        android:background="@color/mainBackground"
+        android:background="@color/macrosBackground"
         android:padding="@dimen/padding3"
         tools:ignore="ContentDescription,MissingPrefix">
 

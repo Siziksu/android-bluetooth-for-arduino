@@ -2,9 +2,11 @@ package com.siziksu.bluetooth.ui.common;
 
 public interface ViewSliderContract {
 
-    void animateToRight();
+    void showRightView();
 
-    void animateToLeft();
+    void showCenterView();
+
+    void showLeftView();
 
     void onConfigurationChanged();
 

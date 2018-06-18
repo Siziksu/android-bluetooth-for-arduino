@@ -42,7 +42,7 @@ public class EditMacroActivity extends AppCompatActivity {
     CheckBox macroConfirmationCheckBox;
     @BindViews({R.id.macroRadioGrey, R.id.macroRadioBlue, R.id.macroRadioGreen,
                 R.id.macroRadioOrange, R.id.macroRadioYellow, R.id.macroRadioRed,
-                R.id.macroRadioPink, R.id.macroRadioLila, R.id.macroRadioSea})
+                R.id.macroRadioPink, R.id.macroRadioPurple, R.id.macroRadioSea})
     List<RadioButton> radioButtons;
 
     private Macro macro;
@@ -90,7 +90,7 @@ public class EditMacroActivity extends AppCompatActivity {
     @Optional
     @OnClick({R.id.macroRadioGrey, R.id.macroRadioBlue, R.id.macroRadioGreen,
               R.id.macroRadioOrange, R.id.macroRadioYellow, R.id.macroRadioRed,
-              R.id.macroRadioPink, R.id.macroRadioLila, R.id.macroRadioSea})
+              R.id.macroRadioPink, R.id.macroRadioPurple, R.id.macroRadioSea})
     public void onMacroRadioButtonClick(View view) {
         if (macro != null) {
             macro.color = ColorUtils.getMacroColorFromRadioButtonChecked(view);

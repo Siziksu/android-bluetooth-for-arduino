@@ -13,4 +13,10 @@
         android:icon="@drawable/macros"
         android:title="@string/macros"
         app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_pots"
+        android:enabled="true"
+        android:icon="@drawable/pots"
+        android:title="@string/pots"
+        app:showAsAction="ifRoom" />
 </menu>

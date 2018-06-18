@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:ignore="ContentDescription,MissingPrefix">
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/potsBackground"
+        android:padding="@dimen/padding3"
+        tools:ignore="ContentDescription,MissingPrefix">
+
+        <com.siziksu.bluetooth.ui.view.custom.RoundedView
+            android:id="@+id/potentiometer5"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_centerInParent="true"
+            app:rimColor="@color/yellowPressed"
+            app:rimWidth="@dimen/padding2"
+            app:barColor="@color/yellowDefault"
+            app:barWidth="@dimen/padding25"
+            android:textColor="@color/white"
+            android:textSize="@dimen/textSize12"
+            android:textStyle="normal"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/horizontal1"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/vertical1" />
+
+        <com.siziksu.bluetooth.ui.view.custom.RoundedView
+            android:id="@+id/potentiometer6"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_centerInParent="true"
+            app:rimColor="@color/pinkPressed"
+            app:rimWidth="@dimen/padding2"
+            app:barColor="@color/pinkDefault"
+            app:barWidth="@dimen/padding25"
+            android:textColor="@color/white"
+            android:textSize="@dimen/textSize12"
+            android:textStyle="normal"
+            app:layout_constraintTop_toBottomOf="@id/horizontal1"
+            app:layout_constraintBottom_toTopOf="@+id/horizontal2"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/vertical1" />
+
+        <com.siziksu.bluetooth.ui.view.custom.RoundedView
+            android:id="@+id/potentiometer7"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_centerInParent="true"
+            app:rimColor="@color/purplePressed"
+            app:rimWidth="@dimen/padding2"
+            app:barColor="@color/purpleDefault"
+            app:barWidth="@dimen/padding25"
+            android:textColor="@color/white"
+            android:textSize="@dimen/textSize12"
+            android:textStyle="normal"
+            app:layout_constraintTop_toBottomOf="@id/horizontal2"
+            app:layout_constraintBottom_toTopOf="@+id/horizontal3"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/vertical1" />
+
+        <com.siziksu.bluetooth.ui.view.custom.RoundedView
+            android:id="@+id/potentiometer8"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_centerInParent="true"
+            app:rimColor="@color/seaPressed"
+            app:rimWidth="@dimen/padding2"
+            app:barColor="@color/seaDefault"
+            app:barWidth="@dimen/padding25"
+            android:textColor="@color/white"
+            android:textSize="@dimen/textSize12"
+            android:textStyle="normal"
+            app:layout_constraintTop_toBottomOf="@id/horizontal3"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/vertical1" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/vertical1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.50" />
+
+        <com.siziksu.bluetooth.ui.view.custom.RoundedView
+            android:id="@+id/potentiometer1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_centerInParent="true"
+            app:rimColor="@color/bluePressed"
+            app:rimWidth="@dimen/padding2"
+            app:barColor="@color/blueDefault"
+            app:barWidth="@dimen/padding25"
+            android:textColor="#ffffff"
+            android:textSize="@dimen/textSize12"
+            android:textStyle="normal"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/horizontal1"
+            app:layout_constraintLeft_toRightOf="@+id/vertical1"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <com.siziksu.bluetooth.ui.view.custom.RoundedView
+            android:id="@+id/potentiometer2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_centerInParent="true"
+            app:rimColor="@color/greenPressed"
+            app:rimWidth="@dimen/padding2"
+            app:barColor="@color/greenDefault"
+            app:barWidth="@dimen/padding25"
+            android:textColor="@color/white"
+            android:textSize="@dimen/textSize12"
+            android:textStyle="normal"
+            app:layout_constraintTop_toBottomOf="@+id/horizontal1"
+            app:layout_constraintBottom_toTopOf="@+id/horizontal2"
+            app:layout_constraintLeft_toRightOf="@+id/vertical1"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <com.siziksu.bluetooth.ui.view.custom.RoundedView
+            android:id="@+id/potentiometer3"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_centerInParent="true"
+            app:rimColor="@color/orangePressed"
+            app:rimWidth="@dimen/padding2"
+            app:barColor="@color/orangeDefault"
+            app:barWidth="@dimen/padding25"
+            android:textColor="@color/white"
+            android:textSize="@dimen/textSize12"
+            android:textStyle="normal"
+            app:layout_constraintTop_toBottomOf="@+id/horizontal2"
+            app:layout_constraintBottom_toTopOf="@+id/horizontal3"
+            app:layout_constraintLeft_toRightOf="@+id/vertical1"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <com.siziksu.bluetooth.ui.view.custom.RoundedView
+            android:id="@+id/potentiometer4"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_centerInParent="true"
+            app:rimColor="@color/redPressed"
+            app:rimWidth="@dimen/padding2"
+            app:barColor="@color/redDefault"
+            app:barWidth="@dimen/padding25"
+            android:textColor="@color/white"
+            android:textSize="@dimen/textSize12"
+            android:textStyle="normal"
+            app:layout_constraintTop_toBottomOf="@+id/horizontal3"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/vertical1"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/horizontal1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.25" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/horizontal2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.50" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/horizontal3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.75" />
+    </android.support.constraint.ConstraintLayout>
+</RelativeLayout>
