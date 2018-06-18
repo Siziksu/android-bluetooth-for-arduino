@@ -33,6 +33,7 @@
 ![Screenshot](art/device-2018-06-12-163250.png)
 ![Screenshot](art/device-2018-06-18-040011.png)
 ![Screenshot](art/device-2018-06-18-040941.png)
+![Screenshot](art/device-2018-06-18-045226.png)
 
 ## License
     Copyright 2018 Esteban Latre
