@@ -147,9 +147,8 @@ public class MainActivity extends AppCompatActivity implements MainViewContract 
                 presenter.refresh();
                 return true;
             default:
-                break;
+                return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
     }
 
     @Override

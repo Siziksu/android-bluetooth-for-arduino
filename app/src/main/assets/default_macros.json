@@ -172,7 +172,7 @@
             "id": 24,
             "name": "SAVE",
             "command": -3,
-            "confirmation": true,
+            "confirmation": false,
             "color": 0
         },
         {

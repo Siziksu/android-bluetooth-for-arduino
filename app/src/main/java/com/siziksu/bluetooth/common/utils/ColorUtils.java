@@ -17,6 +17,7 @@ public class ColorUtils {
     private static final int COLOR_RED = 5;
     private static final int COLOR_PINK = 6;
     private static final int COLOR_LILA = 7;
+    private static final int COLOR_SEA = 8;
 
     private ColorUtils() {}
 
@@ -38,6 +39,8 @@ public class ColorUtils {
                 return R.id.macroRadioPink;
             case COLOR_LILA:
                 return R.id.macroRadioLila;
+            case COLOR_SEA:
+                return R.id.macroRadioSea;
             default:
                 return R.id.macroRadioGrey;
         }
@@ -61,6 +64,8 @@ public class ColorUtils {
                 return ContextCompat.getDrawable(context, R.drawable.button_macro_pink);
             case COLOR_LILA:
                 return ContextCompat.getDrawable(context, R.drawable.button_macro_lila);
+            case COLOR_SEA:
+                return ContextCompat.getDrawable(context, R.drawable.button_macro_sea);
             default:
                 return ContextCompat.getDrawable(context, R.drawable.button_macro_grey);
         }
@@ -84,6 +89,8 @@ public class ColorUtils {
                 return COLOR_PINK;
             case R.id.macroRadioLila:
                 return COLOR_LILA;
+            case R.id.macroRadioSea:
+                return COLOR_SEA;
             default:
                 return COLOR_GREY;
         }

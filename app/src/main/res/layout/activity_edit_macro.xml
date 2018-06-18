@@ -122,8 +122,8 @@
                     android:textSize="@dimen/textSize14" />
             </RelativeLayout>
 
-            <RadioGroup
-                android:id="@+id/macroColorGroup"
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/macroRadioGroup"
                 android:layout_below="@+id/confirmationDialog"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -135,7 +135,9 @@
                     android:layout_height="wrap_content"
                     android:text="@string/grey"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/textSize14" />
+                    android:textSize="@dimen/textSize14"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
 
                 <RadioButton
                     fontPath="fonts/Montserrat-Light.ttf"
@@ -144,7 +146,9 @@
                     android:layout_height="wrap_content"
                     android:text="@string/blue"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/textSize14" />
+                    android:textSize="@dimen/textSize14"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/macroRadioGrey" />
 
                 <RadioButton
                     fontPath="fonts/Montserrat-Light.ttf"
@@ -153,7 +157,16 @@
                     android:layout_height="wrap_content"
                     android:text="@string/green"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/textSize14" />
+                    android:textSize="@dimen/textSize14"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/macroRadioBlue" />
+
+                <android.support.constraint.Guideline
+                    android:id="@+id/vertical1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.33" />
 
                 <RadioButton
                     fontPath="fonts/Montserrat-Light.ttf"
@@ -162,7 +175,9 @@
                     android:layout_height="wrap_content"
                     android:text="@string/orange"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/textSize14" />
+                    android:textSize="@dimen/textSize14"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/vertical1" />
 
                 <RadioButton
                     fontPath="fonts/Montserrat-Light.ttf"
@@ -171,7 +186,9 @@
                     android:layout_height="wrap_content"
                     android:text="@string/red"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/textSize14" />
+                    android:textSize="@dimen/textSize14"
+                    app:layout_constraintTop_toBottomOf="@+id/macroRadioOrange"
+                    app:layout_constraintStart_toEndOf="@+id/vertical1" />
 
                 <RadioButton
                     fontPath="fonts/Montserrat-Light.ttf"
@@ -180,7 +197,16 @@
                     android:layout_height="wrap_content"
                     android:text="@string/yellow"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/textSize14" />
+                    android:textSize="@dimen/textSize14"
+                    app:layout_constraintTop_toBottomOf="@+id/macroRadioRed"
+                    app:layout_constraintStart_toEndOf="@+id/vertical1" />
+
+                <android.support.constraint.Guideline
+                    android:id="@+id/vertical2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.66" />
 
                 <RadioButton
                     fontPath="fonts/Montserrat-Light.ttf"
@@ -189,7 +215,9 @@
                     android:layout_height="wrap_content"
                     android:text="@string/pink"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/textSize14" />
+                    android:textSize="@dimen/textSize14"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/vertical2" />
 
                 <RadioButton
                     fontPath="fonts/Montserrat-Light.ttf"
@@ -198,8 +226,21 @@
                     android:layout_height="wrap_content"
                     android:text="@string/lila"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/textSize14" />
-            </RadioGroup>
+                    android:textSize="@dimen/textSize14"
+                    app:layout_constraintTop_toBottomOf="@+id/macroRadioPink"
+                    app:layout_constraintStart_toEndOf="@+id/vertical2" />
+
+                <RadioButton
+                    fontPath="fonts/Montserrat-Light.ttf"
+                    android:id="@+id/macroRadioSea"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sea"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/textSize14"
+                    app:layout_constraintTop_toBottomOf="@+id/macroRadioLila"
+                    app:layout_constraintStart_toEndOf="@+id/vertical2" />
+            </android.support.constraint.ConstraintLayout>
         </RelativeLayout>
     </ScrollView>
 </RelativeLayout>

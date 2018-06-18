@@ -12,15 +12,19 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.RadioGroup;
+import android.widget.RadioButton;
 
 import com.siziksu.bluetooth.R;
 import com.siziksu.bluetooth.common.Constants;
+import com.siziksu.bluetooth.common.function.Func;
 import com.siziksu.bluetooth.common.utils.ColorUtils;
 import com.siziksu.bluetooth.common.utils.MathUtils;
 import com.siziksu.bluetooth.presenter.model.Macro;
 
+import java.util.List;
+
 import butterknife.BindView;
+import butterknife.BindViews;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Optional;
@@ -36,15 +40,17 @@ public class EditMacroActivity extends AppCompatActivity {
     EditText macroCommand;
     @BindView(R.id.macroConfirmationCheckBox)
     CheckBox macroConfirmationCheckBox;
-    @BindView(R.id.macroColorGroup)
-    RadioGroup macroColorGroup;
+    @BindViews({R.id.macroRadioGrey, R.id.macroRadioBlue, R.id.macroRadioGreen,
+                R.id.macroRadioOrange, R.id.macroRadioYellow, R.id.macroRadioRed,
+                R.id.macroRadioPink, R.id.macroRadioLila, R.id.macroRadioSea})
+    List<RadioButton> radioButtons;
 
     private Macro macro;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_macro);
+        setContentView(R.layout.activity_edit_macro);
         checkIntentExtras();
         initializeViews();
     }
@@ -77,19 +83,19 @@ public class EditMacroActivity extends AppCompatActivity {
                 finish();
                 return true;
             default:
-                break;
+                return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
     }
 
     @Optional
     @OnClick({R.id.macroRadioGrey, R.id.macroRadioBlue, R.id.macroRadioGreen,
               R.id.macroRadioOrange, R.id.macroRadioYellow, R.id.macroRadioRed,
-              R.id.macroRadioPink, R.id.macroRadioLila})
+              R.id.macroRadioPink, R.id.macroRadioLila, R.id.macroRadioSea})
     public void onMacroRadioButtonClick(View view) {
         if (macro != null) {
             macro.color = ColorUtils.getMacroColorFromRadioButtonChecked(view);
         }
+        Func.apply(radioButtons, button -> button.getId() != view.getId(), button -> button.setChecked(false));
     }
 
     private void checkIntentExtras() {
@@ -111,7 +117,7 @@ public class EditMacroActivity extends AppCompatActivity {
             macroName.setText(macro.name);
             macroCommand.setText(String.valueOf(macro.command & 0xff));
             macroConfirmationCheckBox.setChecked(macro.confirmation);
-            macroColorGroup.check(ColorUtils.getRadioButtonFromColor(macro.color));
+            Func.apply(radioButtons, button -> button.getId() == ColorUtils.getRadioButtonFromColor(macro.color), button -> button.setChecked(true));
         }
     }
 }

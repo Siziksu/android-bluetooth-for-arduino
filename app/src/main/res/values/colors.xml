@@ -32,6 +32,8 @@
     <color name="buttonPinkPressed">#783e59</color>
     <color name="buttonLilaNormal">#814e9f</color>
     <color name="buttonLilaPressed">#643e78</color>
+    <color name="buttonMarinaNormal">#4e859f</color>
+    <color name="buttonMarinaPressed">#3e6778</color>
     <color name="bottomNavigationViewBackground">#3F51B5</color>
     <color name="navigationTintChecked">#ffffff</color>
     <color name="navigationTintUnchecked">#1e2440</color>
