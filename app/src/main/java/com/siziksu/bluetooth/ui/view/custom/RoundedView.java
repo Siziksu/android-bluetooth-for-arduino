@@ -158,10 +158,10 @@ public class RoundedView extends View {
 
         int left, top, right, bottom;
 
-        left = h + maxBarRimValue + rimWidth / 2;
-        top = v + maxBarRimValue + rimWidth / 2;
-        right = h - maxBarRimValue - rimWidth / 2 + minWidthHeightValue;
-        bottom = v - maxBarRimValue - rimWidth / 2 + minWidthHeightValue;
+        left = h + PADDING + rimWidth / 2;
+        top = v + PADDING + rimWidth / 2;
+        right = h - PADDING - rimWidth / 2 + minWidthHeightValue;
+        bottom = v - PADDING - rimWidth / 2 + minWidthHeightValue;
         rimBounds = new RectF(left, top, right, bottom);
 
         left = h + PADDING + maxBarRimValue;

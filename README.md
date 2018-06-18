@@ -3,7 +3,8 @@
 ## Short description
 
 - This application is a bluetooth client used to control an Arduino project.
-- It provides 32 programmable macro buttons.
+- It has 32 programmable macro buttons.
+- Also has 8 potentiometers programmed from MIDI CC 100 to MIDI CC 107.
 - This application is originally designed for the Arduino project [MiminuConntroller](https://github.com/Siziksu/MiminuController), a USB MIDI controller for Arduino MEGA 2560.
 
 ## Architecture
@@ -33,7 +34,6 @@
 ![Screenshot](art/device-2018-06-12-163250.png)
 ![Screenshot](art/device-2018-06-18-040011.png)
 ![Screenshot](art/device-2018-06-18-040941.png)
-![Screenshot](art/device-2018-06-18-045226.png)
 
 ## License
     Copyright 2018 Esteban Latre
