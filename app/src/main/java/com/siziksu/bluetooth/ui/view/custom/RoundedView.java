@@ -136,7 +136,7 @@ public class RoundedView extends View {
     }
 
     public void setValue(int value) {
-        degree = value / 0.4233333333333333f;
+        validDegree = (int) (value / 0.4233333333333333f);
         text = String.valueOf(value);
     }
 

@@ -332,12 +332,14 @@ public class MainActivity extends AppCompatActivity implements MainViewContract 
     }
 
     private void updatePots() {
-        Func.apply(pots, pot -> pot.setValue(potsValues[pots.indexOf(pot)]));
-        Func.apply(pots, pot -> pot.setListener(
-                value -> {
-                    presenter.onPotChange(pot.getId(), pot.getValue());
-                    potsValues[pots.indexOf(pot)] = pot.getValue();
-                }
-        ));
+        Func.apply(pots, pot -> {
+            pot.setValue(potsValues[pots.indexOf(pot)]);
+            pot.setListener(
+                    value -> {
+                        presenter.onPotChange(pot.getId(), pot.getValue());
+                        potsValues[pots.indexOf(pot)] = pot.getValue();
+                    }
+            );
+        });
     }
 }
