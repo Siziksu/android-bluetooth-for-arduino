@@ -18,31 +18,39 @@ public class RoundedView extends View implements RoundedViewContract {
 
     private static final int PADDING = 5;
 
+    private boolean debug = false;
+
     private int layoutHeight = 0;
     private int layoutWidth = 0;
 
+    private RectF barBounds = new RectF();
+    private Paint barPaint = new Paint();
     private int barWidth = 20;
     private int barColor = 0xAA000000;
+
+    private RectF rimBounds = new RectF();
+    private Paint rimPaint = new Paint();
     private int rimWidth = 20;
     private int rimColor = 0xAADDDDDD;
 
-    private RectF barBounds = new RectF();
-    private Paint barPaint = new Paint();
-    private RectF rimBounds = new RectF();
-    private Paint rimPaint = new Paint();
+    private Paint whitePaint = new Paint();
+    private int whiteColor = 0xFFFFFFFF;
 
     private Paint textPaint = new Paint();
-
     private int textX;
     private int textY;
+    private int textMargin = 0;
     private float textSize = 30;
     private int textStyle = Typeface.NORMAL;
     private int textColor = 0xAA000000;
     private String text = "0";
+    private int potNumber = 0;
 
     private boolean canMove;
     private int centerX;
     private int centerY;
+    private int radius;
+    private int halfRadius;
     private float degree = 0;
     private float dx;
     private float dy;
@@ -125,10 +133,21 @@ public class RoundedView extends View implements RoundedViewContract {
         if (barWidth > 0) {
             canvas.drawArc(barBounds, 120, validDegree, false, barPaint);
         }
-        // Draw the text
-        textX = (getMeasuredWidth() / 2);
-        textY = (int) ((getMeasuredHeight() / 2) - ((textPaint.descent() + textPaint.ascent()) / 2));
+        // Draw horizontal line
+        canvas.drawLine(centerX - halfRadius, centerY, centerX + halfRadius, centerY, whitePaint);
+        // Draw the text below horizontal line
+        textX = centerX;
+        textY = (int) (centerY - ((textPaint.descent() + textPaint.ascent()) / 2) + textMargin);
         canvas.drawText(text, textX, textY, textPaint);
+        if (potNumber != 0) {
+            textY = (int) (centerY - ((textPaint.descent() + textPaint.ascent()) / 2) - textMargin);
+            canvas.drawText("Pot " + String.valueOf(potNumber), textX, textY, textPaint);
+        }
+
+        if (debug) {
+            canvas.drawLine(centerX - halfRadius, centerY, centerX + halfRadius, centerY, whitePaint);
+            canvas.drawLine(centerX, centerY - halfRadius, centerX, centerY + halfRadius, whitePaint);
+        }
     }
 
     @Override
@@ -155,12 +174,15 @@ public class RoundedView extends View implements RoundedViewContract {
     private void setupBounds() {
         textX = 0;
         textY = 0;
-        centerX = layoutHeight / 2;
-        centerY = layoutWidth / 2;
+        centerX = (getMeasuredWidth() / 2);
+        centerY = (getMeasuredHeight() / 2);
 
         // Width should equal to Height, find the min value to setup the circle
         int minWidthHeightValue = Math.min(layoutWidth, layoutHeight);
         int maxBarRimValue = Math.max(barWidth, rimWidth) / 2;
+
+        radius = minWidthHeightValue / 2;
+        halfRadius = radius / 2;
 
         // To compensate the values when the view is not a square
         int h = (layoutHeight < layoutWidth ? layoutWidth - layoutHeight : 0) / 2;
@@ -199,6 +221,13 @@ public class RoundedView extends View implements RoundedViewContract {
         textPaint.setTextSize(textSize);
         textPaint.setTypeface(Typeface.create(Typeface.DEFAULT, textStyle));
         textPaint.setTextAlign(Paint.Align.CENTER);
+
+        whitePaint.setAntiAlias(true);
+        whitePaint.setColor(whiteColor);
+        whitePaint.setTextSize(textSize);
+        whitePaint.setStrokeWidth(2);
+        whitePaint.setTypeface(Typeface.create(Typeface.DEFAULT, textStyle));
+        whitePaint.setTextAlign(Paint.Align.CENTER);
     }
 
     private void calculateDegree() {
@@ -234,11 +263,13 @@ public class RoundedView extends View implements RoundedViewContract {
     private void parseAttributes(TypedArray attributes) {
         barColor = attributes.getColor(R.styleable.RoundedView_barColor, barColor);
         barWidth = (int) attributes.getDimension(R.styleable.RoundedView_barWidth, barWidth);
-        rimWidth = (int) attributes.getDimension(R.styleable.RoundedView_rimWidth, rimWidth);
         rimColor = attributes.getColor(R.styleable.RoundedView_rimColor, rimColor);
+        rimWidth = (int) attributes.getDimension(R.styleable.RoundedView_rimWidth, rimWidth);
+        textMargin = (int) attributes.getDimension(R.styleable.RoundedView_textMargin, textMargin);
         textColor = attributes.getColor(R.styleable.RoundedView_android_textColor, textColor);
         textSize = attributes.getDimension(R.styleable.RoundedView_android_textSize, textSize);
         textStyle = attributes.getInt(R.styleable.RoundedView_android_textStyle, textStyle);
+        potNumber = attributes.getInt(R.styleable.RoundedView_potNumber, potNumber);
         attributes.recycle();
     }
 }

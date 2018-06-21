@@ -8,6 +8,8 @@
         <attr name="rimWidth" format="dimension" />
         <attr name="barColor" format="color" />
         <attr name="barWidth" format="dimension" />
+        <attr name="textMargin" format="dimension" />
+        <attr name="potNumber" format="integer" />
     </declare-styleable>
 </resources>
 

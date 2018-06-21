@@ -17,6 +17,15 @@
     <color name="mainBackground">#232323</color>
     <color name="macrosBackground">#232323</color>
     <color name="potsBackground">#232323</color>
+    <color name="potsRim">#ababab</color>
+    <color name="rimBlue">#4861ff</color>
+    <color name="rimRed">#ff4b4d</color>
+    <color name="rimGreen">#81fa52</color>
+    <color name="rimYellow">#ffe658</color>
+    <color name="rimOrange">#ff9554</color>
+    <color name="rimPink">#ff59a3</color>
+    <color name="rimPurple">#c156ff</color>
+    <color name="rimSea">#54c8ff</color>
     <color name="greyDefault">#434343</color>
     <color name="greyPressed">#535353</color>
     <color name="blueDefault">#4e599f</color>
