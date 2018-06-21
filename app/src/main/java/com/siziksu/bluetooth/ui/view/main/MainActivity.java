@@ -130,7 +130,7 @@ public class MainActivity extends AppCompatActivity implements MainViewContract 
     @Override
     public void onBackPressed() {
         if (viewSlider.onBackAvailable()) {
-            bottomNavigation.setSelectedItemId(R.id.action_connection);
+            onViewSliderBackAvailable();
         } else {
             super.onBackPressed();
         }
@@ -284,7 +284,7 @@ public class MainActivity extends AppCompatActivity implements MainViewContract 
             decoration.setDrawable(drawable);
         }
         recyclerView.addItemDecoration(decoration);
-        bottomNavigation.setOnNavigationItemSelectedListener(this::setViewPagerSelectedItem);
+        bottomNavigation.setOnNavigationItemSelectedListener(this::onNavigationItemSelected);
         bottomNavigation.setSelectedItemId(R.id.action_connection);
         updateKeepScreenOnButton();
         updateEditMacrosButtonAndButtonsText();
@@ -305,7 +305,7 @@ public class MainActivity extends AppCompatActivity implements MainViewContract 
         updatePots();
     }
 
-    private boolean setViewPagerSelectedItem(MenuItem item) {
+    private boolean onNavigationItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_connection:
                 viewSlider.showLeftView();
@@ -318,6 +318,20 @@ public class MainActivity extends AppCompatActivity implements MainViewContract 
                 return true;
             default:
                 return false;
+        }
+    }
+
+    private void onViewSliderBackAvailable() {
+        switch (viewSlider.getViewId()) {
+            case R.id.macrosView:
+                bottomNavigation.setSelectedItemId(R.id.action_connection);
+                break;
+            case R.id.potentiometersView:
+                bottomNavigation.setSelectedItemId(R.id.action_macros);
+                break;
+            default:
+                bottomNavigation.setSelectedItemId(R.id.action_connection);
+                break;
         }
     }
 

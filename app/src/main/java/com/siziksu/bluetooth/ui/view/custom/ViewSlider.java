@@ -94,6 +94,17 @@ public final class ViewSlider implements ViewSliderContract {
         return position != LEFT;
     }
 
+    @Override
+    public int getViewId() {
+        if (position == CENTER) {
+            return centerView.getId();
+        } else if (position == RIGHT) {
+            return rightView.getId();
+        } else {
+            return leftView.getId();
+        }
+    }
+
     private void clearDisposable(int index) {
         if (disposables[index] != null) {
             disposables[index].dispose();

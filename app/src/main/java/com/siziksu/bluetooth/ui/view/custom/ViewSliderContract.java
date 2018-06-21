@@ -12,5 +12,7 @@ public interface ViewSliderContract {
 
     boolean onBackAvailable();
 
+    int getViewId();
+
     void onDestroy();
 }
