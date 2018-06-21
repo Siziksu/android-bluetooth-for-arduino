@@ -1,4 +1,4 @@
-package com.siziksu.bluetooth.ui.common;
+package com.siziksu.bluetooth.ui.view.custom;
 
 public interface ViewSliderContract {
 

@@ -14,7 +14,7 @@ import android.view.View;
 import com.siziksu.bluetooth.R;
 import com.siziksu.bluetooth.common.function.Func;
 
-public class RoundedView extends View {
+public class RoundedView extends View implements RoundedViewContract {
 
     private static final int PADDING = 5;
 
@@ -50,7 +50,7 @@ public class RoundedView extends View {
     private int validMidiValue;
     private int lastValidMidiValueSent;
 
-    private Func.Consumer<Integer> listener;
+    private Func.Consumer<Void> listener;
 
     public RoundedView(Context context) {
         super(context);
@@ -131,15 +131,23 @@ public class RoundedView extends View {
         canvas.drawText(text, textX, textY, textPaint);
     }
 
-    public void setListener(Func.Consumer<Integer> listener) {
+    @Override
+    public int getPotId() {
+        return getId();
+    }
+
+    @Override
+    public void setListener(Func.Consumer<Void> listener) {
         this.listener = listener;
     }
 
+    @Override
     public void setValue(int value) {
         validDegree = (int) (value / 0.4233333333333333f);
         text = String.valueOf(value);
     }
 
+    @Override
     public int getValue() {
         return Integer.parseInt(text);
     }
@@ -215,7 +223,7 @@ public class RoundedView extends View {
     }
 
     private void sendValue() {
-        listener.accept(Integer.parseInt(text));
+        listener.accept(null);
     }
 
     /**
