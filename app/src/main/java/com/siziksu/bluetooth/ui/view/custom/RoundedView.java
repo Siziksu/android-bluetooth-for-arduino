@@ -17,6 +17,8 @@ import com.siziksu.bluetooth.common.function.Func;
 public class RoundedView extends View implements RoundedViewContract {
 
     private static final int PADDING = 5;
+    private static final int START_ANGLE = 120;
+    private static final int SWEEP_ANGLE = 300;
 
     private boolean debug = false;
 
@@ -32,6 +34,8 @@ public class RoundedView extends View implements RoundedViewContract {
     private Paint rimPaint = new Paint();
     private int rimWidth = 20;
     private int rimColor = 0xAADDDDDD;
+
+    private Paint currentPositionPaint = new Paint();
 
     private Paint whitePaint = new Paint();
     private int whiteColor = 0xFFFFFFFF;
@@ -51,10 +55,16 @@ public class RoundedView extends View implements RoundedViewContract {
     private int centerY;
     private int radius;
     private int halfRadius;
-    private float degree = 0;
+    private float pointXa;
+    private float pointYa;
+    private float pointXb;
+    private float pointYb;
     private float dx;
     private float dy;
+
+    private int degree = 0;
     private int validDegree;
+
     private int validMidiValue;
     private int lastValidMidiValueSent;
 
@@ -127,23 +137,25 @@ public class RoundedView extends View implements RoundedViewContract {
     protected void onDraw(@NonNull Canvas canvas) {
         // Draw the rim
         if (rimWidth > 0) {
-            canvas.drawArc(rimBounds, 120, 300, false, rimPaint);
+            canvas.drawArc(rimBounds, START_ANGLE, SWEEP_ANGLE, false, rimPaint);
         }
         // Draw the bar
         if (barWidth > 0) {
-            canvas.drawArc(barBounds, 120, validDegree, false, barPaint);
+            canvas.drawArc(barBounds, START_ANGLE, validDegree, false, barPaint);
         }
         // Draw horizontal line
         canvas.drawLine(centerX - halfRadius, centerY, centerX + halfRadius, centerY, whitePaint);
+        // Draw current value line
+        calculateLinePointsForCurrentValue();
+        canvas.drawLine(pointXb, pointYb, pointXa, pointYa, currentPositionPaint);
         // Draw the text below horizontal line
-        textX = centerX;
-        textY = (int) (centerY - ((textPaint.descent() + textPaint.ascent()) / 2) + textMargin);
+        calculateTextCoordinates();
         canvas.drawText(text, textX, textY, textPaint);
         if (potNumber != 0) {
-            textY = (int) (centerY - ((textPaint.descent() + textPaint.ascent()) / 2) - textMargin);
+            // Draw pot number
+            calculatePotTextCoordinates();
             canvas.drawText("Pot " + String.valueOf(potNumber), textX, textY, textPaint);
         }
-
         if (debug) {
             canvas.drawLine(centerX - halfRadius, centerY, centerX + halfRadius, centerY, whitePaint);
             canvas.drawLine(centerX, centerY - halfRadius, centerX, centerY + halfRadius, whitePaint);
@@ -228,16 +240,36 @@ public class RoundedView extends View implements RoundedViewContract {
         whitePaint.setStrokeWidth(2);
         whitePaint.setTypeface(Typeface.create(Typeface.DEFAULT, textStyle));
         whitePaint.setTextAlign(Paint.Align.CENTER);
+
+        currentPositionPaint.setAntiAlias(true);
+        currentPositionPaint.setColor(barColor);
+        currentPositionPaint.setStrokeWidth(2);
+    }
+
+    private void calculateTextCoordinates() {
+        textX = centerX;
+        textY = (int) (centerY - ((textPaint.descent() + textPaint.ascent()) / 2) + textMargin);
+    }
+
+    private void calculatePotTextCoordinates() {
+        textY = (int) (centerY - ((textPaint.descent() + textPaint.ascent()) / 2) - textMargin);
+    }
+
+    private void calculateLinePointsForCurrentValue() {
+        pointXa = centerX + (float) ((radius - barWidth) * Math.cos(Math.toRadians(validDegree + START_ANGLE)));
+        pointYa = centerY + (float) ((radius - barWidth) * Math.sin(Math.toRadians(validDegree + START_ANGLE)));
+        pointXb = centerX + (float) ((radius - halfRadius) * Math.cos(Math.toRadians(validDegree + START_ANGLE)));
+        pointYb = centerY + (float) ((radius - halfRadius) * Math.sin(Math.toRadians(validDegree + START_ANGLE)));
     }
 
     private void calculateDegree() {
-        degree = (float) Math.toDegrees(Math.atan2(dy, dx));
+        degree = (int) Math.toDegrees(Math.atan2(dy, dx));
         degree = (degree < 0) ? degree + 360 : degree;
         degree -= 90;
         degree = (degree < 0) ? 360 + degree : degree;
         degree -= 30;
-        validDegree = degree >= 0 && degree <= 318 ? (int) degree : validDegree;
-        validDegree = validDegree > 300 ? 300 : validDegree;
+        validDegree = degree >= 0 && degree <= 318 ? degree : validDegree;
+        validDegree = validDegree > SWEEP_ANGLE ? SWEEP_ANGLE : validDegree;
         setText();
     }
 

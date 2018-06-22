@@ -17,7 +17,7 @@
     <color name="mainBackground">#232323</color>
     <color name="macrosBackground">#232323</color>
     <color name="potsBackground">#232323</color>
-    <color name="potsRim">#ababab</color>
+    <color name="potsRim">#c2c2c2</color>
     <color name="rimBlue">#4861ff</color>
     <color name="rimRed">#ff4b4d</color>
     <color name="rimGreen">#81fa52</color>
