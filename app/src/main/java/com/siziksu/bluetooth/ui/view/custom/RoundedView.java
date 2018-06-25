@@ -35,8 +35,6 @@ public class RoundedView extends View implements RoundedViewContract {
     private int rimWidth = 20;
     private int rimColor = 0xAADDDDDD;
 
-    private Paint currentPositionPaint = new Paint();
-
     private Paint whitePaint = new Paint();
     private int whiteColor = 0xFFFFFFFF;
 
@@ -48,27 +46,28 @@ public class RoundedView extends View implements RoundedViewContract {
     private int textStyle = Typeface.NORMAL;
     private int textColor = 0xAA000000;
     private String text = "0";
+
     private int potNumber = 0;
 
     private boolean canMove;
+
+    private Paint currentPositionPaint = new Paint();
     private int centerX;
     private int centerY;
     private int radius;
     private int halfRadius;
-    private float pointXa;
-    private float pointYa;
-    private float pointXb;
-    private float pointYb;
-    private float dx;
-    private float dy;
 
-    private int degree = 0;
-    private int validDegree;
+    private float currentPointXa;
+    private float currentPointYa;
+    private float currentPointXb;
+    private float currentPointYb;
+
+    private Func.Consumer<Void> listener;
 
     private int validMidiValue;
     private int lastValidMidiValueSent;
 
-    private Func.Consumer<Void> listener;
+    private RoundedViewMaths roundedViewMaths;
 
     public RoundedView(Context context) {
         super(context);
@@ -89,6 +88,7 @@ public class RoundedView extends View implements RoundedViewContract {
         if (attrs != null) {
             parseAttributes(context.obtainStyledAttributes(attrs, R.styleable.RoundedView));
         }
+        roundedViewMaths = new RoundedViewMaths();
     }
 
     /**
@@ -112,13 +112,14 @@ public class RoundedView extends View implements RoundedViewContract {
             case MotionEvent.ACTION_DOWN:
                 if (!canMove) {
                     canMove = true;
+                    roundedViewMaths.onActionDown(event.getX() - centerX, event.getY() - centerY);
                 }
                 break;
             case MotionEvent.ACTION_MOVE:
                 if (canMove) {
-                    dx = event.getX() - centerX;
-                    dy = event.getY() - centerY;
-                    calculateDegree();
+                    roundedViewMaths.onActionMove(event.getX() - centerX, event.getY() - centerY);
+                    setText(roundedViewMaths.value());
+                    invalidate();
                 }
                 break;
             case MotionEvent.ACTION_UP:
@@ -126,9 +127,6 @@ public class RoundedView extends View implements RoundedViewContract {
                 break;
             default:
                 break;
-        }
-        if (canMove) {
-            invalidate();
         }
         return true;
     }
@@ -141,13 +139,13 @@ public class RoundedView extends View implements RoundedViewContract {
         }
         // Draw the bar
         if (barWidth > 0) {
-            canvas.drawArc(barBounds, START_ANGLE, validDegree, false, barPaint);
+            canvas.drawArc(barBounds, START_ANGLE, roundedViewMaths.value(), false, barPaint);
         }
         // Draw horizontal line
         canvas.drawLine(centerX - halfRadius, centerY, centerX + halfRadius, centerY, whitePaint);
         // Draw current value line
-        calculateLinePointsForCurrentValue();
-        canvas.drawLine(pointXb, pointYb, pointXa, pointYa, currentPositionPaint);
+        calculateLinePointsForCurrentValue(roundedViewMaths.value());
+        canvas.drawLine(currentPointXb, currentPointYb, currentPointXa, currentPointYa, currentPositionPaint);
         // Draw the text below horizontal line
         calculateTextCoordinates();
         canvas.drawText(text, textX, textY, textPaint);
@@ -174,8 +172,8 @@ public class RoundedView extends View implements RoundedViewContract {
 
     @Override
     public void setValue(int value) {
-        validDegree = (int) (value / 0.4233333333333333f);
         text = String.valueOf(value);
+        roundedViewMaths.update((value));
     }
 
     @Override
@@ -221,12 +219,14 @@ public class RoundedView extends View implements RoundedViewContract {
             barPaint.setColor(barColor);
             barPaint.setStrokeWidth(barWidth);
             barPaint.setStyle(Paint.Style.STROKE);
+            barPaint.setStrokeCap(Paint.Cap.ROUND);
         }
         if (rimWidth > 0) {
             rimPaint.setAntiAlias(true);
             rimPaint.setColor(rimColor);
             rimPaint.setStrokeWidth(rimWidth);
             rimPaint.setStyle(Paint.Style.STROKE);
+            rimPaint.setStrokeCap(Paint.Cap.ROUND);
         }
         textPaint.setAntiAlias(true);
         textPaint.setColor(textColor);
@@ -243,7 +243,8 @@ public class RoundedView extends View implements RoundedViewContract {
 
         currentPositionPaint.setAntiAlias(true);
         currentPositionPaint.setColor(barColor);
-        currentPositionPaint.setStrokeWidth(2);
+        barPaint.setStyle(Paint.Style.STROKE);
+        currentPositionPaint.setStrokeCap(Paint.Cap.ROUND);
     }
 
     private void calculateTextCoordinates() {
@@ -255,35 +256,24 @@ public class RoundedView extends View implements RoundedViewContract {
         textY = (int) (centerY - ((textPaint.descent() + textPaint.ascent()) / 2) - textMargin);
     }
 
-    private void calculateLinePointsForCurrentValue() {
-        pointXa = centerX + (float) ((radius - barWidth) * Math.cos(Math.toRadians(validDegree + START_ANGLE)));
-        pointYa = centerY + (float) ((radius - barWidth) * Math.sin(Math.toRadians(validDegree + START_ANGLE)));
-        pointXb = centerX + (float) ((radius - halfRadius) * Math.cos(Math.toRadians(validDegree + START_ANGLE)));
-        pointYb = centerY + (float) ((radius - halfRadius) * Math.sin(Math.toRadians(validDegree + START_ANGLE)));
+    private void calculateLinePointsForCurrentValue(int value) {
+        currentPointXa = centerX + (float) ((radius - barWidth) * Math.cos(Math.toRadians(value + START_ANGLE)));
+        currentPointYa = centerY + (float) ((radius - barWidth) * Math.sin(Math.toRadians(value + START_ANGLE)));
+        currentPointXb = centerX + (float) ((radius - halfRadius) * Math.cos(Math.toRadians(value + START_ANGLE)));
+        currentPointYb = centerY + (float) ((radius - halfRadius) * Math.sin(Math.toRadians(value + START_ANGLE)));
     }
 
-    private void calculateDegree() {
-        degree = (int) Math.toDegrees(Math.atan2(dy, dx));
-        degree = (degree < 0) ? degree + 360 : degree;
-        degree -= 90;
-        degree = (degree < 0) ? 360 + degree : degree;
-        degree -= 30;
-        validDegree = degree >= 0 && degree <= 318 ? degree : validDegree;
-        validDegree = validDegree > SWEEP_ANGLE ? SWEEP_ANGLE : validDegree;
-        setText();
-    }
-
-    private void setText() {
-        validMidiValue = validDegree;
+    private void setText(int value) {
+        validMidiValue = value;
         validMidiValue *= 0.4234;
         text = validMidiValue >= 0 && validMidiValue <= 127 ? String.valueOf(validMidiValue) : text;
         if (lastValidMidiValueSent != validMidiValue) {
-            sendValue();
+            valueChanged();
             lastValidMidiValueSent = validMidiValue;
         }
     }
 
-    private void sendValue() {
+    private void valueChanged() {
         listener.accept(null);
     }
 

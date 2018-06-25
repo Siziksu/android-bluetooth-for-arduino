@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion 27
@@ -21,8 +22,8 @@ android {
     def properSigningConfig = android.signingConfigs.debug
     // KeyStore and KeyAlias Password. Uses environment variables to resolve.
     def keyStorePass = project.KEY_STORE_PASS
-    def keyAliasName =  project.KEY_ALIAS
-    def keyAliasPassword =  project.KEY_ALIAS_PASS
+    def keyAliasName = project.KEY_ALIAS
+    def keyAliasPassword = project.KEY_ALIAS_PASS
     // keyStorePath should point to the .jks file
     def keyStorePath = project.KEY_STORE_DIR
     signingConfigs {
@@ -78,4 +79,5 @@ dependencies {
     implementation 'com.squareup.okhttp3:logging-interceptor:3.8.0'
 
     implementation 'uk.co.chrisjenx:calligraphy:2.3.0'
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.2.50'
 }

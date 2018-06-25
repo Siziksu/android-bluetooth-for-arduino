@@ -45,6 +45,7 @@ public final class MainPresenter implements MainPresenterContract<MainViewContra
     private List<Button> buttons = new ArrayList<>();
     private boolean macrosByName;
     private byte[] message = {START_PACKET_BYTE, NOT_VALID_PACKET_BYTE, NOT_VALID_PACKET_BYTE, END_PACKET_BYTE};
+    private String lastMessage = "";
 
     public MainPresenter(BluetoothDomainContract<BluetoothDomainPresenterContract> bluetoothDomain,
                          PreferencesDomainContract<PreferencesDomainPresenterContract> preferencesDomain) {
@@ -151,13 +152,16 @@ public final class MainPresenter implements MainPresenterContract<MainViewContra
     @Override
     public void write(String message, boolean error, boolean main) {
         if (view != null) {
-            String currentDate = DatesUtils.getTimeString();
-            String terminalDateColor = view.getAppCompatActivity().getString(R.string.terminal_date_color);
-            String terminalEntryColor = view.getAppCompatActivity().getString(R.string.terminal_entry_color);
-            String terminalWarningColor = view.getAppCompatActivity().getString(R.string.terminal_warning_color);
-            String date = String.format(Constants.TERMINAL_DATE, terminalDateColor, currentDate);
-            String entry = String.format(Constants.TERMINAL_ENTRY, (!error ? terminalEntryColor : terminalWarningColor), message);
-            view.writeInTerminal(date + entry, main);
+            if (!lastMessage.equals(message)) {
+                lastMessage = message;
+                String currentDate = DatesUtils.getTimeString();
+                String terminalDateColor = view.getAppCompatActivity().getString(R.string.terminal_date_color);
+                String terminalEntryColor = view.getAppCompatActivity().getString(R.string.terminal_entry_color);
+                String terminalWarningColor = view.getAppCompatActivity().getString(R.string.terminal_warning_color);
+                String date = String.format(Constants.TERMINAL_DATE, terminalDateColor, currentDate);
+                String entry = String.format(Constants.TERMINAL_ENTRY, (!error ? terminalEntryColor : terminalWarningColor), message);
+                view.writeInTerminal(date + entry, main);
+            }
         }
     }
 
