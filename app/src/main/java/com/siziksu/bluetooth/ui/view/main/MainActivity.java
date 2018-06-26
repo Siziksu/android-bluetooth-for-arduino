@@ -33,7 +33,7 @@ import com.siziksu.bluetooth.common.utils.MetricsUtils;
 import com.siziksu.bluetooth.presenter.main.MainPresenterContract;
 import com.siziksu.bluetooth.presenter.main.MainViewContract;
 import com.siziksu.bluetooth.ui.common.DialogFragmentHelper;
-import com.siziksu.bluetooth.ui.view.custom.RoundedViewContract;
+import com.siziksu.bluetooth.ui.view.custom.RoundedView;
 import com.siziksu.bluetooth.ui.view.custom.ViewSlider;
 import com.siziksu.bluetooth.ui.view.custom.ViewSliderContract;
 
@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity implements MainViewContract 
     List<Button> buttons;
     @BindViews({R.id.potentiometer1, R.id.potentiometer2, R.id.potentiometer3, R.id.potentiometer4,
                 R.id.potentiometer5, R.id.potentiometer6, R.id.potentiometer7, R.id.potentiometer8})
-    List<RoundedViewContract> pots;
+    List<RoundedView> pots;
 
     private ViewSliderContract viewSlider;
     private boolean alreadyStarted;
@@ -348,12 +348,11 @@ public class MainActivity extends AppCompatActivity implements MainViewContract 
     private void updatePots() {
         Func.apply(pots, pot -> {
             pot.setValue(potsValues[pots.indexOf(pot)]);
-            pot.setListener(
-                    aVoid -> {
-                        presenter.onPotChange(pot.getPotId(), pot.getValue());
-                        potsValues[pots.indexOf(pot)] = pot.getValue();
-                    }
-            );
+            pot.listener = () -> {
+                presenter.onPotChange(pot.getId(), pot.getValue());
+                potsValues[pots.indexOf(pot)] = pot.getValue();
+                return null;
+            };
         });
     }
 }

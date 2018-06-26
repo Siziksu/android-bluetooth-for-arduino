@@ -2,16 +2,16 @@ package com.siziksu.bluetooth.ui.view.custom
 
 class RoundedViewMaths {
 
-    private var startDegree: Int = 0
-    private var movingDegree: Int = 0
-    private var origin: Int = 0
-    private var value: Int = 0
+    private var startDegree = 0
+    private var movingDegree = 0
+    private var origin = 0f
+    private var value = 0f
 
-    fun value(): Int {
+    fun value(): Float {
         if (startDegree in 110..430 && movingDegree in 110..430) {
             value = origin + movingDegree - startDegree
-            value = if (value <= 0) 0 else value
-            value = if (value >= 300) 300 else value
+            value = if (value <= 0) 0f else value
+            value = if (value >= 300) 300f else value
         }
         return value
     }
@@ -33,6 +33,6 @@ class RoundedViewMaths {
     }
 
     fun update(value: Int) {
-        this.value = (value / 0.4233333333333333f).toInt()
+        this.value = value / 0.4233333333333333f
     }
 }
