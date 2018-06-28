@@ -18,7 +18,7 @@ class RoundedView : View {
 
     companion object {
 
-        private const val PADDING = 5
+        private const val PADDING = 0f
         private const val START_ANGLE = 120f
         private const val SWEEP_ANGLE = 300f
     }
@@ -162,7 +162,6 @@ class RoundedView : View {
 
         // Width should equal to Height, find the min value to setup the circle
         val minWidthHeightValue = minOf(layoutWidth, layoutHeight)
-        val maxBarRimValue = minOf(barWidth, rimWidth) / 2
 
         radius = minWidthHeightValue / 2
         halfRadius = radius / 2
@@ -182,10 +181,10 @@ class RoundedView : View {
         bottom = (v - PADDING - rimWidth / 2 + minWidthHeightValue)
         rimBounds = RectF(left, top, right, bottom)
 
-        left = (h + PADDING + maxBarRimValue)
-        top = (v + PADDING + maxBarRimValue)
-        right = (h - PADDING - maxBarRimValue + minWidthHeightValue)
-        bottom = (v - PADDING - maxBarRimValue + minWidthHeightValue)
+        left = (h + PADDING + barWidth / 2)
+        top = (v + PADDING + barWidth / 2)
+        right = (h - PADDING - barWidth / 2) + minWidthHeightValue
+        bottom = (v - PADDING - barWidth / 2) + minWidthHeightValue
         barBounds = RectF(left, top, right, bottom)
     }
 
@@ -195,14 +194,12 @@ class RoundedView : View {
             barPaint.color = barColor
             barPaint.strokeWidth = barWidth
             barPaint.style = Paint.Style.STROKE
-            barPaint.strokeCap = Paint.Cap.ROUND
         }
         if (rimWidth > 0) {
             rimPaint.isAntiAlias = true
             rimPaint.color = rimColor
             rimPaint.strokeWidth = rimWidth
             rimPaint.style = Paint.Style.STROKE
-            rimPaint.strokeCap = Paint.Cap.ROUND
         }
         textPaint.isAntiAlias = true
         textPaint.color = textColor
@@ -233,8 +230,8 @@ class RoundedView : View {
     }
 
     private fun calculateLinePointsForCurrentValue(value: Float) {
-        currentPointXa = centerX + ((radius - barWidth) * cos((value + START_ANGLE).toRadians()))
-        currentPointYa = centerY + ((radius - barWidth) * sin((value + START_ANGLE).toRadians()))
+        currentPointXa = centerX + (radius * cos((value + START_ANGLE).toRadians()))
+        currentPointYa = centerY + (radius * sin((value + START_ANGLE).toRadians()))
         currentPointXb = centerX + ((radius - halfRadius) * cos((value + START_ANGLE).toRadians()))
         currentPointYb = centerY + ((radius - halfRadius) * sin((value + START_ANGLE).toRadians()))
     }

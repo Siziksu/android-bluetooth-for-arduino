@@ -42,7 +42,7 @@
     <style name="AppTheme.Potentiometer">
         <item name="rimColor">@color/potsRim</item>
         <item name="rimWidth">@dimen/padding3</item>
-        <item name="barWidth">@dimen/padding3</item>
+        <item name="barWidth">@dimen/padding25</item>
         <item name="textMargin">@dimen/padding15</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:textSize">@dimen/textSize12</item>
