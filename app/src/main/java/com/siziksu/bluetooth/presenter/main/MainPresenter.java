@@ -150,7 +150,7 @@ public final class MainPresenter implements MainPresenterContract<MainViewContra
     }
 
     @Override
-    public void write(String message, boolean error, boolean main) {
+    public void write(String message, boolean error, boolean both) {
         if (view != null) {
             if (!lastMessage.equals(message)) {
                 lastMessage = message;
@@ -160,7 +160,7 @@ public final class MainPresenter implements MainPresenterContract<MainViewContra
                 String terminalWarningColor = view.getAppCompatActivity().getString(R.string.terminal_warning_color);
                 String date = String.format(Constants.TERMINAL_DATE, terminalDateColor, currentDate);
                 String entry = String.format(Constants.TERMINAL_ENTRY, (!error ? terminalEntryColor : terminalWarningColor), message);
-                view.writeInTerminal(date + entry, main);
+                view.writeInTerminal(date + entry, both);
             }
         }
     }
@@ -280,22 +280,21 @@ public final class MainPresenter implements MainPresenterContract<MainViewContra
 
     private byte getMidiCcFromPotId(int id) {
         switch (id) {
-            case R.id.potentiometer1:
-                return 100;
-            case R.id.potentiometer2:
-                return 101;
-            case R.id.potentiometer3:
-                return 102;
-            case R.id.potentiometer4:
-                return 103;
-            case R.id.potentiometer5:
-                return 104;
-            case R.id.potentiometer6:
-                return 105;
-            case R.id.potentiometer7:
-                return 106;
             case R.id.potentiometer8:
                 return 107;
+            case R.id.potentiometer7:
+                return 106;
+            case R.id.potentiometer6:
+                return 105;
+            case R.id.potentiometer5:
+                return 104;
+            case R.id.potentiometer4:
+                return 103;
+            case R.id.potentiometer3:
+                return 102;
+            case R.id.potentiometer2:
+                return 101;
+            case R.id.potentiometer1:
             default:
                 return 100;
         }

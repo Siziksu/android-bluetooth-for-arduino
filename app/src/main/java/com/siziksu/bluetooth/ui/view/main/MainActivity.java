@@ -72,8 +72,8 @@ public class MainActivity extends AppCompatActivity implements MainViewContract 
     View potentiometersView;
     @BindView(R.id.editMacrosButton)
     ImageButton editMacrosButton;
-    @BindView(R.id.editKeepScreenOnButton)
-    ImageButton editKeepScreenOnButton;
+    @BindView(R.id.keepScreenOnButton)
+    ImageButton keepScreenOnButton;
     @BindView(R.id.terminal)
     TextView terminal;
     @BindView(R.id.lastCommand)
@@ -164,7 +164,7 @@ public class MainActivity extends AppCompatActivity implements MainViewContract 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        updateViews();
+        updateViewsOnConfigurationChanged();
     }
 
     @Override
@@ -193,8 +193,8 @@ public class MainActivity extends AppCompatActivity implements MainViewContract 
     }
 
     @Override
-    public void writeInTerminal(String message, boolean main) {
-        if (main) {
+    public void writeInTerminal(String message, boolean both) {
+        if (both) {
             terminal.append(Html.fromHtml((terminal.length() == 0 ? "" : Constants.TERMINAL_CRLF) + message));
             terminal.requestFocus();
         }
@@ -238,10 +238,10 @@ public class MainActivity extends AppCompatActivity implements MainViewContract 
         }
     }
 
-    @OnClick({R.id.editKeepScreenOnButton, R.id.editMacrosButton})
+    @OnClick({R.id.keepScreenOnButton, R.id.editMacrosButton})
     public void onButtonClick(View view) {
         switch (view.getId()) {
-            case R.id.editKeepScreenOnButton:
+            case R.id.keepScreenOnButton:
                 keepScreenOn = !keepScreenOn;
                 updateKeepScreenOnButton();
                 break;
@@ -291,7 +291,7 @@ public class MainActivity extends AppCompatActivity implements MainViewContract 
         updatePots();
     }
 
-    private void updateViews() {
+    private void updateViewsOnConfigurationChanged() {
         ((ViewGroup) macrosView).removeAllViews();
         ((ViewGroup) macrosView).addView(getLayoutInflater().inflate(R.layout.view_macros, ((ViewGroup) macrosViewContainer), false));
         ((ViewGroup) potentiometersView).removeAllViews();
@@ -323,12 +323,10 @@ public class MainActivity extends AppCompatActivity implements MainViewContract 
 
     private void onViewSliderBackAvailable() {
         switch (viewSlider.getViewId()) {
-            case R.id.macrosView:
-                bottomNavigation.setSelectedItemId(R.id.action_connection);
-                break;
             case R.id.potentiometersView:
                 bottomNavigation.setSelectedItemId(R.id.action_macros);
                 break;
+            case R.id.macrosView:
             default:
                 bottomNavigation.setSelectedItemId(R.id.action_connection);
                 break;
@@ -336,7 +334,7 @@ public class MainActivity extends AppCompatActivity implements MainViewContract 
     }
 
     private void updateKeepScreenOnButton() {
-        editKeepScreenOnButton.setBackground(ContextCompat.getDrawable(this, !keepScreenOn ? R.drawable.keep_on : R.drawable.keep_off));
+        keepScreenOnButton.setBackground(ContextCompat.getDrawable(this, !keepScreenOn ? R.drawable.keep_on : R.drawable.keep_off));
         presenter.updateScreenOnState(keepScreenOn);
     }
 

@@ -79,5 +79,5 @@ dependencies {
     implementation 'com.squareup.okhttp3:logging-interceptor:3.8.0'
 
     implementation 'uk.co.chrisjenx:calligraphy:2.3.0'
-    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.2.50'
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.2.51'
 }

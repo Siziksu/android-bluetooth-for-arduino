@@ -455,7 +455,7 @@
             android:id="@+id/lastCommand"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_toStartOf="@+id/editKeepScreenOnButton"
+            android:layout_toStartOf="@+id/keepScreenOnButton"
             android:layout_centerVertical="true"
             android:maxLines="1"
             android:ellipsize="end"
@@ -464,7 +464,7 @@
             android:textSize="@dimen/textSize12" />
 
         <ImageButton
-            android:id="@+id/editKeepScreenOnButton"
+            android:id="@+id/keepScreenOnButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toStartOf="@+id/editMacrosButton"

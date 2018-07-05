@@ -12,7 +12,7 @@ public interface MainViewContract extends BaseViewContract {
 
     void hideLoadingDialog();
 
-    void writeInTerminal(String message, boolean main);
+    void writeInTerminal(String message, boolean both);
 
     void onConnectionUpdate(boolean connected);
 }

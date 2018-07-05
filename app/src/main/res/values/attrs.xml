@@ -4,10 +4,8 @@
         <attr name="android:textColor" />
         <attr name="android:textSize" />
         <attr name="android:textStyle" />
-        <attr name="rimColor" format="color" />
         <attr name="rimWidth" format="dimension" />
         <attr name="barColor" format="color" />
-        <attr name="barWidth" format="dimension" />
         <attr name="textMargin" format="dimension" />
         <attr name="potNumber" format="integer" />
     </declare-styleable>
