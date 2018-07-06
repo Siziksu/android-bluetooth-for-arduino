@@ -2,10 +2,10 @@
 
 ## Short description
 
+- This application is originally designed for the Arduino project [ARMC2560](https://github.com/Siziksu/ARMC2560), a USB MIDI controller for Arduino MEGA 2560.
 - This application is a bluetooth client used to control an Arduino project.
 - It has 32 programmable macro buttons.
 - Also has 8 potentiometers programmed from MIDI CC 100 to MIDI CC 107.
-- This application is originally designed for the Arduino project [MiminuConntroller](https://github.com/Siziksu/MiminuController), a USB MIDI controller for Arduino MEGA 2560.
 
 ## Architecture
 
