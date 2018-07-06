@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Bluetooth</string>
+    <string name="app_name">ARMC2560</string>
     <string name="action_ok">OK</string>
     <string name="action_connect">Connect</string>
     <string name="action_disconnect">Disconnect</string>
